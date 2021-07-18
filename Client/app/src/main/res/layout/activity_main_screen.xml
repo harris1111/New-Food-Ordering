@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@drawable/main_background"
+        android:layout_height="match_parent"
+        >
+
+
+    <EditText
+            android:id="@+id/et_devicelocation"
+            android:layout_width="368dp"
+            android:layout_height="46dp"
+            android:inputType="text"
+            android:hint="Device location"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0"/>
+    <TextView
+            android:id="@+id/search_bar"
+            android:layout_width="409dp"
+            android:layout_height="40dp"
+            android:hint="Search..."
+            android:gravity="center"
+            android:drawableRight="@drawable/ic_action_search"
+            android:background="@drawable/search_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_devicelocation"
+            android:layout_marginTop="8dp"
+    />
+    <EditText
+            android:layout_width="106dp"
+            android:layout_height="41dp"
+            android:inputType="textPersonName"
+            android:hint="Sort by"
+            android:drawableLeft="@drawable/ic_action_sort"
+            android:id="@+id/et_sort"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar" android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.003"/>
+    <EditText
+            android:layout_width="106dp"
+            android:layout_height="41dp"
+            android:id="@+id/et_filter"
+            android:drawableLeft="@drawable/ic_action_filter"
+            android:hint="Filter by"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar" android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/et_sort"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:srcCompat="@drawable/tcf_1"
+            android:id="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_sort"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="56dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <EditText
+            android:id="@+id/item1_description"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:inputType="text"
+            android:hint="Description"
+            app:layout_constraintTop_toBottomOf="@+id/et_filter" app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="56dp"
+            app:layout_constraintHorizontal_bias="0.419"/>
+    <EditText
+            android:id="@+id/item2_description"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:inputType="text"
+            android:hint="Description"
+            app:layout_constraintTop_toBottomOf="@+id/item1_description"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.425"/>
+    <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:srcCompat="@drawable/dalgona_coffee"
+            android:id="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.003"/>
+    <ImageButton
+            android:layout_width="44dp"
+            android:layout_height="52dp"
+            app:srcCompat="@drawable/ic_manage_profile"
+            android:id="@+id/profile_manage_button"
+            tools:ignore="VectorDrawableCompat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/et_devicelocation"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
