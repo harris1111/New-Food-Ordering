@@ -1,2 +1,2 @@
+rootProject.name = "Client"
 include ':app'
-rootProject.name = "P4F_Project"

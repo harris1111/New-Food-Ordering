@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package tutorial;
+
+option java_multiple_files = true;
+option java_package = "com.p2p.p4f.protocols";
+
+message UserAccount {
+  string username = 1;
+  string password = 2;
+}
+
+message ClientMessage {
+  int32 opcode = 1;
+  oneof client_requests {
+    UserAccount account = 2;
+  }
+}
+
+message ServerMessage {
+  int32 opcode = 1;
+  oneof server_responses {
+    int32 loginResult = 2;
+  }
+}
