@@ -11,9 +11,29 @@ public class DBCPConnectionPoolingExample {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         ConnectionPool.setFirstUrl("jdbc:sqlserver://NChinh-Laptop\\SQLEXPRESS;databaseName=PrayForFood;integratedSecurity=true;");
-        Connection conn = ConnectionPool.getConnection();
-        DBHandler dbH = new DBHandler(conn);
-        dbH.get_ListRestaurant();
-        conn.close();
+        Thread T1 = new Thread(()->{
+            try(Connection conn = ConnectionPool.getConnection();
+                ){
+                DBHandler dbH = new DBHandler(conn);
+            System.out.println("Thread 1 " + dbH.Login("khachhang2","pss"));
+            conn.close();}
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        });
+        Thread T2 = new Thread(()->{
+            try(Connection conn = ConnectionPool.getConnection();
+            ){
+                DBHandler dbH = new DBHandler(conn);
+                System.out.println("Thread 2 " + dbH.Login("khachhang3","pss"));
+                conn.close();}
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        T1.start();
+        T2.start();
+        T1.join();
+        T2.join();
     }
 }

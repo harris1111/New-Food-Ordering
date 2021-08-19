@@ -2,6 +2,8 @@ package com.p2p.p4f.server;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 class User{
     public String username = "NULL";
@@ -46,27 +48,32 @@ class Restaurant{
     }
 }
 
+
 public class DBHandler {
     private Connection conn;
     public DBHandler(Connection conn){
         this.conn = conn;
     }
 
-    // 0 = no fault, 1 = username fault, 2 = pw fault
-    public int Login(String user, String pass) {
+    // list[0]:  0 = user login, 1 = username fault, 2 = pw fault, 3 = staff login, 4 = other fault
+    // list[1]:  User information
+    public List<Object> Login(String user, String pass) {
         String sqlState = "select * from tblUser u where u.Username = \'" + user+"\'";
-        try (   Connection conn = ConnectionPool.getConnection();
+        User u = new User();
+        try (   Connection conn = this.conn;
                 PreparedStatement st = conn.prepareStatement(sqlState);
                 ResultSet rs = st.executeQuery();
                 ) {
-            if (!rs.next()) return 1;
+            if (!rs.next()) return Arrays.asList(1, u);
             if (!pass.equals(rs.getString("U_pass"))) {
-                return 2;
+                return Arrays.asList(2, u);
             }
+            if (rs.getString("Usertype").equals("1")) return Arrays.asList(0, u);
+            else return Arrays.asList(3, u);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return Arrays.asList(4, u);
     }
 
     // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
@@ -84,7 +91,7 @@ public class DBHandler {
                 "\', " + u.image + ");" ;
         String QState = "select * from tblUser where ? = ?";
         try (
-                Connection conn = ConnectionPool.getConnection();
+                Connection conn = this.conn;
                 //PreparedStatement st = conn.prepareStatement(sqlState+val);
                 Statement st = conn.createStatement();
 
@@ -123,7 +130,7 @@ public class DBHandler {
             String sqlSelect = "SELECT * from tblBranch";
             ArrayList<Restaurant> list = new ArrayList<>();
             try (
-                    Connection conn = ConnectionPool.getConnection();
+                    Connection conn = this.conn;
                     Statement st = conn.createStatement();
                     ResultSet rs = st.executeQuery(sqlSelect);) {
                     while(rs.next()){
