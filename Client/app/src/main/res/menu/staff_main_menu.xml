@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+
+      tools:openDrawer="start">
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/n_home"
+                android:title="Home"
+                android:icon="@drawable/ic_nav_home"/>
+        <item
+                android:id="@+id/n_profile"
+                android:title="Profile"
+                android:icon="@drawable/ic_manage_profile"/>
+    </group>
+    <item android:title="About us">
+        <menu>
+            <item
+                    android:id="@+id/n_contact_phone"
+                    android:title="Phone"
+                    android:icon="@drawable/ic_nav_contact_phone"
+            />
+            <item
+                    android:id="@+id/n_contact_email"
+                    android:title="Email"
+                    android:icon="@drawable/ic_nav_contact_email"
+            />
+        </menu>
+    </item>
+
+</menu>

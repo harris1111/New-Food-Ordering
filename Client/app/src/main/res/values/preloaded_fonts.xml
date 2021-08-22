@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/</item>
         <item>@font/aclonica</item>
         <item>@font/aguafina_script</item>
         <item>@font/aladin</item>
         <item>@font/alice</item>
+        <item>@font/bangers</item>
+        <item>@font/berkshire_swash</item>
+        <item>@font/bigshot_one</item>
+        <item>@font/bungee_shade</item>
+        <item>@font/butcherman</item>
+        <item>@font/caesar_dressing</item>
+        <item>@font/caudex</item>
+        <item>@font/cherry_cream_soda</item>
+        <item>@font/crafty_girls</item>
+        <item>@font/croissant_one</item>
+        <item>@font/ewert</item>
+        <item>@font/faster_one</item>
+        <item>@font/fontdiner_swanky</item>
+        <item>@font/lemon</item>
+        <item>@font/sue_ellen_francisco</item>
     </array>
 </resources>

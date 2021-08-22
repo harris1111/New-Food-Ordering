@@ -7,34 +7,42 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-    TextView register_link;
-    Button login_button;
+public class LoginActivity extends AppCompatActivity{
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    float v=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //find register_link id
-        register_link=(TextView) findViewById(R.id.register_link);
-        login_button=(Button) findViewById(R.id.login_button);
-        //set click listener on register link
-        register_link.setOnClickListener(this);
-        login_button.setOnClickListener(this);
+
+        // find id of these things
+        tabLayout=findViewById(R.id.tab_layout);
+        viewPager=findViewById(R.id.view_pager);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Login"));
+        tabLayout.addTab(tabLayout.newTab().setText("Register"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        LoginAdapter loginAdapter = new LoginAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewPager.setAdapter(loginAdapter);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.setTranslationY(0);
+
+        tabLayout.setAlpha(v);
+
+        tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
+        ViewPager pager = (ViewPager) findViewById(R.id.view_pager);
+        pager.setOffscreenPageLimit(2);
     }
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.register_link:
-                Intent myIntnent= new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(myIntnent);
-                break;
-            case R.id.login_button:
-                Intent myIntent= new Intent(LoginActivity.this,MainPage.class);
-                startActivity(myIntent);
-                break;
-        }
-    }
+
+
 }
