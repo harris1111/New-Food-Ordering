@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import org.w3c.dom.Text;
 
+import static com.example.p4f_project.LoginActivity.worker;
+
 public class Profile extends AppCompatActivity implements View.OnClickListener {
     ImageView profile_backtomain;
     TextView profile_name;
@@ -63,6 +65,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Intent outIntent=new Intent(Profile.this,LoginActivity.class);
                 startActivity(outIntent);
                 prefGetEdit.clear().apply();
+                worker.interrupt();
                 finish();
                 break;
             case R.id.btn_changePass:

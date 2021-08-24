@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewPager;
     float v=0;
-
+    public static Thread worker = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity{
             System.out.println(IP[i]);
         }
         //Start thread
-        Thread worker = new Thread(new ContainerClient(IP, 9999));
+        worker = new Thread(new ContainerClient(IP, 9999));
         worker.start();
         // find id of these things
         tabLayout=findViewById(R.id.tab_layout);
