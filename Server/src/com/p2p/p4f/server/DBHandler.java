@@ -1,105 +1,152 @@
 package com.p2p.p4f.server;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.concurrent.CountDownLatch;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
-class DBHandler extends Thread {
+class User{
+    public String username = "NULL";
+    public String pass = "NULL";
+    public int Usertype = 1;
+    public String email = "NULL";
+    public String phone ="NULL";
+    public String addr = "NULL";
+    public String image = "NULL";
+    public User(){}
+    public User(String usr, String pass, String addr){
+        this.username = usr;
+        this.pass = pass;
+        this.addr = addr;
+    }
+    public User(String usr, String pass, String email, String phone, String addr, String image){
+        this.username = usr;
+        this.pass = pass;
+        this.email = email;
+        this.phone = phone;
+        this.addr = addr;
+        this.image = image;
+    }
+}
 
-    public ResultSet rs = null;
-    private CountDownLatch latch;
-    private String taskName;
-    // work có 3 trường hợp, Login, Reg, và getBranch
-    public DBHandler(CountDownLatch latch, String taskName, String work[]) {
-        this.latch = latch;
-        this.taskName = taskName;
-        switch (work[0]){
-            case "Login":
-                System.out.println("Check user: " + CheckUser(work[1], work[2]));
-                break;
-            case "Reg":
-                System.out.println("Insert user: " + InsertUser(work[1], work[2]));
-                break;
-            case "getBranch":
-                rs = getBranch();
-                System.out.println("Get branch successfully");
-                break;
-        }
+class Restaurant{
+    public String Branch_ID,
+            Branch_Name,
+            Branch_Address,
+            Branch_image,
+            Branch_Location_Longtitude,
+            Branch_Location_Latitude = "NULL";
+    public Restaurant(){}
+    public Restaurant(String Branch_ID,String Branch_Name,String Branch_Address,String Branch_image,
+                      String Branch_Location_Longtitude, String Branch_Location_Latitude){
+        this.Branch_ID = Branch_ID;
+        this.Branch_Name = Branch_Name;
+        this.Branch_Address = Branch_Address;
+        this.Branch_image = Branch_image;
+        this.Branch_Location_Longtitude = Branch_Location_Longtitude;
+        this.Branch_Location_Latitude = Branch_Location_Latitude;
+    }
+}
+
+
+public class DBHandler {
+    private Connection conn;
+    public DBHandler(Connection conn){
+        this.conn = conn;
     }
 
-
-    private boolean CheckUser(String user, String pass) {
-        System.out.println(Thread.currentThread().getName() + " Starting. Task = " + taskName);
+    // list[0]:  0 = user login, 1 = username fault, 2 = pw fault, 3 = staff login, 4 = other fault
+    // list[1]:  User information
+    public List<Object> Login(String user, String pass) {
         String sqlState = "select * from tblUser u where u.Username = \'" + user+"\'";
-        try (
-                Connection conn = ConnectionPool.getConnection();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sqlState);) {
-            Thread.sleep(2000);
-            rs.next();
-            System.out.println("Task = " + taskName + ": Run SQL successfully ");
-            if (pass.equals(rs.getString("U_pass"))) {
-                latch.countDown();
-                System.out.println(Thread.currentThread().getName() + " Finished.");
-                return true;
+        User u = new User();
+        try (   Connection conn = this.conn;
+                PreparedStatement st = conn.prepareStatement(sqlState);
+                ResultSet rs = st.executeQuery();
+                ) {
+            if (!rs.next()) return Arrays.asList(1, u);
+            if (!pass.equals(rs.getString("U_pass"))) {
+                return Arrays.asList(2, u);
             }
-        } catch (SQLException | InterruptedException e) {
+            if (rs.getString("Usertype").equals("1")) return Arrays.asList(0, u);
+            else return Arrays.asList(3, u);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        latch.countDown();
-        System.out.println(Thread.currentThread().getName() + " Finished.");
-        return false;
+        return Arrays.asList(4, u);
     }
 
-
-    private boolean InsertUser(String user, String U_passw) {
-        System.out.println(Thread.currentThread().getName() + " Starting. Task = " + taskName);
-        String sqlState = "insert into tblUser(Username, U_pass, Usertype, U_address) \nvalues";
-        String val = "(\'" + user + "\', " + "\'" + U_passw + "\', '1', 'ABCCCCC')";
+    // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
+    public int Register(User u) {
+        String sqlState = "insert into tblUser(Username, U_pass, Usertype, " +
+                "Email, Phone, U_address, U_image) \nvalues";
+        if (!u.email.equals("NULL")) u.email = "\'" + u.email + "\'";
+        if (!u.phone.equals("NULL")) u.phone = "\'" + u.phone + "\'";
+        String val = "(\'" + u.username + "\'," +
+                "\'" + u.pass + "\',"+
+                "\'" + u.Usertype +"\'," +
+                u.email + ","  +
+                u.phone + "," +
+                "N\'" + u.addr +
+                "\', " + u.image + ");" ;
+        String QState = "select * from tblUser where ? = ?";
         try (
-                Connection conn = ConnectionPool.getConnection();
+                Connection conn = this.conn;
+                //PreparedStatement st = conn.prepareStatement(sqlState+val);
                 Statement st = conn.createStatement();
-        )
-                { st.executeUpdate(sqlState+val);
-            Thread.sleep(2000);
-            System.out.println("Task = " + taskName + ": Run SQL successfully ");
-            latch.countDown();
-            System.out.println(Thread.currentThread().getName() + " Finished.");
-            return true;
-                } catch (SQLException | InterruptedException e) {
+
+                PreparedStatement stQuery = conn.prepareStatement(QState);
+                )
+                {
+                    stQuery.setString(1,"u.Username");
+                    stQuery.setString(2,"\'" + u.username + "\'");
+                    ResultSet rs = stQuery.executeQuery();
+                    if (rs.next()) return 1;
+                    stQuery.setString(1,"u.Email");
+                    stQuery.setString(2,"\'" + u.email + "\'");
+                    if (!u.email.equals("NULL")) {
+                        rs = stQuery.executeQuery();
+                        if (rs.next()) return 2;
+                    }
+                    stQuery.setString(1,"u.Phone");
+                    stQuery.setString(2,"\'" + u.phone + "\'");
+                    if (!u.phone.equals("NULL")) {
+                        rs = stQuery.executeQuery();
+                        if (rs.next()) return 3;
+                    }
+                    st.executeUpdate(sqlState + val);
+                    return 0;
+                } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        latch.countDown();
-        System.out.println(Thread.currentThread().getName() + " Finished.");
-        return false;
+        return 5;
     }
 
     // ResultSet: hàm getArray() để lấy từng cột, có 6 cột
     // Branch_ID, Branch_Name, Branch_Address, Branch_image, Branch_Location_Longtitude, Branch_Location_Latitude
     // ví dụ: rs.getArray("BranchID") là lấy cột ID của toàn bộ branch
-    private ResultSet getBranch() {
-        System.out.println(Thread.currentThread().getName() + " Starting. Task = " + taskName);
+    public ArrayList<Restaurant> get_ListRestaurant() {
         try {
             String sqlSelect = "SELECT * from tblBranch";
+            ArrayList<Restaurant> list = new ArrayList<>();
             try (
-                    Connection conn = ConnectionPool.getConnection();
+                    Connection conn = this.conn;
                     Statement st = conn.createStatement();
                     ResultSet rs = st.executeQuery(sqlSelect);) {
-                Thread.sleep(2000);
-                rs.next();
-                System.out.println("Task = " + taskName + ": Run SQL successfully ");
-                latch.countDown();
-                System.out.println(Thread.currentThread().getName() + " Finished.");
-                return rs;
+                    while(rs.next()){
+                        Restaurant r = new Restaurant(rs.getString("Branch_ID"),
+                                rs.getString("Branch_Name")
+                                ,rs.getString("Branch_Address")
+                                ,rs.getString("Branch_image")
+                        ,rs.getString("Branch_Location_Longitude")
+                                ,rs.getString("Branch_Location_Latitude"));
+                        list.add(r);
+                    }
+                return list;
             }
-        } catch (SQLException | InterruptedException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        latch.countDown();
-        System.out.println(Thread.currentThread().getName() + " Finished.");
         return null;
     }
 }
