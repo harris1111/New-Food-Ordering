@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.fragment.app.Fragment;
+import com.example.p4f_project.BackEnd.ContainerClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.regex.Matcher;
@@ -70,33 +71,15 @@ public class LoginFragment extends Fragment {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                switch(v.getId()) {
-//                    case R.id.loginButton:
-//                        Message msg = Message.obtain();
-//                        msg.obj = (String) (uName+uPass);
-//                        Log.d("Obj of msg: ", (String)msg.obj);
-//                        //ContainerClient.handler.sendMessage(msg);
-//                        Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
-//                        startActivity(myIntent);
-//                        getActivity().finish();
-//                    case R.id.username:
-//                        uName=username.getText().toString();
-//                        if(uName.length()>=1){
-//                            Log.d("output","NOT NULL");
-//                        }
-//                    case R.id.password:
-//                        uPass=password.getText().toString();
-//
-//                }
                 uName=username.getText().toString();
                 uPass=password.getText().toString();
                 if(uName.length()>=1){
                     Log.d("output","NOT NULL");
                 }
                 Message msg = Message.obtain();
-                msg.obj = (String) (uName+uPass);
+                msg.obj = "Login " +  (uName+uPass);
                 Log.d("Obj of msg: ", (String)msg.obj);
-                //ContainerClient.handler.sendMessage(msg);
+                ContainerClient.handler.sendMessage(msg);
                 Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
                 startActivity(myIntent);
                 getActivity().finish();

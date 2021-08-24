@@ -26,30 +26,26 @@ public class ContainerClient implements Runnable {
     private Channel channel;
     Bootstrap bootstrap = new Bootstrap();
     private Timer timer_ = new Timer();
+    NioEventLoopGroup group = new NioEventLoopGroup();
     boolean isConnected = false;
     int i = 0;
-    public ContainerClient(String serverr, int port) {
-        //this.server = server;
-        serverr = "192.168.1.11";
+    public ContainerClient(String[] server, int port) {
+        this.server = server;
         this.port = port;
-        bootstrap.group(new NioEventLoopGroup());
+        bootstrap.group(group);
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.handler(new ClientAdapterInitializer());
-        scheduleConnect( 10 );
+        scheduleConnect(10);
     }
     @Override
     public void run() {
         Looper.prepare();
         looper = Looper.myLooper();
-        EventLoopGroup group = new NioEventLoopGroup();
         try {
             handler = new Handler(looper) {
                 @Override
                 public void handleMessage(@NonNull Message msg) {
                     super.handleMessage(msg);
-                    if (isConnected == false) {
-                        scheduleConnect(10);
-                    }
                     String line = msg.obj.toString();
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(line);
@@ -79,7 +75,7 @@ public class ContainerClient implements Runnable {
     }
     private void doConnect() {
         try {
-            ChannelFuture f = bootstrap.connect( "192.168.1.11", port ).sync();
+            ChannelFuture f = bootstrap.connect( server[i], port );
             f.addListener( new ChannelFutureListener() {
                 @Override public void operationComplete(ChannelFuture future) throws Exception {
                     if( !future.isSuccess() ) {//if is not successful, reconnect
@@ -87,14 +83,15 @@ public class ContainerClient implements Runnable {
                         future.channel().close();
                         bootstrap.connect(  server[++i], port ).addListener(this).sync();
                     }
-
                     else {//good, the connection is ok
                         System.out.println("CONNECT SUCCESSFULLY");
+                        isConnected = true;
                         channel = future.channel();
                         //add a listener to detect the connection lost
                         addCloseDetectListener(channel);
                         timer_.cancel();
                         timer_.purge();
+                        return;
                     }
                 }
                 private void addCloseDetectListener(Channel channel) {
