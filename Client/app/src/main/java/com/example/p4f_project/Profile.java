@@ -20,9 +20,9 @@ import org.w3c.dom.Text;
 public class Profile extends AppCompatActivity implements View.OnClickListener {
     ImageView profile_backtomain;
     TextView profile_name;
+    Button logout,changePass;
     SharedPreferences myPreferences;
     private Context mContext;
-    Button logout;
     public static Handler profileHandler;
     SharedPreferences prefGet;
     SharedPreferences.Editor prefGetEdit;
@@ -30,9 +30,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        profile_backtomain=(ImageView) findViewById(R.id.profile_backtomain);
+        findID();
         profile_backtomain.setOnClickListener(this);
-        profile_name=(TextView) findViewById(R.id.profile_name);
         prefGet = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         prefGetEdit = prefGet.edit();
         profile_name.setText(prefGet.getString("Profile name", null));
@@ -43,10 +42,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 profile_name.setText((String) msg.obj);
             }
         };
-        logout=(Button) findViewById(R.id.logout_button);
         logout.setOnClickListener(this);
+        changePass.setOnClickListener(this);
     }
-
+    public void findID(){
+        profile_backtomain=(ImageView) findViewById(R.id.profile_backtomain);
+        profile_name=(TextView) findViewById(R.id.profile_name);
+        logout=(Button) findViewById(R.id.logout_button);
+        changePass=(Button) findViewById(R.id.btn_changePass);
+    }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -60,6 +64,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 prefGetEdit.clear().apply();
                 finish();
                 break;
+            case R.id.btn_changePass:
+                Intent changePassIntent=new Intent(Profile.this, ChangePassword.class);
+                startActivity(changePassIntent);
+                finish();
         }
     }
 

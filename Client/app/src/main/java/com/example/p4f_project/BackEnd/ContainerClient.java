@@ -28,8 +28,9 @@ public class ContainerClient implements Runnable {
     private Timer timer_ = new Timer();
     boolean isConnected = false;
     int i = 0;
-    public ContainerClient(String[] server, int port) {
-        this.server = server;
+    public ContainerClient(String serverr, int port) {
+        //this.server = server;
+        serverr = "192.168.1.11";
         this.port = port;
         bootstrap.group(new NioEventLoopGroup());
         bootstrap.channel(NioSocketChannel.class);
@@ -46,7 +47,7 @@ public class ContainerClient implements Runnable {
                 @Override
                 public void handleMessage(@NonNull Message msg) {
                     super.handleMessage(msg);
-                    if (isConnected == true) {
+                    if (isConnected == false) {
                         scheduleConnect(10);
                     }
                     String line = msg.obj.toString();
@@ -78,15 +79,7 @@ public class ContainerClient implements Runnable {
     }
     private void doConnect() {
         try {
-            ChannelFuture f = bootstrap.connect( server[i], port );
-            while (!f.channel().isActive()) {
-                i++;
-                bootstrap.connect(server[i], port);
-                 if (i > server.length) {
-                     System.out.println("Out of Address");
-                    System.exit(3);
-                }
-            }
+            ChannelFuture f = bootstrap.connect( "192.168.1.11", port ).sync();
             f.addListener( new ChannelFutureListener() {
                 @Override public void operationComplete(ChannelFuture future) throws Exception {
                     if( !future.isSuccess() ) {//if is not successful, reconnect

@@ -12,24 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.p4f_project.BackEnd.ContainerClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
-import android.app.Application;
-import android.content.Context;
 
 public class LoginFragment extends Fragment {
-    EditText username;
-    EditText password;
+    EditText username,password;
     Button Login;
+    int ID;
     Context context;
-    String uName;
+    String uName,uPass;
     FloatingActionButton fb,gg,phone;
     float v=0;
     public static Handler loginFragmentHandler;
@@ -41,6 +37,7 @@ public class LoginFragment extends Fragment {
         username=(EditText) root.findViewById(R.id.username);
         password=(EditText) root.findViewById(R.id.password);
         Login=(Button)root.findViewById(R.id.loginButton);
+        ID=R.id.login_fragment;
         fb=root.findViewById(R.id.fab_fb);
         gg=root.findViewById(R.id.fab_gg);
         phone=root.findViewById(R.id.fab_phone);
@@ -73,24 +70,40 @@ public class LoginFragment extends Fragment {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch(v.getId()) {
-                    case R.id.loginButton:
-                        Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
-                        startActivity(myIntent);
-                        getActivity().finish();
-                    case R.id.username:
-                        uName=username.getText().toString();
-                        if(uName.length()>=1){
-                            Log.d("output","NOT NULL");
-                        }
-                        Message msg = Message.obtain();
-                        msg.obj = "Login " + uName;
-                        ContainerClient.handler.sendMessage(msg);
+//                switch(v.getId()) {
+//                    case R.id.loginButton:
+//                        Message msg = Message.obtain();
+//                        msg.obj = (String) (uName+uPass);
+//                        Log.d("Obj of msg: ", (String)msg.obj);
+//                        //ContainerClient.handler.sendMessage(msg);
+//                        Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
+//                        startActivity(myIntent);
+//                        getActivity().finish();
+//                    case R.id.username:
+//                        uName=username.getText().toString();
+//                        if(uName.length()>=1){
+//                            Log.d("output","NOT NULL");
+//                        }
+//                    case R.id.password:
+//                        uPass=password.getText().toString();
+//
+//                }
+                uName=username.getText().toString();
+                uPass=password.getText().toString();
+                if(uName.length()>=1){
+                    Log.d("output","NOT NULL");
                 }
+                Message msg = Message.obtain();
+                msg.obj = (String) (uName+uPass);
+                Log.d("Obj of msg: ", (String)msg.obj);
+                //ContainerClient.handler.sendMessage(msg);
+                Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
+                startActivity(myIntent);
+                getActivity().finish();
             }
         });
         return root;
-        }
+    }
 
     public boolean checkString(String userName){
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9]]");
@@ -136,3 +149,4 @@ public class LoginFragment extends Fragment {
     }
 
 }
+

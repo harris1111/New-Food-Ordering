@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import com.example.p4f_project.BackEnd.ContainerClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,7 +22,15 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        String[] IP = new String[10];
+        for (int i = 2;i<=10;i++) {
+            IP[i-2] = "192.168.1." + String.valueOf(i);
+        }
+        for (int i = 0; i<IP.length - 1; i++) {
+            System.out.println(IP[i]);
+        }
+        Thread worker = new Thread(new ContainerClient("192.168.1.11", 9999));
+        worker.start();
         // find id of these things
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);
