@@ -19,6 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ContainerClient implements Runnable {
+    //Initialization
     public static Looper looper;
     public static Handler handler;
     String[] server;
@@ -39,6 +40,7 @@ public class ContainerClient implements Runnable {
     }
     @Override
     public void run() {
+        //start Looper
         Looper.prepare();
         looper = Looper.myLooper();
         try {
@@ -102,7 +104,6 @@ public class ContainerClient implements Runnable {
                                 throws Exception {
                             connectionLost();
                         }
-
                     });
 
                 }

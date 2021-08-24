@@ -35,6 +35,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         prefGet = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
         prefGetEdit = prefGet.edit();
         profile_name.setText(prefGet.getString("Profile name", null));
+        //use Handler to receive Message
         Profile.profileHandler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {

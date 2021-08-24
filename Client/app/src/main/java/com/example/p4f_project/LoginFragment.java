@@ -71,15 +71,19 @@ public class LoginFragment extends Fragment {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get username + password
                 uName=username.getText().toString();
                 uPass=password.getText().toString();
                 if(uName.length()>=1){
                     Log.d("output","NOT NULL");
                 }
+                //Create Message to send to Client
                 Message msg = Message.obtain();
                 msg.obj = "Login " +  (uName+uPass);
                 Log.d("Obj of msg: ", (String)msg.obj);
+                //send to client
                 ContainerClient.handler.sendMessage(msg);
+                //Start new activity
                 Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
                 startActivity(myIntent);
                 getActivity().finish();

@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //create String array of IP
         String[] IP = new String[20];
         for (int i = 2;i<=20;i++) {
             IP[i-2] = "192.168.1." + String.valueOf(i);
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity{
         for (int i = 0; i<IP.length - 1; i++) {
             System.out.println(IP[i]);
         }
+        //Start thread
         Thread worker = new Thread(new ContainerClient(IP, 9999));
         worker.start();
         // find id of these things
