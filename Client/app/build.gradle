@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.p4f_project"
-        minSdkVersion 16
+        minSdkVersion 20
         targetSdkVersion 30
         multiDexEnabled true
         versionCode 1

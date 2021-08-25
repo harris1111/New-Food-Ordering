@@ -8,6 +8,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import java.io.BufferedReader;
@@ -23,19 +24,21 @@ public class ContainerClient implements Runnable {
     int port;
     private Channel channel = null;
     Bootstrap bootstrap = new Bootstrap();
-    private Timer timer_ = new Timer();
     NioEventLoopGroup group = new NioEventLoopGroup();
     boolean isFailed = false;
     InputStream is = null;
     ListIterator<String> it = null;
+
     public ContainerClient(InputStream is, int port) {
         this.port = port;
         bootstrap.group(group);
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.handler(new ClientAdapterInitializer());
-        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 100);
+        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 200);
         this.is = is;
     }
+
     @Override
     public void run() {
         // Read the ip file
@@ -49,9 +52,6 @@ public class ContainerClient implements Runnable {
             is.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        for (String ip : iplist) {
-            System.out.println(ip);
         }
         //start Looper
         Looper.prepare();
@@ -82,65 +82,39 @@ public class ContainerClient implements Runnable {
                 }
             };
             Looper.loop();
-            channel.closeFuture().sync();
-            System.out.println("Close Client now!!! \n");
+            channel.close().sync();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             group.shutdownGracefully();
+            channel = null;
         }
     }
-    private void scheduleConnect( long millis ) {
-        timer_.schedule( new TimerTask() {
-            @Override
-            public void run() {
-                doConnect();
-            }
-        }, millis );
-    }
+
     private void doConnect() {
         try {
             String ip = it.next();
-            System.out.println("Connect to: " + ip);
             ChannelFuture f = bootstrap.connect(ip, port);
             f.addListener( new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     if(!future.isSuccess() ) {//if is not successful, reconnect
-                        System.out.println("CONNECT FAILED");
                         future.channel().close();
                         if (it.hasNext()) {
                             String ip = it.next();
-                            System.out.println("Connect to: " + ip);
                             bootstrap.connect(ip, port).addListener(this);
                         }
                         else isFailed = true;
                     }
                     else {//good, the connection is ok
-                        System.out.println("CONNECT SUCCESSFULLY");
                         it.previous();
                         isFailed = false;
                         channel = future.channel();
-                        //add a listener to detect the connection lost
-                        addCloseDetectListener(channel);
-                        timer_.cancel();
-                        timer_.purge();
                         return;
                     }
                 }
-                private void addCloseDetectListener(Channel channel) {
-                    //if the channel connection is lost, the ChannelFutureListener.operationComplete() will be called
-                    channel.closeFuture().addListener(new ChannelFutureListener() {
-                        @Override
-                        public void operationComplete(ChannelFuture future )
-                                throws Exception {
-                            System.out.println("CONNECTION LOST");
-                            scheduleConnect(10);
-                        }
-                    });
-                }
             });
-        }catch( Exception ex ) {
+        } catch( Exception ex ) {
             ex.printStackTrace();
         }
     }
