@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity{
         }
         if (is != null) {
             worker = new Thread(new ContainerClient(is, 9999));
+            worker.setDaemon(true);
             worker.start();
         }
         // find id of these things

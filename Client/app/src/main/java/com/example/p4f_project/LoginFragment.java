@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.p4f_project.BackEnd.ContainerClient;
+import com.example.p4f_project.protocols.ClientMessage;
+import com.example.p4f_project.protocols.LoginInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.regex.Matcher;
@@ -28,7 +31,6 @@ public class LoginFragment extends Fragment {
     Button Login;
     int ID;
     Context context;
-    String uName,uPass;
     FloatingActionButton fb,gg,phone;
     float v=0;
     public static Handler loginFragmentHandler;
@@ -74,8 +76,16 @@ public class LoginFragment extends Fragment {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if ((boolean) msg.obj == true) {
-                    toNextActivity();
+                if (msg.what == 1) {
+                    Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                    announce.show();
+                    if (msg.arg1 == 0) {
+                        toMainPageActivity();
+                    }
+                }
+                else if (msg.what == -1) {
+                    Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                    announce.show();
                 }
             }
         };
@@ -83,66 +93,25 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //get username + password
-                uName=username.getText().toString();
-                uPass=password.getText().toString();
+                LoginInfo loginInfo = LoginInfo.newBuilder()
+                        .setUsername(username.getText().toString())
+                        .setPassword(password.getText().toString()).build();
                 //Create Message to send to Client
-                Message msg = Message.obtain();
-                msg.obj = "Login " +  (uName+uPass);
+                Message msg = Message.obtain(ContainerClient.handler);
+                msg.what = 1;
+                msg.obj = loginInfo;
                 //send to client
-                ContainerClient.handler.sendMessage(msg);
+                msg.sendToTarget();
             }
         });
         return root;
     }
 
-    public boolean checkString(String userName){
-        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]]");
-        Matcher matcher= pattern.matcher(userName);
-        boolean isSpecial=matcher.find();
-        return isSpecial;
-    }
-
-    public void toNextActivity() {
+    public void toMainPageActivity() {
         //Start new activity
         Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
         startActivity(myIntent);
         getActivity().finish();
     }
-
-    public int validate(String userName, String password)
-    {
-        String result="";
-        if(userName.equals("user") && password.equals("1234")) {
-            result = "Login was successful";
-            return -1;
-        }
-        // Case username has special characters
-        if(checkString(userName)){
-            result= "Username contains special character(s)";
-            return -1;
-        }
-        // case username != user
-        if(userName!=("user")){
-            result="Username not found!";
-            return -1;
-        }
-        // case username or password is blank
-        if(userName.equals("") || password.equals((""))){
-            result= "Username invalid!";
-            return -1;
-        }
-        // case Wrong password
-        if(userName.equals("user") && password!=("1234")){
-            result=("Wrong Pass!");
-            return -1;
-        }
-        // case password length <8 characters
-        if(password.length()<8){
-            result=("Password must be at least 8 characters");
-            return -1;
-        }
-        return 1;
-    }
-
 }
 
