@@ -70,7 +70,7 @@ public class Main {
         }
     }
     
-    public static void main(String[] args) {
+    public static void main_(String[] args) {
         try {
             ServerP4F server = new ServerP4F("", 10201);
             server.start();

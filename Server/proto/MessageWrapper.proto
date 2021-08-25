@@ -18,7 +18,7 @@ message UserAccount {
   string address = 5;
 }
 
-message LoginResponse {
+message InfoResponse {
   int32 reCode = 1; // Result code
   UserAccount userInfo = 2;
 }
@@ -33,6 +33,6 @@ message ClientMessage {
 message ServerMessage {
   int32 opcode = 1;
   oneof server_responses {
-    LoginResponse loginResponse = 2;
+    InfoResponse loginResponse = 2;
   }
 }

@@ -1,5 +1,9 @@
 package com.p2p.p4f.server;
 
+import com.p2p.p4f.protocols.InfoResponse;
+import com.p2p.p4f.protocols.LoginInfo;
+import com.p2p.p4f.protocols.UserAccount;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,31 +88,35 @@ public class DBHandler {
 
     // Int_User: int to get the result of query, 0(no fault) 1(username fault) 2(pass fault) 3(staff login)
     // User: get information of the login user
-    public Int_User Login(String user, String pass) throws SQLException {
-        String sqlState = "select * from tblUser u where u.Username = \'" + user+"\'";
-        User u = new User();
-        Int_User Result = new Int_User();
+    public InfoResponse Login(LoginInfo user) throws SQLException {
+        String sqlState = "select * from tblUser u where u.Username = \'" + user.getUsername() + "\'";
+        InfoResponse.Builder Result = InfoResponse.newBuilder();
+        UserAccount.Builder account = UserAccount.newBuilder();
         PreparedStatement st = conn.prepareStatement(sqlState);
         ResultSet rs = st.executeQuery();
         try{
-            if (!rs.next()) Result.setInt(1);
-            if (!pass.equals(rs.getString("U_pass"))) Result.setInt(2);
-            if (rs.getString("Usertype").equals("1")) {
-                Result.setInt(0);
-                u = new User(rs.getString(1), rs.getString(2),
-                        rs.getString(4),rs.getString(5),
-                        rs.getString(6),rs.getString(7));
+            if (!rs.next())
+                Result.setReCode(1);
+            else if (!user.getPassword().equals(rs.getString("U_pass")))
+                Result.setReCode(2);
+            else if (rs.getString("Usertype").equals("1")) {
+                Result.setReCode(0);
+                account.setUsername(rs.getString(1))
+                        .setType(1)
+                        .setEmail(rs.getString(4)) // Info fields can be null
+                        .setPhone(rs.getString(5))
+                        .setAddress(rs.getString(6));
+                Result.setUserInfo(account);
             }
-            else Result.setInt(3);
+            else Result.setReCode(3) // NEED TO GET INFO OF STAFFS
+                    .setUserInfo(UserAccount.newBuilder().setType(0));
             st.close();
             rs.close();
             //conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Result.setUser(u);
-
-        return Result;
+        return Result.build();
     }
 
     // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault

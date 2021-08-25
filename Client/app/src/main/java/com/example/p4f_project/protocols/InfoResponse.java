@@ -4,25 +4,25 @@
 package com.p2p.p4f.protocols;
 
 /**
- * Protobuf type {@code p4f_protocols.LoginResponse}
+ * Protobuf type {@code p4f_protocols.InfoResponse}
  */
-public final class LoginResponse extends
+public final class InfoResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:p4f_protocols.LoginResponse)
-    LoginResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:p4f_protocols.InfoResponse)
+    InfoResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use LoginResponse.newBuilder() to construct.
-  private LoginResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use InfoResponse.newBuilder() to construct.
+  private InfoResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private LoginResponse() {
+  private InfoResponse() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new LoginResponse();
+    return new InfoResponse();
   }
 
   @java.lang.Override
@@ -30,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private LoginResponse(
+  private InfoResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -87,15 +87,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginResponse_descriptor;
+    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_InfoResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginResponse_fieldAccessorTable
+    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_InfoResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.p2p.p4f.protocols.LoginResponse.class, com.p2p.p4f.protocols.LoginResponse.Builder.class);
+            com.p2p.p4f.protocols.InfoResponse.class, com.p2p.p4f.protocols.InfoResponse.Builder.class);
   }
 
   public static final int RECODE_FIELD_NUMBER = 1;
@@ -186,10 +186,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.p2p.p4f.protocols.LoginResponse)) {
+    if (!(obj instanceof com.p2p.p4f.protocols.InfoResponse)) {
       return super.equals(obj);
     }
-    com.p2p.p4f.protocols.LoginResponse other = (com.p2p.p4f.protocols.LoginResponse) obj;
+    com.p2p.p4f.protocols.InfoResponse other = (com.p2p.p4f.protocols.InfoResponse) obj;
 
     if (getReCode()
         != other.getReCode()) return false;
@@ -220,69 +220,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(byte[] data)
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(java.io.InputStream input)
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.p2p.p4f.protocols.InfoResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseDelimitedFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.LoginResponse parseFrom(
+  public static com.p2p.p4f.protocols.InfoResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -295,7 +295,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.p2p.p4f.protocols.LoginResponse prototype) {
+  public static Builder newBuilder(com.p2p.p4f.protocols.InfoResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -311,26 +311,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code p4f_protocols.LoginResponse}
+   * Protobuf type {@code p4f_protocols.InfoResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:p4f_protocols.LoginResponse)
-      com.p2p.p4f.protocols.LoginResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:p4f_protocols.InfoResponse)
+      com.p2p.p4f.protocols.InfoResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginResponse_descriptor;
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_InfoResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginResponse_fieldAccessorTable
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_InfoResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.p2p.p4f.protocols.LoginResponse.class, com.p2p.p4f.protocols.LoginResponse.Builder.class);
+              com.p2p.p4f.protocols.InfoResponse.class, com.p2p.p4f.protocols.InfoResponse.Builder.class);
     }
 
-    // Construct using com.p2p.p4f.protocols.LoginResponse.newBuilder()
+    // Construct using com.p2p.p4f.protocols.InfoResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -362,17 +362,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginResponse_descriptor;
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_InfoResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.LoginResponse getDefaultInstanceForType() {
-      return com.p2p.p4f.protocols.LoginResponse.getDefaultInstance();
+    public com.p2p.p4f.protocols.InfoResponse getDefaultInstanceForType() {
+      return com.p2p.p4f.protocols.InfoResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.LoginResponse build() {
-      com.p2p.p4f.protocols.LoginResponse result = buildPartial();
+    public com.p2p.p4f.protocols.InfoResponse build() {
+      com.p2p.p4f.protocols.InfoResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -380,8 +380,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.LoginResponse buildPartial() {
-      com.p2p.p4f.protocols.LoginResponse result = new com.p2p.p4f.protocols.LoginResponse(this);
+    public com.p2p.p4f.protocols.InfoResponse buildPartial() {
+      com.p2p.p4f.protocols.InfoResponse result = new com.p2p.p4f.protocols.InfoResponse(this);
       result.reCode_ = reCode_;
       if (userInfoBuilder_ == null) {
         result.userInfo_ = userInfo_;
@@ -426,16 +426,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.p2p.p4f.protocols.LoginResponse) {
-        return mergeFrom((com.p2p.p4f.protocols.LoginResponse)other);
+      if (other instanceof com.p2p.p4f.protocols.InfoResponse) {
+        return mergeFrom((com.p2p.p4f.protocols.InfoResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.p2p.p4f.protocols.LoginResponse other) {
-      if (other == com.p2p.p4f.protocols.LoginResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.p2p.p4f.protocols.InfoResponse other) {
+      if (other == com.p2p.p4f.protocols.InfoResponse.getDefaultInstance()) return this;
       if (other.getReCode() != 0) {
         setReCode(other.getReCode());
       }
@@ -457,11 +457,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.p2p.p4f.protocols.LoginResponse parsedMessage = null;
+      com.p2p.p4f.protocols.InfoResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.p2p.p4f.protocols.LoginResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.p2p.p4f.protocols.InfoResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -645,41 +645,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:p4f_protocols.LoginResponse)
+    // @@protoc_insertion_point(builder_scope:p4f_protocols.InfoResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:p4f_protocols.LoginResponse)
-  private static final com.p2p.p4f.protocols.LoginResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:p4f_protocols.InfoResponse)
+  private static final com.p2p.p4f.protocols.InfoResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.p2p.p4f.protocols.LoginResponse();
+    DEFAULT_INSTANCE = new com.p2p.p4f.protocols.InfoResponse();
   }
 
-  public static com.p2p.p4f.protocols.LoginResponse getDefaultInstance() {
+  public static com.p2p.p4f.protocols.InfoResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<LoginResponse>
-      PARSER = new com.google.protobuf.AbstractParser<LoginResponse>() {
+  private static final com.google.protobuf.Parser<InfoResponse>
+      PARSER = new com.google.protobuf.AbstractParser<InfoResponse>() {
     @java.lang.Override
-    public LoginResponse parsePartialFrom(
+    public InfoResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new LoginResponse(input, extensionRegistry);
+      return new InfoResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<LoginResponse> parser() {
+  public static com.google.protobuf.Parser<InfoResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<LoginResponse> getParserForType() {
+  public com.google.protobuf.Parser<InfoResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.p2p.p4f.protocols.LoginResponse getDefaultInstanceForType() {
+  public com.p2p.p4f.protocols.InfoResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

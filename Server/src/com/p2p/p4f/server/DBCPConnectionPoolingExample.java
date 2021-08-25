@@ -1,5 +1,8 @@
 package com.p2p.p4f.server;
 
+import com.p2p.p4f.protocols.LoginInfo;
+import com.p2p.p4f.protocols.InfoResponse;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -8,24 +11,26 @@ public class DBCPConnectionPoolingExample {
 
     private static final int NUMBER_OF_USERS = 5;
 
-    public static void main_2(String[] args) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
         // Test URL (DON'T CHANGE THIS COMMENT):
         // jdbc:sqlserver://localhost\MSSQLSERVER;databaseName=PrayForFood;integratedSecurity=true;
         ConnectionPool.setFirstUrl("jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=PrayForFood;integratedSecurity=true;");
         try{
-                DBHandler dbH = new DBHandler();
-                Int_User rs =  dbH.Login("khachhang2","pss");
-            System.out.println("Thread 1 " + rs.getInt());
-                System.out.println("Thread 1 " + rs.u.username);
-                User newU = new User (rs.u);
-                newU.email = "kh2@mail.vn";
-            System.out.println("Thread 1 " + dbH.ChangeInformation(rs.u,rs.u.pass,newU));
+            DBHandler dbH = new DBHandler();
+            InfoResponse rs =  dbH.Login(LoginInfo.newBuilder()
+                    .setUsername("khachhang1")
+                    .setPassword("1111")
+                    .build());
             // return connection to pool
             dbH.releaseConn();
-                }
-            catch(SQLException e){
-                e.printStackTrace();
+            if (rs.getReCode() == 0 || rs.getReCode() == 3) {
+                System.out.println("Login success");
             }
+            else System.out.println("Login failed");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
 
     }
 }

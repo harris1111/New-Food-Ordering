@@ -1,7 +1,5 @@
-package tests;
-
 import com.p2p.p4f.protocols.ClientMessage;
-import com.p2p.p4f.protocols.UserAccount;
+import com.p2p.p4f.protocols.LoginInfo;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.embedded.EmbeddedChannel;
@@ -18,11 +16,9 @@ public class ProtobufEncoderDecoderTest {
 		try {
 			ClientMessage loginReq = ClientMessage.newBuilder()
 					.setOpcode(1)
-					.setAccount(
-							UserAccount.newBuilder()
-									.setUsername("admin")
-									.setPassword("10022001")
-					).build();
+					.setAccount(LoginInfo.newBuilder()
+					.setUsername("ak123")
+					.setPassword("12345")).build();
 			
 			EmbeddedChannel eChan = new EmbeddedChannel();
 			ChannelPipeline pipeline = eChan.pipeline();

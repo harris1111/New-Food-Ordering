@@ -3,8 +3,8 @@
 
 package com.p2p.p4f.protocols;
 
-public interface LoginResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:p4f_protocols.LoginResponse)
+public interface InfoResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:p4f_protocols.InfoResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**

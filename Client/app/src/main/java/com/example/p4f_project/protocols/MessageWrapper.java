@@ -25,10 +25,10 @@ public final class MessageWrapper {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_p4f_protocols_UserAccount_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_p4f_protocols_LoginResponse_descriptor;
+    internal_static_p4f_protocols_InfoResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_p4f_protocols_LoginResponse_fieldAccessorTable;
+      internal_static_p4f_protocols_InfoResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_p4f_protocols_ClientMessage_descriptor;
   static final 
@@ -52,15 +52,15 @@ public final class MessageWrapper {
       "ls\"/\n\tLoginInfo\022\020\n\010username\030\001 \001(\t\022\020\n\010pas" +
       "sword\030\002 \001(\t\"\\\n\013UserAccount\022\020\n\010username\030\001" +
       " \001(\t\022\014\n\004type\030\002 \001(\005\022\r\n\005email\030\003 \001(\t\022\r\n\005pho" +
-      "ne\030\004 \001(\t\022\017\n\007address\030\005 \001(\t\"M\n\rLoginRespon" +
-      "se\022\016\n\006reCode\030\001 \001(\005\022,\n\010userInfo\030\002 \001(\0132\032.p" +
-      "4f_protocols.UserAccount\"_\n\rClientMessag" +
-      "e\022\016\n\006opcode\030\001 \001(\005\022+\n\007account\030\002 \001(\0132\030.p4f" +
-      "_protocols.LoginInfoH\000B\021\n\017client_request" +
-      "s\"j\n\rServerMessage\022\016\n\006opcode\030\001 \001(\005\0225\n\rlo" +
-      "ginResponse\030\002 \001(\0132\034.p4f_protocols.LoginR" +
-      "esponseH\000B\022\n\020server_responsesB\031\n\025com.p2p" +
-      ".p4f.protocolsP\001b\006proto3"
+      "ne\030\004 \001(\t\022\017\n\007address\030\005 \001(\t\"L\n\014InfoRespons" +
+      "e\022\016\n\006reCode\030\001 \001(\005\022,\n\010userInfo\030\002 \001(\0132\032.p4" +
+      "f_protocols.UserAccount\"_\n\rClientMessage" +
+      "\022\016\n\006opcode\030\001 \001(\005\022+\n\007account\030\002 \001(\0132\030.p4f_" +
+      "protocols.LoginInfoH\000B\021\n\017client_requests" +
+      "\"i\n\rServerMessage\022\016\n\006opcode\030\001 \001(\005\0224\n\rlog" +
+      "inResponse\030\002 \001(\0132\033.p4f_protocols.InfoRes" +
+      "ponseH\000B\022\n\020server_responsesB\031\n\025com.p2p.p" +
+      "4f.protocolsP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -78,11 +78,11 @@ public final class MessageWrapper {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_p4f_protocols_UserAccount_descriptor,
         new java.lang.String[] { "Username", "Type", "Email", "Phone", "Address", });
-    internal_static_p4f_protocols_LoginResponse_descriptor =
+    internal_static_p4f_protocols_InfoResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_p4f_protocols_LoginResponse_fieldAccessorTable = new
+    internal_static_p4f_protocols_InfoResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_p4f_protocols_LoginResponse_descriptor,
+        internal_static_p4f_protocols_InfoResponse_descriptor,
         new java.lang.String[] { "ReCode", "UserInfo", });
     internal_static_p4f_protocols_ClientMessage_descriptor =
       getDescriptor().getMessageTypes().get(3);

@@ -14,19 +14,19 @@ public interface ServerMessageOrBuilder extends
   int getOpcode();
 
   /**
-   * <code>.p4f_protocols.LoginResponse loginResponse = 2;</code>
+   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
    * @return Whether the loginResponse field is set.
    */
   boolean hasLoginResponse();
   /**
-   * <code>.p4f_protocols.LoginResponse loginResponse = 2;</code>
+   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
    * @return The loginResponse.
    */
-  com.p2p.p4f.protocols.LoginResponse getLoginResponse();
+  com.p2p.p4f.protocols.InfoResponse getLoginResponse();
   /**
-   * <code>.p4f_protocols.LoginResponse loginResponse = 2;</code>
+   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
    */
-  com.p2p.p4f.protocols.LoginResponseOrBuilder getLoginResponseOrBuilder();
+  com.p2p.p4f.protocols.InfoResponseOrBuilder getLoginResponseOrBuilder();
 
   public com.p2p.p4f.protocols.ServerMessage.ServerResponsesCase getServerResponsesCase();
 }
