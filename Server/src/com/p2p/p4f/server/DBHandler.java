@@ -73,21 +73,24 @@ class Int_User{
 //Each time using the new query, you have to create new dbhandler
 public class DBHandler {
     private Connection conn;
+    // Constructor to get conn by the parameter Connection conn
     public DBHandler(Connection conn){
         this.conn = conn;
     }
+    // Constructor to get conn from pool if there is a idle connection in pool, if not, we have to wait
+    public DBHandler() throws SQLException {
+        this.conn = ConnectionPool.getConnection();
+    }
 
-
-    // list[0]:  0 = user login, 1 = username fault, 2 = pw fault, 3 = staff login, 4 = other fault
-    // list[1]:  User information
-    public Int_User Login(String user, String pass) {
+    // Int_User: int to get the result of query, 0(no fault) 1(username fault) 2(pass fault) 3(staff login)
+    // User: get information of the login user
+    public Int_User Login(String user, String pass) throws SQLException {
         String sqlState = "select * from tblUser u where u.Username = \'" + user+"\'";
         User u = new User();
         Int_User Result = new Int_User();
-        try (   Connection conn = this.conn;
-                PreparedStatement st = conn.prepareStatement(sqlState);
-                ResultSet rs = st.executeQuery();
-                ) {
+        PreparedStatement st = conn.prepareStatement(sqlState);
+        ResultSet rs = st.executeQuery();
+        try{
             if (!rs.next()) Result.setInt(1);
             if (!pass.equals(rs.getString("U_pass"))) Result.setInt(2);
             if (rs.getString("Usertype").equals("1")) {
@@ -109,7 +112,7 @@ public class DBHandler {
     }
 
     // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
-    public int Register(User u) {
+    public int Register(User u) throws SQLException {
         String sqlState = "insert into tblUser(Username, U_pass, Usertype, " +
                 "Email, Phone, U_address, U_image) \nvalues";
         if (!u.email.equals("NULL")) u.email = "\'" + u.email + "\'";
@@ -122,49 +125,42 @@ public class DBHandler {
                 "N\'" + u.addr +
                 "\', " + u.image + ");" ;
         String QState = "select * from tblUser where ? = ?";
-        try (
-                Connection conn = this.conn;
-                //PreparedStatement st = conn.prepareStatement(sqlState+val);
-                Statement st = conn.createStatement();
-
-                PreparedStatement stQuery = conn.prepareStatement(QState);
-                )
-                {
-                    stQuery.setString(1,"u.Username");
-                    stQuery.setString(2,"\'" + u.username + "\'");
-                    ResultSet rs = stQuery.executeQuery();
-                    if (rs.next()) return 1;
-                    stQuery.setString(1,"u.Email");
-                    stQuery.setString(2,"\'" + u.email + "\'");
-                    if (!u.email.equals("NULL")) {
-                        rs = stQuery.executeQuery();
-                        if (rs.next()) return 2;
-                    }
-                    stQuery.setString(1,"u.Phone");
-                    stQuery.setString(2,"\'" + u.phone + "\'");
-                    if (!u.phone.equals("NULL")) {
-                        rs = stQuery.executeQuery();
-                        if (rs.next()) return 3;
-                    }
-                    st.executeUpdate(sqlState + val);
-                    return 0;
-                } catch (SQLException e) {
+        //PreparedStatement st = conn.prepareStatement(sqlState+val);
+        Statement st = conn.createStatement();
+        PreparedStatement stQuery = conn.prepareStatement(QState);
+        try {
+            stQuery.setString(1, "u.Username");
+            stQuery.setString(2, "\'" + u.username + "\'");
+            ResultSet rs = stQuery.executeQuery();
+            if (rs.next()) return 1;
+            stQuery.setString(1, "u.Email");
+            stQuery.setString(2, "\'" + u.email + "\'");
+            if (!u.email.equals("NULL")) {
+                rs = stQuery.executeQuery();
+                if (rs.next()) return 2;
+            }
+            stQuery.setString(1, "u.Phone");
+            stQuery.setString(2, "\'" + u.phone + "\'");
+            if (!u.phone.equals("NULL")) {
+                rs = stQuery.executeQuery();
+                if (rs.next()) return 3;
+            }
+            st.executeUpdate(sqlState + val);
+            return 0;
+        }catch (SQLException e) {
             e.printStackTrace();
         }
         return 5;
     }
 
-    // ResultSet: hàm getArray() để lấy từng cột, có 6 cột
-    // Branch_ID, Branch_Name, Branch_Address, Branch_image, Branch_Location_Longtitude, Branch_Location_Latitude
-    // ví dụ: rs.getArray("BranchID") là lấy cột ID của toàn bộ branch
-    public ArrayList<Restaurant> get_ListRestaurant() {
-        try {
+    // Restaurant: Branch_ID, Branch_Name, Branch_Address, Branch_image, Branch_Location_Longtitude, Branch_Location_Latitude
+    // example: rs.getArray("BranchID") is get column BranchID.
+    public ArrayList<Restaurant> get_ListRestaurant() throws SQLException {
             String sqlSelect = "SELECT * from tblBranch";
             ArrayList<Restaurant> list = new ArrayList<>();
-            try (
-                    Connection conn = this.conn;
-                    Statement st = conn.createStatement();
-                    ResultSet rs = st.executeQuery(sqlSelect);) {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sqlSelect);
+            try{
                     while(rs.next()){
                         Restaurant r = new Restaurant(rs.getString("Branch_ID"),
                                 rs.getString("Branch_Name")
@@ -175,14 +171,15 @@ public class DBHandler {
                         list.add(r);
                     }
                 return list;
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public boolean ChangePassword (User user,String oldPass,String newPass){
+    // Change password
+    public boolean ChangePassword (User user,String oldPass,String newPass) throws SQLException {
         // if the inputted oldPass is incorrect or the new pass and old pass is the same
         System.out.println(user.pass + "  " + oldPass + "  " + newPass);
         if ((!user.pass.equals(oldPass))|| user.pass.equals(newPass)) return false;
@@ -190,10 +187,9 @@ public class DBHandler {
         String sqlUpdate = "Update tblUser\n" +
                 "set U_pass = " + "\'" + newPass + "\'" +
                 "\nwhere Username = " + "\'" + user.username + "\'";
-        try(
-                Connection conn = this.conn;
-                PreparedStatement sql = conn.prepareStatement(sqlUpdate);
-                ){
+        Connection conn = this.conn;
+        PreparedStatement sql = conn.prepareStatement(sqlUpdate);
+        try{
             System.out.println(sqlUpdate);
             System.out.println(user.username);
             sql.executeUpdate();
@@ -205,7 +201,7 @@ public class DBHandler {
         return true;
     }
 
-    public boolean ChangeInformation (User user, String oldPass, User newInfo){
+    public boolean ChangeInformation (User user, String oldPass, User newInfo) throws SQLException {
         // if the inputted oldPass is incorrect
 
         if (!user.pass.equals(oldPass) ) return false;
@@ -216,17 +212,14 @@ public class DBHandler {
                 "U_address = ?,\n" +
                 "U_image = ?\n" +
                 "where Username = ?";
-        Connection conn = this.conn;
-        try(
-                PreparedStatement sql = conn.prepareStatement(sqlUpdate);
-        ){
+         PreparedStatement sql = conn.prepareStatement(sqlUpdate);
+        try{
 
             sql.setString(1, newInfo.email );
             sql.setString(2, newInfo.phone );
             sql.setString(3,newInfo.addr );
             sql.setString(4, newInfo.image );
             sql.setString(5, user.username );
-            System.out.println(sqlUpdate);
             sql.executeUpdate();
         }
         catch(SQLException e){
@@ -236,9 +229,13 @@ public class DBHandler {
         return true;
     }
 
-    public void getNewConn() throws SQLException {
-        this.conn = ConnectionPool.getConnection();
+    // if the connection is not returned to pool, use this func to do it
+    public void releaseConn() throws SQLException {
+        if (!conn.isClosed()){
+            conn.close();
+        }
     }
+
 }
 
 
