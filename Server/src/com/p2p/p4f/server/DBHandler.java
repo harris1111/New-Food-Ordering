@@ -95,21 +95,48 @@ public class DBHandler {
         PreparedStatement st = conn.prepareStatement(sqlState);
         ResultSet rs = st.executeQuery();
         try{
+            // if username is invalid
             if (!rs.next())
                 Result.setReCode(1);
+                // if password is incorrect
             else if (!user.getPassword().equals(rs.getString("U_pass")))
                 Result.setReCode(2);
+                // customer login
             else if (rs.getString("Usertype").equals("1")) {
                 Result.setReCode(0);
-                account.setUsername(rs.getString(1))
-                        .setType(1)
-                        .setEmail(rs.getString(4)) // Info fields can be null
-                        .setPhone(rs.getString(5))
-                        .setAddress(rs.getString(6));
+                // set username
+                account.setUsername(rs.getString(1));
+                // set user type: 1 is customer
+                account.setType(1);
+                // set email
+                if (rs.getString(4) == null) account.setEmail("null");
+                else account.setEmail(rs.getString(4));
+                // set phone
+                if (rs.getString(5) == null) account.setPhone("null");
+                else account.setPhone(rs.getString(5));
+                // set address
+                if (rs.getString(6) == null) account.setAddress("null");
+                else account.setAddress(rs.getString(6));
                 Result.setUserInfo(account);
             }
-            else Result.setReCode(3) // NEED TO GET INFO OF STAFFS
-                    .setUserInfo(UserAccount.newBuilder().setType(0));
+            // staff login
+            else {
+                Result.setReCode(3); // NEED TO GET INFO OF STAFFS
+                // set username
+                account.setUsername(rs.getString(1));
+                // set user type: 1 is customer
+                account.setType(0);
+                // set email
+                if (rs.getString(4) == null) account.setEmail("NULL");
+                else account.setEmail(rs.getString(4));
+                // set phone
+                if (rs.getString(5) == null) account.setPhone("NULL");
+                else account.setPhone(rs.getString(5));
+                // set address
+                if (rs.getString(6) == null) account.setAddress("NULL");
+                else account.setAddress(rs.getString(6));
+                Result.setUserInfo(account);
+            }
             st.close();
             rs.close();
             //conn.close();
