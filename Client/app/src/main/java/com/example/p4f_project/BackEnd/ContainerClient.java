@@ -33,6 +33,7 @@ public class ContainerClient implements Runnable {
         bootstrap.group(group);
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.handler(new ClientAdapterInitializer());
+        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 100);
         this.is = is;
     }
     @Override
