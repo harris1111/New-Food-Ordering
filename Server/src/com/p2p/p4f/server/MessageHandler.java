@@ -35,9 +35,10 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 		if (op == 1) {
 			InfoResponse info = dbHandler.Login(clientMsg.getAccount());
 			response.setOpcode(op);
-			
+			response.setInfoResponse(info);
 		}
 		dbHandler.releaseConn();
+		ctx.writeAndFlush(response.build());
 	}
 	
 	@Override

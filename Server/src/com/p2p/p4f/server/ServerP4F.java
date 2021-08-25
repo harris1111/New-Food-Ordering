@@ -25,7 +25,7 @@ public class ServerP4F {
 		if (!ip.isEmpty())
 			ipAddr = ip;
 		this.port = port;
-		System.out.println(logger.isInfoEnabled());
+		//System.out.println(logger.isInfoEnabled());
 	}
 	
 	public void start() throws Exception {
@@ -47,6 +47,7 @@ public class ServerP4F {
 								pipeline.addLast(new ProtobufEncoder());
 								pipeline.addLast(new ProtobufVarint32FrameDecoder());
 								pipeline.addLast(new ProtobufDecoder(ClientMessage.getDefaultInstance()));
+								pipeline.addLast(new MessageHandler());
 							}
 						})
 						.option(ChannelOption.SO_BACKLOG, 128)

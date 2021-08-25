@@ -19,10 +19,15 @@ message UserAccount {
 }
 
 message InfoResponse {
+  /*
+    re:
+      - Login: 0 = Success as customer, 1 = User not exists, 2 = Wrong password, 3 = Success as staff
+  */
   int32 reCode = 1; // Result code
   UserAccount userInfo = 2;
 }
 
+//op: 1 = Login;
 message ClientMessage {
   int32 opcode = 1;
   oneof client_requests {
