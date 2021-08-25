@@ -9,37 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-class User{
-    public String username = "NULL";
-    public String pass = "NULL";
-    public int Usertype = 1;
-    public String email = "NULL";
-    public String phone ="NULL";
-    public String addr = "NULL";
-    public String image = "NULL";
-    public User(){}
-    public User(String usr, String pass, String addr){
-        this.username = usr;
-        this.pass = pass;
-        this.addr = addr;
-    }
-    public User(String usr, String pass, String email, String phone, String addr, String image){
-        this.username = usr;
-        this.pass = pass;
-        this.email = email;
-        this.phone = phone;
-        this.addr = addr;
-        this.image = image;
-    }
-    public User(Object o){
-        this.username = ((User) o).username;
-        this.pass = ((User) o).pass;
-        this.email = ((User) o).email;
-        this.phone = ((User) o).phone;
-        this.addr = ((User) o).addr;
-        this.image = ((User) o).image;
-    }
-}
+
 
 class Restaurant{
     public String Branch_ID,
@@ -58,20 +28,6 @@ class Restaurant{
         this.Branch_Location_Longtitude = Branch_Location_Longtitude;
         this.Branch_Location_Latitude = Branch_Location_Latitude;
     }
-}
-
-class Int_User{
-    public int i;
-    public User u;
-    public Int_User(){}
-    public Int_User(int i, User u){
-        this.i = i;
-        this.u = u;
-    }
-    public int getInt() {return this.i;}
-    public User getUser(){return this.u;}
-    public void setInt(int i){this.i = i;}
-    public void setUser(User u){this.u = u;}
 }
 
 //Each time using the new query, you have to create new dbhandler
@@ -222,20 +178,37 @@ public class DBHandler {
         return null;
     }
 
+    private String getPass(String username) throws SQLException {
+        PreparedStatement sql = conn.prepareStatement("select U_pass from tblUser where Username = ?");
+        sql.setString(1, username);
+        ResultSet rs = sql.executeQuery();
+        if (rs.next()){
+            return rs.getString("U_pass");
+        }
+        else return null;
+    }
     // Change password
-    public boolean ChangePassword (User user,String oldPass,String newPass) throws SQLException {
-        // if the inputted oldPass is incorrect or the new pass and old pass is the same
-        System.out.println(user.pass + "  " + oldPass + "  " + newPass);
-        if ((!user.pass.equals(oldPass))|| user.pass.equals(newPass)) return false;
+    public boolean ChangePassword (UserAccount user, String oldPass, String newPass) throws SQLException {
 
+        String pass = getPass(user.getUsername());
+        // if get pass false, it means that user has some faults
+        if (pass == null) return false;
+
+        if ((!pass.equals(oldPass))|| pass.equals(newPass)) return false;
+        // if the inputted oldPass is incorrect or the new pass and old pass is the same
+        String email =  user.getEmail();
+        String phone =  user.getPhone();
+        String Usertype = "1";
+        String username =  user.getUsername();
+        String addr =  user.getAddress();
         String sqlUpdate = "Update tblUser\n" +
                 "set U_pass = " + "\'" + newPass + "\'" +
-                "\nwhere Username = " + "\'" + user.username + "\'";
+                "\nwhere Username = " + "\'" +  username + "\'";
         Connection conn = this.conn;
         PreparedStatement sql = conn.prepareStatement(sqlUpdate);
         try{
             System.out.println(sqlUpdate);
-            System.out.println(user.username);
+            System.out.println(username);
             sql.executeUpdate();
             conn.commit();
         }
@@ -245,10 +218,12 @@ public class DBHandler {
         return true;
     }
 
-    public boolean ChangeInformation (User user, String oldPass, User newInfo) throws SQLException {
-        // if the inputted oldPass is incorrect
 
-        if (!user.pass.equals(oldPass) ) return false;
+
+    public boolean ChangeInformation (UserAccount user, String oldPass, UserAccount newInfo) throws SQLException {
+        // if the inputted oldPass is incorrect
+        String pass = getPass(user.getUsername());
+        if (!pass.equals(oldPass) ) return false;
 
         String sqlUpdate = "Update tblUser\n" +
                 "set Email = ?,\n" +
@@ -259,11 +234,11 @@ public class DBHandler {
          PreparedStatement sql = conn.prepareStatement(sqlUpdate);
         try{
 
-            sql.setString(1, newInfo.email );
-            sql.setString(2, newInfo.phone );
-            sql.setString(3,newInfo.addr );
-            sql.setString(4, newInfo.image );
-            sql.setString(5, user.username );
+            sql.setString(1, newInfo.getEmail());
+            sql.setString(2, newInfo.getPhone() );
+            sql.setString(3,newInfo.getAddress() );
+            sql.setString(4, "NULL" );
+            sql.setString(5, user.getUsername());
             sql.executeUpdate();
         }
         catch(SQLException e){
