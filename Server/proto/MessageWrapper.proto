@@ -33,6 +33,6 @@ message ClientMessage {
 message ServerMessage {
   int32 opcode = 1;
   oneof server_responses {
-    InfoResponse loginResponse = 2;
+    InfoResponse infoResponse = 2;
   }
 }

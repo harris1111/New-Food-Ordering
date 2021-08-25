@@ -104,7 +104,7 @@ private static final long serialVersionUID = 0L;
   public enum ServerResponsesCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    LOGINRESPONSE(2),
+    INFORESPONSE(2),
     SERVERRESPONSES_NOT_SET(0);
     private final int value;
     private ServerResponsesCase(int value) {
@@ -122,7 +122,7 @@ private static final long serialVersionUID = 0L;
 
     public static ServerResponsesCase forNumber(int value) {
       switch (value) {
-        case 2: return LOGINRESPONSE;
+        case 2: return INFORESPONSE;
         case 0: return SERVERRESPONSES_NOT_SET;
         default: return null;
       }
@@ -149,31 +149,31 @@ private static final long serialVersionUID = 0L;
     return opcode_;
   }
 
-  public static final int LOGINRESPONSE_FIELD_NUMBER = 2;
+  public static final int INFORESPONSE_FIELD_NUMBER = 2;
   /**
-   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
-   * @return Whether the loginResponse field is set.
+   * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
+   * @return Whether the infoResponse field is set.
    */
   @java.lang.Override
-  public boolean hasLoginResponse() {
+  public boolean hasInfoResponse() {
     return serverResponsesCase_ == 2;
   }
   /**
-   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
-   * @return The loginResponse.
+   * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
+   * @return The infoResponse.
    */
   @java.lang.Override
-  public com.p2p.p4f.protocols.InfoResponse getLoginResponse() {
+  public com.p2p.p4f.protocols.InfoResponse getInfoResponse() {
     if (serverResponsesCase_ == 2) {
        return (com.p2p.p4f.protocols.InfoResponse) serverResponses_;
     }
     return com.p2p.p4f.protocols.InfoResponse.getDefaultInstance();
   }
   /**
-   * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+   * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
    */
   @java.lang.Override
-  public com.p2p.p4f.protocols.InfoResponseOrBuilder getLoginResponseOrBuilder() {
+  public com.p2p.p4f.protocols.InfoResponseOrBuilder getInfoResponseOrBuilder() {
     if (serverResponsesCase_ == 2) {
        return (com.p2p.p4f.protocols.InfoResponse) serverResponses_;
     }
@@ -237,8 +237,8 @@ private static final long serialVersionUID = 0L;
     if (!getServerResponsesCase().equals(other.getServerResponsesCase())) return false;
     switch (serverResponsesCase_) {
       case 2:
-        if (!getLoginResponse()
-            .equals(other.getLoginResponse())) return false;
+        if (!getInfoResponse()
+            .equals(other.getInfoResponse())) return false;
         break;
       case 0:
       default:
@@ -258,8 +258,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getOpcode();
     switch (serverResponsesCase_) {
       case 2:
-        hash = (37 * hash) + LOGINRESPONSE_FIELD_NUMBER;
-        hash = (53 * hash) + getLoginResponse().hashCode();
+        hash = (37 * hash) + INFORESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getInfoResponse().hashCode();
         break;
       case 0:
       default:
@@ -429,10 +429,10 @@ private static final long serialVersionUID = 0L;
       com.p2p.p4f.protocols.ServerMessage result = new com.p2p.p4f.protocols.ServerMessage(this);
       result.opcode_ = opcode_;
       if (serverResponsesCase_ == 2) {
-        if (loginResponseBuilder_ == null) {
+        if (infoResponseBuilder_ == null) {
           result.serverResponses_ = serverResponses_;
         } else {
-          result.serverResponses_ = loginResponseBuilder_.build();
+          result.serverResponses_ = infoResponseBuilder_.build();
         }
       }
       result.serverResponsesCase_ = serverResponsesCase_;
@@ -488,8 +488,8 @@ private static final long serialVersionUID = 0L;
         setOpcode(other.getOpcode());
       }
       switch (other.getServerResponsesCase()) {
-        case LOGINRESPONSE: {
-          mergeLoginResponse(other.getLoginResponse());
+        case INFORESPONSE: {
+          mergeInfoResponse(other.getInfoResponse());
           break;
         }
         case SERVERRESPONSES_NOT_SET: {
@@ -572,68 +572,68 @@ private static final long serialVersionUID = 0L;
     }
 
     private com.google.protobuf.SingleFieldBuilderV3<
-        com.p2p.p4f.protocols.InfoResponse, com.p2p.p4f.protocols.InfoResponse.Builder, com.p2p.p4f.protocols.InfoResponseOrBuilder> loginResponseBuilder_;
+        com.p2p.p4f.protocols.InfoResponse, com.p2p.p4f.protocols.InfoResponse.Builder, com.p2p.p4f.protocols.InfoResponseOrBuilder> infoResponseBuilder_;
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
-     * @return Whether the loginResponse field is set.
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
+     * @return Whether the infoResponse field is set.
      */
     @java.lang.Override
-    public boolean hasLoginResponse() {
+    public boolean hasInfoResponse() {
       return serverResponsesCase_ == 2;
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
-     * @return The loginResponse.
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
+     * @return The infoResponse.
      */
     @java.lang.Override
-    public com.p2p.p4f.protocols.InfoResponse getLoginResponse() {
-      if (loginResponseBuilder_ == null) {
+    public com.p2p.p4f.protocols.InfoResponse getInfoResponse() {
+      if (infoResponseBuilder_ == null) {
         if (serverResponsesCase_ == 2) {
           return (com.p2p.p4f.protocols.InfoResponse) serverResponses_;
         }
         return com.p2p.p4f.protocols.InfoResponse.getDefaultInstance();
       } else {
         if (serverResponsesCase_ == 2) {
-          return loginResponseBuilder_.getMessage();
+          return infoResponseBuilder_.getMessage();
         }
         return com.p2p.p4f.protocols.InfoResponse.getDefaultInstance();
       }
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
-    public Builder setLoginResponse(com.p2p.p4f.protocols.InfoResponse value) {
-      if (loginResponseBuilder_ == null) {
+    public Builder setInfoResponse(com.p2p.p4f.protocols.InfoResponse value) {
+      if (infoResponseBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
         serverResponses_ = value;
         onChanged();
       } else {
-        loginResponseBuilder_.setMessage(value);
+        infoResponseBuilder_.setMessage(value);
       }
       serverResponsesCase_ = 2;
       return this;
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
-    public Builder setLoginResponse(
+    public Builder setInfoResponse(
         com.p2p.p4f.protocols.InfoResponse.Builder builderForValue) {
-      if (loginResponseBuilder_ == null) {
+      if (infoResponseBuilder_ == null) {
         serverResponses_ = builderForValue.build();
         onChanged();
       } else {
-        loginResponseBuilder_.setMessage(builderForValue.build());
+        infoResponseBuilder_.setMessage(builderForValue.build());
       }
       serverResponsesCase_ = 2;
       return this;
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
-    public Builder mergeLoginResponse(com.p2p.p4f.protocols.InfoResponse value) {
-      if (loginResponseBuilder_ == null) {
+    public Builder mergeInfoResponse(com.p2p.p4f.protocols.InfoResponse value) {
+      if (infoResponseBuilder_ == null) {
         if (serverResponsesCase_ == 2 &&
             serverResponses_ != com.p2p.p4f.protocols.InfoResponse.getDefaultInstance()) {
           serverResponses_ = com.p2p.p4f.protocols.InfoResponse.newBuilder((com.p2p.p4f.protocols.InfoResponse) serverResponses_)
@@ -644,18 +644,18 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } else {
         if (serverResponsesCase_ == 2) {
-          loginResponseBuilder_.mergeFrom(value);
+          infoResponseBuilder_.mergeFrom(value);
         }
-        loginResponseBuilder_.setMessage(value);
+        infoResponseBuilder_.setMessage(value);
       }
       serverResponsesCase_ = 2;
       return this;
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
-    public Builder clearLoginResponse() {
-      if (loginResponseBuilder_ == null) {
+    public Builder clearInfoResponse() {
+      if (infoResponseBuilder_ == null) {
         if (serverResponsesCase_ == 2) {
           serverResponsesCase_ = 0;
           serverResponses_ = null;
@@ -666,23 +666,23 @@ private static final long serialVersionUID = 0L;
           serverResponsesCase_ = 0;
           serverResponses_ = null;
         }
-        loginResponseBuilder_.clear();
+        infoResponseBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
-    public com.p2p.p4f.protocols.InfoResponse.Builder getLoginResponseBuilder() {
-      return getLoginResponseFieldBuilder().getBuilder();
+    public com.p2p.p4f.protocols.InfoResponse.Builder getInfoResponseBuilder() {
+      return getInfoResponseFieldBuilder().getBuilder();
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
     @java.lang.Override
-    public com.p2p.p4f.protocols.InfoResponseOrBuilder getLoginResponseOrBuilder() {
-      if ((serverResponsesCase_ == 2) && (loginResponseBuilder_ != null)) {
-        return loginResponseBuilder_.getMessageOrBuilder();
+    public com.p2p.p4f.protocols.InfoResponseOrBuilder getInfoResponseOrBuilder() {
+      if ((serverResponsesCase_ == 2) && (infoResponseBuilder_ != null)) {
+        return infoResponseBuilder_.getMessageOrBuilder();
       } else {
         if (serverResponsesCase_ == 2) {
           return (com.p2p.p4f.protocols.InfoResponse) serverResponses_;
@@ -691,16 +691,16 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.p4f_protocols.InfoResponse loginResponse = 2;</code>
+     * <code>.p4f_protocols.InfoResponse infoResponse = 2;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.p2p.p4f.protocols.InfoResponse, com.p2p.p4f.protocols.InfoResponse.Builder, com.p2p.p4f.protocols.InfoResponseOrBuilder> 
-        getLoginResponseFieldBuilder() {
-      if (loginResponseBuilder_ == null) {
+        getInfoResponseFieldBuilder() {
+      if (infoResponseBuilder_ == null) {
         if (!(serverResponsesCase_ == 2)) {
           serverResponses_ = com.p2p.p4f.protocols.InfoResponse.getDefaultInstance();
         }
-        loginResponseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        infoResponseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.p2p.p4f.protocols.InfoResponse, com.p2p.p4f.protocols.InfoResponse.Builder, com.p2p.p4f.protocols.InfoResponseOrBuilder>(
                 (com.p2p.p4f.protocols.InfoResponse) serverResponses_,
                 getParentForChildren(),
@@ -709,7 +709,7 @@ private static final long serialVersionUID = 0L;
       }
       serverResponsesCase_ = 2;
       onChanged();;
-      return loginResponseBuilder_;
+      return infoResponseBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

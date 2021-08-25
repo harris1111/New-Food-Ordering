@@ -57,10 +57,10 @@ public final class MessageWrapper {
       "f_protocols.UserAccount\"_\n\rClientMessage" +
       "\022\016\n\006opcode\030\001 \001(\005\022+\n\007account\030\002 \001(\0132\030.p4f_" +
       "protocols.LoginInfoH\000B\021\n\017client_requests" +
-      "\"i\n\rServerMessage\022\016\n\006opcode\030\001 \001(\005\0224\n\rlog" +
-      "inResponse\030\002 \001(\0132\033.p4f_protocols.InfoRes" +
-      "ponseH\000B\022\n\020server_responsesB\031\n\025com.p2p.p" +
-      "4f.protocolsP\001b\006proto3"
+      "\"h\n\rServerMessage\022\016\n\006opcode\030\001 \001(\005\0223\n\014inf" +
+      "oResponse\030\002 \001(\0132\033.p4f_protocols.InfoResp" +
+      "onseH\000B\022\n\020server_responsesB\031\n\025com.p2p.p4" +
+      "f.protocolsP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -95,7 +95,7 @@ public final class MessageWrapper {
     internal_static_p4f_protocols_ServerMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_p4f_protocols_ServerMessage_descriptor,
-        new java.lang.String[] { "Opcode", "LoginResponse", "ServerResponses", });
+        new java.lang.String[] { "Opcode", "InfoResponse", "ServerResponses", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
