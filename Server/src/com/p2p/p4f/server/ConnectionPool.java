@@ -12,10 +12,10 @@ public final class ConnectionPool {
     private static final BasicDataSource sDS = new BasicDataSource();
     private static final int  MinIdleConnectionInPool = 2;
     private static final int MaxIdleConnectionInPool = 5;
-
     private ConnectionPool(){}
 
     public ConnectionPool getInstance() {
+        System.out.println("Create Instance");
         if (instance == null){
             synchronized (ConnectionPool.class){
                 if (instance == null){
@@ -37,7 +37,6 @@ public final class ConnectionPool {
     public static Connection getConnection() throws SQLException {
         return sDS.getConnection();
     }
-
 }
 
 
