@@ -147,36 +147,42 @@ public class DBHandler {
     }
 
     // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
-    public int Register(User u) throws SQLException {
+    public int Register(UserAccount u, String pass) throws SQLException {
         String sqlState = "insert into tblUser(Username, U_pass, Usertype, " +
                 "Email, Phone, U_address, U_image) \nvalues";
-        if (!u.email.equals("NULL")) u.email = "\'" + u.email + "\'";
-        if (!u.phone.equals("NULL")) u.phone = "\'" + u.phone + "\'";
-        String val = "(\'" + u.username + "\'," +
-                "\'" + u.pass + "\',"+
-                "\'" + u.Usertype +"\'," +
-                u.email + ","  +
-                u.phone + "," +
-                "N\'" + u.addr +
-                "\', " + u.image + ");" ;
+        String email = u.getEmail();
+        String phone = u.getPhone();
+        String Usertype = "1";
+        String username = u.getUsername();
+        String addr = u.getAddress();
+        String image = "NULL";
+        if (! email.equals("NULL"))  email = "\'" +  email + "\'";
+        if (! phone.equals("NULL"))  phone = "\'" +  phone + "\'";
+        String val = "(\'" +  username + "\'," +
+                "\'" +  pass + "\',"+
+                "\'" +  Usertype +"\'," +
+                email + ","  +
+                phone + "," +
+                "N\'" +  addr +
+                "\', " +  image + ");" ;
         String QState = "select * from tblUser where ? = ?";
         //PreparedStatement st = conn.prepareStatement(sqlState+val);
         Statement st = conn.createStatement();
         PreparedStatement stQuery = conn.prepareStatement(QState);
         try {
-            stQuery.setString(1, "u.Username");
-            stQuery.setString(2, "\'" + u.username + "\'");
+            stQuery.setString(1, " Username");
+            stQuery.setString(2, "\'" +  username + "\'");
             ResultSet rs = stQuery.executeQuery();
             if (rs.next()) return 1;
-            stQuery.setString(1, "u.Email");
-            stQuery.setString(2, "\'" + u.email + "\'");
-            if (!u.email.equals("NULL")) {
+            stQuery.setString(1, " Email");
+            stQuery.setString(2, "\'" +  email + "\'");
+            if (! email.equals("NULL")) {
                 rs = stQuery.executeQuery();
                 if (rs.next()) return 2;
             }
-            stQuery.setString(1, "u.Phone");
-            stQuery.setString(2, "\'" + u.phone + "\'");
-            if (!u.phone.equals("NULL")) {
+            stQuery.setString(1, " Phone");
+            stQuery.setString(2, "\'" +  phone + "\'");
+            if (! phone.equals("NULL")) {
                 rs = stQuery.executeQuery();
                 if (rs.next()) return 3;
             }
@@ -187,6 +193,9 @@ public class DBHandler {
         }
         return 5;
     }
+
+
+
 
     // Restaurant: Branch_ID, Branch_Name, Branch_Address, Branch_image, Branch_Location_Longtitude, Branch_Location_Latitude
     // example: rs.getArray("BranchID") is get column BranchID.
