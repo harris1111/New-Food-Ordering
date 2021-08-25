@@ -21,7 +21,8 @@ public class ServerP4F {
 	private String ipAddr = "";
 	private Thread serverThread = null;
 	
-	public ServerP4F(String ip, int port) {
+	public ServerP4F(String dbConnString, String ip, int port) {
+		ConnectionPool.setFirstUrl(dbConnString);
 		if (!ip.isEmpty())
 			ipAddr = ip;
 		this.port = port;

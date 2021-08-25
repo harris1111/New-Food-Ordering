@@ -217,9 +217,7 @@ public class DBHandler {
         }
         return true;
     }
-
-
-
+    
     public boolean ChangeInformation (UserAccount user, String oldPass, UserAccount newInfo) throws SQLException {
         // if the inputted oldPass is incorrect
         String pass = getPass(user.getUsername());
