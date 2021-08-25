@@ -9,7 +9,7 @@ public class DBCPConnectionPoolingExample {
 
     private static final int NUMBER_OF_USERS = 5;
 
-    public static void main(String[] args) throws SQLException, InterruptedException {
+    public static void main_2(String[] args) throws SQLException, InterruptedException {
         ConnectionPool.setFirstUrl("jdbc:sqlserver://NChinh-Laptop\\SQLEXPRESS;databaseName=PrayForFood;integratedSecurity=true;");
         Thread T1 = new Thread(()->{
             try(Connection conn = ConnectionPool.getConnection();

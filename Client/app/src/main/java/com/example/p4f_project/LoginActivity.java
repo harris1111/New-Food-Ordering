@@ -1,5 +1,6 @@
 package com.example.p4f_project;
 
+import android.content.res.AssetManager;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,9 @@ import com.example.p4f_project.BackEnd.ContainerClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LoginActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -22,17 +26,28 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //create String array of IP
-        String[] IP = new String[20];
-        for (int i = 2;i<=20;i++) {
-            IP[i-2] = "192.168.1." + String.valueOf(i);
-        }
-        for (int i = 0; i<IP.length - 1; i++) {
-            System.out.println(IP[i]);
-        }
+//        //create String array of IP
+//        String[] IP = new String[20];
+//        for (int i = 2;i<=20;i++) {
+//            IP[i-2] = "192.168.1." + String.valueOf(i);
+//        }
+//        for (int i = 0; i<IP.length - 1; i++) {
+//            System.out.println(IP[i]);
+//        }
         //Start thread
-        worker = new Thread(new ContainerClient(IP, 9999));
-        worker.start();
+        AssetManager assetManager = p4f_project.getContext().getResources().getAssets();
+        InputStream is = null;
+        try {
+            is = assetManager.open("server.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (is != null) {
+            System.out.println("File opened");
+            worker = new Thread(new ContainerClient(is, 9999));
+            worker.start();
+        }
+        else System.out.println("File Failed");
         // find id of these things
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);

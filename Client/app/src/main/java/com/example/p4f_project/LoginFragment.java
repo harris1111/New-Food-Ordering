@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.p4f_project.BackEnd.ContainerClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -68,6 +70,15 @@ public class LoginFragment extends Fragment {
         password.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(500).start();
         Login.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(700).start();
 
+        loginFragmentHandler = new Handler(Looper.myLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if ((boolean) msg.obj == true) {
+                    toNextActivity();
+                }
+            }
+        };
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +94,6 @@ public class LoginFragment extends Fragment {
                 Log.d("Obj of msg: ", (String)msg.obj);
                 //send to client
                 ContainerClient.handler.sendMessage(msg);
-                //Start new activity
-                Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
-                startActivity(myIntent);
-                getActivity().finish();
             }
         });
         return root;
@@ -99,6 +106,12 @@ public class LoginFragment extends Fragment {
         return isSpecial;
     }
 
+    public void toNextActivity() {
+        //Start new activity
+        Intent myIntent = new Intent(LoginFragment.this.getActivity(), MainPage.class);
+        startActivity(myIntent);
+        getActivity().finish();
+    }
 
     public int validate(String userName, String password)
     {

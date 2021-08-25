@@ -30,6 +30,10 @@ public class ClientAdapterHandler extends SimpleChannelInboundHandler<String> {
             prefEditor.putString("Profile name", msg);
             System.out.println(p4f_project.getContext().getSharedPreferences("user_data",Context.MODE_PRIVATE).getString("Profile name",null));
             prefEditor.apply();
+            // Send notification to login fragment
+            Message notif = Message.obtain(LoginFragment.loginFragmentHandler);
+            notif.obj = true;
+            notif.sendToTarget();
         }
     }
 }

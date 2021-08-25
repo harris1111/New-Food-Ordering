@@ -8,38 +8,50 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import com.example.p4f_project.*;
-
-import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class ContainerClient implements Runnable {
     //Initialization
     public static Looper looper;
     public static Handler handler;
-    String[] server;
+    ArrayList<String> iplist = new ArrayList<String>();
     int port;
-    private Channel channel;
+    private Channel channel = null;
     Bootstrap bootstrap = new Bootstrap();
     private Timer timer_ = new Timer();
     NioEventLoopGroup group = new NioEventLoopGroup();
-    boolean isConnected = false;
-    int i = 0;
-    public ContainerClient(String[] server, int port) {
-        this.server = server;
+    boolean isFailed = false;
+    InputStream is = null;
+    ListIterator<String> it = null;
+    public ContainerClient(InputStream is, int port) {
         this.port = port;
         bootstrap.group(group);
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.handler(new ClientAdapterInitializer());
-        scheduleConnect(10);
+        this.is = is;
     }
     @Override
     public void run() {
+        // Read the ip file
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line = reader.readLine();
+            while (line != null) {
+                iplist.add(line);
+                line = reader.readLine();
+            }
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (String ip : iplist) {
+            System.out.println(ip);
+        }
         //start Looper
         Looper.prepare();
         looper = Looper.myLooper();
@@ -48,6 +60,16 @@ public class ContainerClient implements Runnable {
                 @Override
                 public void handleMessage(@NonNull Message msg) {
                     super.handleMessage(msg);
+                    if (channel == null) {
+                        it = iplist.listIterator();
+                        doConnect();
+                    }
+                    while (channel == null) {
+                        if (isFailed) {
+                            System.out.println("CONNECT FAILED FOR ALL IPs");
+                            return;
+                        }
+                    }
                     String line = msg.obj.toString();
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(line);
@@ -77,17 +99,26 @@ public class ContainerClient implements Runnable {
     }
     private void doConnect() {
         try {
-            ChannelFuture f = bootstrap.connect( server[i], port );
+            String ip = it.next();
+            System.out.println("Connect to: " + ip);
+            ChannelFuture f = bootstrap.connect(ip, port);
             f.addListener( new ChannelFutureListener() {
-                @Override public void operationComplete(ChannelFuture future) throws Exception {
-                    if( !future.isSuccess() ) {//if is not successful, reconnect
-                        System.out.println("CONNECT FAIL");
+                @Override
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if(!future.isSuccess() ) {//if is not successful, reconnect
+                        System.out.println("CONNECT FAILED");
                         future.channel().close();
-                        bootstrap.connect(  server[++i], port ).addListener(this).sync();
+                        if (it.hasNext()) {
+                            String ip = it.next();
+                            System.out.println("Connect to: " + ip);
+                            bootstrap.connect(ip, port).addListener(this);
+                        }
+                        else isFailed = true;
                     }
                     else {//good, the connection is ok
                         System.out.println("CONNECT SUCCESSFULLY");
-                        isConnected = true;
+                        it.previous();
+                        isFailed = false;
                         channel = future.channel();
                         //add a listener to detect the connection lost
                         addCloseDetectListener(channel);
@@ -102,17 +133,14 @@ public class ContainerClient implements Runnable {
                         @Override
                         public void operationComplete(ChannelFuture future )
                                 throws Exception {
-                            connectionLost();
+                            System.out.println("CONNECTION LOST");
+                            scheduleConnect(10);
                         }
                     });
-
                 }
             });
         }catch( Exception ex ) {
             ex.printStackTrace();
         }
-    }
-    public void connectionLost() {
-        System.out.println("connectionLost()" );
     }
 }
