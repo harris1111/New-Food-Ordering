@@ -4,29 +4,27 @@
 package com.p2p.p4f.protocols;
 
 /**
- * Protobuf type {@code p4f_protocols.UserAccount}
+ * Protobuf type {@code p4f_protocols.LoginInfo}
  */
-public final class UserAccount extends
+public final class LoginInfo extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:p4f_protocols.UserAccount)
-    UserAccountOrBuilder {
+    // @@protoc_insertion_point(message_implements:p4f_protocols.LoginInfo)
+    LoginInfoOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use UserAccount.newBuilder() to construct.
-  private UserAccount(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use LoginInfo.newBuilder() to construct.
+  private LoginInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private UserAccount() {
+  private LoginInfo() {
     username_ = "";
-    email_ = "";
-    phone_ = "";
-    address_ = "";
+    password_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new UserAccount();
+    return new LoginInfo();
   }
 
   @java.lang.Override
@@ -34,7 +32,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private UserAccount(
+  private LoginInfo(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -58,27 +56,10 @@ private static final long serialVersionUID = 0L;
             username_ = s;
             break;
           }
-          case 16: {
-
-            type_ = input.readInt32();
-            break;
-          }
-          case 26: {
+          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            email_ = s;
-            break;
-          }
-          case 34: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            phone_ = s;
-            break;
-          }
-          case 42: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            address_ = s;
+            password_ = s;
             break;
           }
           default: {
@@ -102,15 +83,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_UserAccount_descriptor;
+    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginInfo_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_UserAccount_fieldAccessorTable
+    return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginInfo_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.p2p.p4f.protocols.UserAccount.class, com.p2p.p4f.protocols.UserAccount.Builder.class);
+            com.p2p.p4f.protocols.LoginInfo.class, com.p2p.p4f.protocols.LoginInfo.Builder.class);
   }
 
   public static final int USERNAME_FIELD_NUMBER = 1;
@@ -151,125 +132,38 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TYPE_FIELD_NUMBER = 2;
-  private int type_;
+  public static final int PASSWORD_FIELD_NUMBER = 2;
+  private volatile java.lang.Object password_;
   /**
-   * <code>int32 type = 2;</code>
-   * @return The type.
+   * <code>string password = 2;</code>
+   * @return The password.
    */
   @java.lang.Override
-  public int getType() {
-    return type_;
-  }
-
-  public static final int EMAIL_FIELD_NUMBER = 3;
-  private volatile java.lang.Object email_;
-  /**
-   * <code>string email = 3;</code>
-   * @return The email.
-   */
-  @java.lang.Override
-  public java.lang.String getEmail() {
-    java.lang.Object ref = email_;
+  public java.lang.String getPassword() {
+    java.lang.Object ref = password_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      email_ = s;
+      password_ = s;
       return s;
     }
   }
   /**
-   * <code>string email = 3;</code>
-   * @return The bytes for email.
+   * <code>string password = 2;</code>
+   * @return The bytes for password.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getEmailBytes() {
-    java.lang.Object ref = email_;
+      getPasswordBytes() {
+    java.lang.Object ref = password_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      email_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int PHONE_FIELD_NUMBER = 4;
-  private volatile java.lang.Object phone_;
-  /**
-   * <code>string phone = 4;</code>
-   * @return The phone.
-   */
-  @java.lang.Override
-  public java.lang.String getPhone() {
-    java.lang.Object ref = phone_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      phone_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string phone = 4;</code>
-   * @return The bytes for phone.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPhoneBytes() {
-    java.lang.Object ref = phone_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      phone_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ADDRESS_FIELD_NUMBER = 5;
-  private volatile java.lang.Object address_;
-  /**
-   * <code>string address = 5;</code>
-   * @return The address.
-   */
-  @java.lang.Override
-  public java.lang.String getAddress() {
-    java.lang.Object ref = address_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      address_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string address = 5;</code>
-   * @return The bytes for address.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getAddressBytes() {
-    java.lang.Object ref = address_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      address_ = b;
+      password_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -293,17 +187,8 @@ private static final long serialVersionUID = 0L;
     if (!getUsernameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
     }
-    if (type_ != 0) {
-      output.writeInt32(2, type_);
-    }
-    if (!getEmailBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
-    }
-    if (!getPhoneBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, phone_);
-    }
-    if (!getAddressBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, address_);
+    if (!getPasswordBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
     }
     unknownFields.writeTo(output);
   }
@@ -317,18 +202,8 @@ private static final long serialVersionUID = 0L;
     if (!getUsernameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
     }
-    if (type_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, type_);
-    }
-    if (!getEmailBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
-    }
-    if (!getPhoneBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, phone_);
-    }
-    if (!getAddressBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, address_);
+    if (!getPasswordBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -340,21 +215,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.p2p.p4f.protocols.UserAccount)) {
+    if (!(obj instanceof com.p2p.p4f.protocols.LoginInfo)) {
       return super.equals(obj);
     }
-    com.p2p.p4f.protocols.UserAccount other = (com.p2p.p4f.protocols.UserAccount) obj;
+    com.p2p.p4f.protocols.LoginInfo other = (com.p2p.p4f.protocols.LoginInfo) obj;
 
     if (!getUsername()
         .equals(other.getUsername())) return false;
-    if (getType()
-        != other.getType()) return false;
-    if (!getEmail()
-        .equals(other.getEmail())) return false;
-    if (!getPhone()
-        .equals(other.getPhone())) return false;
-    if (!getAddress()
-        .equals(other.getAddress())) return false;
+    if (!getPassword()
+        .equals(other.getPassword())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -368,82 +237,76 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + USERNAME_FIELD_NUMBER;
     hash = (53 * hash) + getUsername().hashCode();
-    hash = (37 * hash) + TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getType();
-    hash = (37 * hash) + EMAIL_FIELD_NUMBER;
-    hash = (53 * hash) + getEmail().hashCode();
-    hash = (37 * hash) + PHONE_FIELD_NUMBER;
-    hash = (53 * hash) + getPhone().hashCode();
-    hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
-    hash = (53 * hash) + getAddress().hashCode();
+    hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
+    hash = (53 * hash) + getPassword().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(byte[] data)
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(java.io.InputStream input)
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseDelimitedFrom(java.io.InputStream input)
+  public static com.p2p.p4f.protocols.LoginInfo parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseDelimitedFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.p2p.p4f.protocols.UserAccount parseFrom(
+  public static com.p2p.p4f.protocols.LoginInfo parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -456,7 +319,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.p2p.p4f.protocols.UserAccount prototype) {
+  public static Builder newBuilder(com.p2p.p4f.protocols.LoginInfo prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -472,26 +335,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code p4f_protocols.UserAccount}
+   * Protobuf type {@code p4f_protocols.LoginInfo}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:p4f_protocols.UserAccount)
-      com.p2p.p4f.protocols.UserAccountOrBuilder {
+      // @@protoc_insertion_point(builder_implements:p4f_protocols.LoginInfo)
+      com.p2p.p4f.protocols.LoginInfoOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_UserAccount_descriptor;
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_UserAccount_fieldAccessorTable
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.p2p.p4f.protocols.UserAccount.class, com.p2p.p4f.protocols.UserAccount.Builder.class);
+              com.p2p.p4f.protocols.LoginInfo.class, com.p2p.p4f.protocols.LoginInfo.Builder.class);
     }
 
-    // Construct using com.p2p.p4f.protocols.UserAccount.newBuilder()
+    // Construct using com.p2p.p4f.protocols.LoginInfo.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -511,13 +374,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       username_ = "";
 
-      type_ = 0;
-
-      email_ = "";
-
-      phone_ = "";
-
-      address_ = "";
+      password_ = "";
 
       return this;
     }
@@ -525,17 +382,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_UserAccount_descriptor;
+      return com.p2p.p4f.protocols.MessageWrapper.internal_static_p4f_protocols_LoginInfo_descriptor;
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.UserAccount getDefaultInstanceForType() {
-      return com.p2p.p4f.protocols.UserAccount.getDefaultInstance();
+    public com.p2p.p4f.protocols.LoginInfo getDefaultInstanceForType() {
+      return com.p2p.p4f.protocols.LoginInfo.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.UserAccount build() {
-      com.p2p.p4f.protocols.UserAccount result = buildPartial();
+    public com.p2p.p4f.protocols.LoginInfo build() {
+      com.p2p.p4f.protocols.LoginInfo result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -543,13 +400,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.p2p.p4f.protocols.UserAccount buildPartial() {
-      com.p2p.p4f.protocols.UserAccount result = new com.p2p.p4f.protocols.UserAccount(this);
+    public com.p2p.p4f.protocols.LoginInfo buildPartial() {
+      com.p2p.p4f.protocols.LoginInfo result = new com.p2p.p4f.protocols.LoginInfo(this);
       result.username_ = username_;
-      result.type_ = type_;
-      result.email_ = email_;
-      result.phone_ = phone_;
-      result.address_ = address_;
+      result.password_ = password_;
       onBuilt();
       return result;
     }
@@ -588,33 +442,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.p2p.p4f.protocols.UserAccount) {
-        return mergeFrom((com.p2p.p4f.protocols.UserAccount)other);
+      if (other instanceof com.p2p.p4f.protocols.LoginInfo) {
+        return mergeFrom((com.p2p.p4f.protocols.LoginInfo)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.p2p.p4f.protocols.UserAccount other) {
-      if (other == com.p2p.p4f.protocols.UserAccount.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.p2p.p4f.protocols.LoginInfo other) {
+      if (other == com.p2p.p4f.protocols.LoginInfo.getDefaultInstance()) return this;
       if (!other.getUsername().isEmpty()) {
         username_ = other.username_;
         onChanged();
       }
-      if (other.getType() != 0) {
-        setType(other.getType());
-      }
-      if (!other.getEmail().isEmpty()) {
-        email_ = other.email_;
-        onChanged();
-      }
-      if (!other.getPhone().isEmpty()) {
-        phone_ = other.phone_;
-        onChanged();
-      }
-      if (!other.getAddress().isEmpty()) {
-        address_ = other.address_;
+      if (!other.getPassword().isEmpty()) {
+        password_ = other.password_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -632,11 +475,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.p2p.p4f.protocols.UserAccount parsedMessage = null;
+      com.p2p.p4f.protocols.LoginInfo parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.p2p.p4f.protocols.UserAccount) e.getUnfinishedMessage();
+        parsedMessage = (com.p2p.p4f.protocols.LoginInfo) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -722,261 +565,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int type_ ;
+    private java.lang.Object password_ = "";
     /**
-     * <code>int32 type = 2;</code>
-     * @return The type.
+     * <code>string password = 2;</code>
+     * @return The password.
      */
-    @java.lang.Override
-    public int getType() {
-      return type_;
-    }
-    /**
-     * <code>int32 type = 2;</code>
-     * @param value The type to set.
-     * @return This builder for chaining.
-     */
-    public Builder setType(int value) {
-      
-      type_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 type = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearType() {
-      
-      type_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object email_ = "";
-    /**
-     * <code>string email = 3;</code>
-     * @return The email.
-     */
-    public java.lang.String getEmail() {
-      java.lang.Object ref = email_;
+    public java.lang.String getPassword() {
+      java.lang.Object ref = password_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        email_ = s;
+        password_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string email = 3;</code>
-     * @return The bytes for email.
+     * <code>string password = 2;</code>
+     * @return The bytes for password.
      */
     public com.google.protobuf.ByteString
-        getEmailBytes() {
-      java.lang.Object ref = email_;
+        getPasswordBytes() {
+      java.lang.Object ref = password_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        email_ = b;
+        password_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string email = 3;</code>
-     * @param value The email to set.
+     * <code>string password = 2;</code>
+     * @param value The password to set.
      * @return This builder for chaining.
      */
-    public Builder setEmail(
+    public Builder setPassword(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      email_ = value;
+      password_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string email = 3;</code>
+     * <code>string password = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearEmail() {
+    public Builder clearPassword() {
       
-      email_ = getDefaultInstance().getEmail();
+      password_ = getDefaultInstance().getPassword();
       onChanged();
       return this;
     }
     /**
-     * <code>string email = 3;</code>
-     * @param value The bytes for email to set.
+     * <code>string password = 2;</code>
+     * @param value The bytes for password to set.
      * @return This builder for chaining.
      */
-    public Builder setEmailBytes(
+    public Builder setPasswordBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      email_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object phone_ = "";
-    /**
-     * <code>string phone = 4;</code>
-     * @return The phone.
-     */
-    public java.lang.String getPhone() {
-      java.lang.Object ref = phone_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        phone_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string phone = 4;</code>
-     * @return The bytes for phone.
-     */
-    public com.google.protobuf.ByteString
-        getPhoneBytes() {
-      java.lang.Object ref = phone_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        phone_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string phone = 4;</code>
-     * @param value The phone to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPhone(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      phone_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string phone = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPhone() {
-      
-      phone_ = getDefaultInstance().getPhone();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string phone = 4;</code>
-     * @param value The bytes for phone to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPhoneBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      phone_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object address_ = "";
-    /**
-     * <code>string address = 5;</code>
-     * @return The address.
-     */
-    public java.lang.String getAddress() {
-      java.lang.Object ref = address_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        address_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string address = 5;</code>
-     * @return The bytes for address.
-     */
-    public com.google.protobuf.ByteString
-        getAddressBytes() {
-      java.lang.Object ref = address_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        address_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string address = 5;</code>
-     * @param value The address to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAddress(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      address_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string address = 5;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearAddress() {
-      
-      address_ = getDefaultInstance().getAddress();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string address = 5;</code>
-     * @param value The bytes for address to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAddressBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      address_ = value;
+      password_ = value;
       onChanged();
       return this;
     }
@@ -993,41 +653,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:p4f_protocols.UserAccount)
+    // @@protoc_insertion_point(builder_scope:p4f_protocols.LoginInfo)
   }
 
-  // @@protoc_insertion_point(class_scope:p4f_protocols.UserAccount)
-  private static final com.p2p.p4f.protocols.UserAccount DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:p4f_protocols.LoginInfo)
+  private static final com.p2p.p4f.protocols.LoginInfo DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.p2p.p4f.protocols.UserAccount();
+    DEFAULT_INSTANCE = new com.p2p.p4f.protocols.LoginInfo();
   }
 
-  public static com.p2p.p4f.protocols.UserAccount getDefaultInstance() {
+  public static com.p2p.p4f.protocols.LoginInfo getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<UserAccount>
-      PARSER = new com.google.protobuf.AbstractParser<UserAccount>() {
+  private static final com.google.protobuf.Parser<LoginInfo>
+      PARSER = new com.google.protobuf.AbstractParser<LoginInfo>() {
     @java.lang.Override
-    public UserAccount parsePartialFrom(
+    public LoginInfo parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new UserAccount(input, extensionRegistry);
+      return new LoginInfo(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<UserAccount> parser() {
+  public static com.google.protobuf.Parser<LoginInfo> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<UserAccount> getParserForType() {
+  public com.google.protobuf.Parser<LoginInfo> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.p2p.p4f.protocols.UserAccount getDefaultInstanceForType() {
+  public com.p2p.p4f.protocols.LoginInfo getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
