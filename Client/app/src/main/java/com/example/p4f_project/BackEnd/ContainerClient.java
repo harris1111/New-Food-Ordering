@@ -3,6 +3,7 @@ package com.example.p4f_project.BackEnd;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.example.p4f_project.LoginFragment;
 import com.example.p4f_project.protocols.ClientMessage;
@@ -173,7 +174,7 @@ public class ContainerClient implements Runnable {
     }
 
     private boolean checkString(String userName){
-        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]]");
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
         Matcher matcher= pattern.matcher(userName);
         boolean isSpecial=matcher.find();
         return isSpecial;
@@ -185,7 +186,7 @@ public class ContainerClient implements Runnable {
             return 1;
         }
         // Username is shorter than 5 characters
-        if(loginInfo.getUsername().length()<5){
+        if(loginInfo.getUsername().length()<5 && loginInfo.getUsername().length()!=0){
             return 2;
         }
         // case username or password is blank

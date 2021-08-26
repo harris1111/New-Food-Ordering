@@ -36,9 +36,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_profile);
         findID();
         profile_backtomain.setOnClickListener(this);
-        prefGet = getApplicationContext().getSharedPreferences("user_data", MODE_PRIVATE);
+        prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
         prefGetEdit = prefGet.edit();
-        profile_name.setText(prefGet.getString("Profile name", null));
+        profile_name.setText(prefGet.getString("Username", null));
         //use Handler to receive Message
         Profile.profileHandler = new Handler(Looper.getMainLooper()){
             @Override

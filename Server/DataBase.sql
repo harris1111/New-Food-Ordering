@@ -1,5 +1,3 @@
-use PrayForFood
-select * from tblUser
 USE [master]
 GO
 CREATE DATABASE [PrayForFood]
