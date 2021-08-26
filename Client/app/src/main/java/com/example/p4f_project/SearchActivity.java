@@ -1,7 +1,10 @@
 package com.example.p4f_project;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -14,10 +17,12 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
     private RecyclerView recRes;
     private restaurantAdapter resAdapter;
+    ImageView backImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        backImage=(ImageView) findViewById(R.id.backbt);
         recRes = findViewById(R.id.recycleView_res);
         LinearLayoutManager llm= new LinearLayoutManager(this);
         recRes.setLayoutManager(llm);
@@ -26,6 +31,14 @@ public class SearchActivity extends AppCompatActivity {
         recRes.setAdapter(resAdapter);
         RecyclerView.ItemDecoration itemDecoration= new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         recRes.addItemDecoration(itemDecoration);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent= new Intent(SearchActivity.this,MainPage.class);
+                startActivity(newIntent);
+                finish();
+            }
+        });
     }
 
     private List<Restaurant> getListRes() {
