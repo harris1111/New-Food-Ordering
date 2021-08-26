@@ -8,9 +8,9 @@
             android:title="Home"
             android:icon="@drawable/ic_nav_home"/>
         <item
-            android:id="@+id/n_menu"
-            android:title="Menu"
-            android:icon="@drawable/ic_nav_menu"/>
+            android:id="@+id/n_search"
+            android:title="Search"
+            android:icon="@drawable/ic_action_search"/>
         <item
             android:id="@+id/n_profile"
             android:title="Profile"

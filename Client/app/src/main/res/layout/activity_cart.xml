@@ -7,17 +7,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <androidx.appcompat.widget.Toolbar
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:background="@drawable/cbg"
                 android:id="@+id/order_toolbar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0">
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/back"
+                    android:id="@+id/back2main"
+                    android:layout_marginTop="8dp"
+                    android:layout_alignParentLeft="true"
+                    tools:ignore="VectorDrawableCompat"/>
+        </RelativeLayout>
         <TextView
                 android:text="Food Cart"
-                android:textSize="50dp"
+                android:textSize="40dp"
                 android:textStyle="italic"
                 android:textColor="#434343"
                 android:layout_width="200dp"
@@ -139,7 +148,7 @@
               app:layout_constraintStart_toEndOf="@+id/imageView1"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.0"
-              android:layout_marginTop="0.0dp"/>
+              android:layout_marginTop="0.0dp" android:id="@+id/view3"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="0.5dp"
@@ -169,7 +178,14 @@
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintHorizontal_bias="0.0"
                    android:id="@+id/imageView3"/>
-
+        <TextView
+                android:text="Amount: x1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.037"/>
         <TextView
                 android:id="@+id/item_name3"
                 android:text="Americano"
@@ -190,7 +206,7 @@
               app:layout_constraintTop_toBottomOf="@+id/item_name3"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toEndOf="@+id/imageView3"
-              app:layout_constraintHorizontal_bias="0.0"/>
+              app:layout_constraintHorizontal_bias="0.0" android:id="@+id/view4"/>
 
         <TextView
                 android:id="@+id/textView3"
@@ -215,15 +231,68 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.0"
               app:layout_constraintVertical_bias="0.375"
-              android:id="@+id/view10"/>
+              android:id="@+id/view10" app:layout_constraintBottom_toTopOf="@+id/imageView4"/>
         <ImageView android:id="@+id/imageView4"
-                android:layout_width="150dp" android:layout_height="150dp"
+                   android:layout_width="150dp" android:layout_height="150dp"
                    android:background="@drawable/chocolate"
                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
                    android:layout_marginTop="56dp"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintHorizontal_bias="0.0"
+                   app:layout_constraintBottom_toTopOf="@+id/relativeLayout3" app:layout_constraintVertical_bias="0.0"/>
+        <TextView
+                android:id="@+id/item_name4"
+                android:text="Chocolate latte"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/aladin"
+                app:layout_constraintTop_toBottomOf="@+id/view10" app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="24dp"
+                app:layout_constraintHorizontal_bias="0.043"
         />
+        <TextView
+                android:id="@+id/textView4"
+                android:maxEms="15"
+                android:text="Chocolate latte with almond mild and hot hershey chocolate and whipped cream on top."
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:fontFamily="@font/alice"
+                android:layout_width="229dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView4" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.218" app:layout_constraintTop_toBottomOf="@+id/item_name4"/>
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="50dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal"
+                        android:background="@drawable/mintbg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/relativeLayout3" app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+            <TextView android:layout_width="200dp" android:layout_height="wrap_content"
+                      android:text="Total:"
+                      android:id="@+id/amount"
+                      android:textSize="20dp"
+                      android:textStyle="bold"
+                      android:textColor="@color/black"
+                      android:fontFamily="@font/alice"/>
+            <Button android:layout_width="150dp" android:layout_height="wrap_content"
+                    android:background="#ffdde1"
+                    android:text="Purchase"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/alice"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/purchase_button"/>
+        </RelativeLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
