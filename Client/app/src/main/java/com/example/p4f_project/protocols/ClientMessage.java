@@ -5,7 +5,7 @@ package com.example.p4f_project.protocols;
 
 /**
  * <pre>
- *op: 1 = Login;
+ *op: 0 = Logout, 1 = Login, 2 = register, 3 = change password;
  * </pre>
  *
  * Protobuf type {@code p4f_protocols.ClientMessage}
@@ -71,6 +71,34 @@ private static final long serialVersionUID = 0L;
             clientRequestsCase_ = 2;
             break;
           }
+          case 26: {
+            com.example.p4f_project.protocols.RegisterInfo.Builder subBuilder = null;
+            if (clientRequestsCase_ == 3) {
+              subBuilder = ((com.example.p4f_project.protocols.RegisterInfo) clientRequests_).toBuilder();
+            }
+            clientRequests_ =
+                input.readMessage(com.example.p4f_project.protocols.RegisterInfo.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((com.example.p4f_project.protocols.RegisterInfo) clientRequests_);
+              clientRequests_ = subBuilder.buildPartial();
+            }
+            clientRequestsCase_ = 3;
+            break;
+          }
+          case 34: {
+            com.example.p4f_project.protocols.Order.Builder subBuilder = null;
+            if (clientRequestsCase_ == 4) {
+              subBuilder = ((com.example.p4f_project.protocols.Order) clientRequests_).toBuilder();
+            }
+            clientRequests_ =
+                input.readMessage(com.example.p4f_project.protocols.Order.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((com.example.p4f_project.protocols.Order) clientRequests_);
+              clientRequests_ = subBuilder.buildPartial();
+            }
+            clientRequestsCase_ = 4;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -109,6 +137,8 @@ private static final long serialVersionUID = 0L;
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     ACCOUNT(2),
+    REGACC(3),
+    ORDER(4),
     CLIENTREQUESTS_NOT_SET(0);
     private final int value;
     private ClientRequestsCase(int value) {
@@ -127,6 +157,8 @@ private static final long serialVersionUID = 0L;
     public static ClientRequestsCase forNumber(int value) {
       switch (value) {
         case 2: return ACCOUNT;
+        case 3: return REGACC;
+        case 4: return ORDER;
         case 0: return CLIENTREQUESTS_NOT_SET;
         default: return null;
       }
@@ -155,6 +187,10 @@ private static final long serialVersionUID = 0L;
 
   public static final int ACCOUNT_FIELD_NUMBER = 2;
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    * @return Whether the account field is set.
    */
@@ -163,6 +199,10 @@ private static final long serialVersionUID = 0L;
     return clientRequestsCase_ == 2;
   }
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    * @return The account.
    */
@@ -174,6 +214,10 @@ private static final long serialVersionUID = 0L;
     return com.example.p4f_project.protocols.LoginInfo.getDefaultInstance();
   }
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    */
   @java.lang.Override
@@ -182,6 +226,68 @@ private static final long serialVersionUID = 0L;
        return (com.example.p4f_project.protocols.LoginInfo) clientRequests_;
     }
     return com.example.p4f_project.protocols.LoginInfo.getDefaultInstance();
+  }
+
+  public static final int REGACC_FIELD_NUMBER = 3;
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   * @return Whether the regAcc field is set.
+   */
+  @java.lang.Override
+  public boolean hasRegAcc() {
+    return clientRequestsCase_ == 3;
+  }
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   * @return The regAcc.
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.RegisterInfo getRegAcc() {
+    if (clientRequestsCase_ == 3) {
+       return (com.example.p4f_project.protocols.RegisterInfo) clientRequests_;
+    }
+    return com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+  }
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.RegisterInfoOrBuilder getRegAccOrBuilder() {
+    if (clientRequestsCase_ == 3) {
+       return (com.example.p4f_project.protocols.RegisterInfo) clientRequests_;
+    }
+    return com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+  }
+
+  public static final int ORDER_FIELD_NUMBER = 4;
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   * @return Whether the order field is set.
+   */
+  @java.lang.Override
+  public boolean hasOrder() {
+    return clientRequestsCase_ == 4;
+  }
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   * @return The order.
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.Order getOrder() {
+    if (clientRequestsCase_ == 4) {
+       return (com.example.p4f_project.protocols.Order) clientRequests_;
+    }
+    return com.example.p4f_project.protocols.Order.getDefaultInstance();
+  }
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.OrderOrBuilder getOrderOrBuilder() {
+    if (clientRequestsCase_ == 4) {
+       return (com.example.p4f_project.protocols.Order) clientRequests_;
+    }
+    return com.example.p4f_project.protocols.Order.getDefaultInstance();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -204,6 +310,12 @@ private static final long serialVersionUID = 0L;
     if (clientRequestsCase_ == 2) {
       output.writeMessage(2, (com.example.p4f_project.protocols.LoginInfo) clientRequests_);
     }
+    if (clientRequestsCase_ == 3) {
+      output.writeMessage(3, (com.example.p4f_project.protocols.RegisterInfo) clientRequests_);
+    }
+    if (clientRequestsCase_ == 4) {
+      output.writeMessage(4, (com.example.p4f_project.protocols.Order) clientRequests_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -220,6 +332,14 @@ private static final long serialVersionUID = 0L;
     if (clientRequestsCase_ == 2) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, (com.example.p4f_project.protocols.LoginInfo) clientRequests_);
+    }
+    if (clientRequestsCase_ == 3) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, (com.example.p4f_project.protocols.RegisterInfo) clientRequests_);
+    }
+    if (clientRequestsCase_ == 4) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, (com.example.p4f_project.protocols.Order) clientRequests_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -244,6 +364,14 @@ private static final long serialVersionUID = 0L;
         if (!getAccount()
             .equals(other.getAccount())) return false;
         break;
+      case 3:
+        if (!getRegAcc()
+            .equals(other.getRegAcc())) return false;
+        break;
+      case 4:
+        if (!getOrder()
+            .equals(other.getOrder())) return false;
+        break;
       case 0:
       default:
     }
@@ -264,6 +392,14 @@ private static final long serialVersionUID = 0L;
       case 2:
         hash = (37 * hash) + ACCOUNT_FIELD_NUMBER;
         hash = (53 * hash) + getAccount().hashCode();
+        break;
+      case 3:
+        hash = (37 * hash) + REGACC_FIELD_NUMBER;
+        hash = (53 * hash) + getRegAcc().hashCode();
+        break;
+      case 4:
+        hash = (37 * hash) + ORDER_FIELD_NUMBER;
+        hash = (53 * hash) + getOrder().hashCode();
         break;
       case 0:
       default:
@@ -365,7 +501,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *op: 1 = Login;
+   *op: 0 = Logout, 1 = Login, 2 = register, 3 = change password;
    * </pre>
    *
    * Protobuf type {@code p4f_protocols.ClientMessage}
@@ -443,6 +579,20 @@ private static final long serialVersionUID = 0L;
           result.clientRequests_ = accountBuilder_.build();
         }
       }
+      if (clientRequestsCase_ == 3) {
+        if (regAccBuilder_ == null) {
+          result.clientRequests_ = clientRequests_;
+        } else {
+          result.clientRequests_ = regAccBuilder_.build();
+        }
+      }
+      if (clientRequestsCase_ == 4) {
+        if (orderBuilder_ == null) {
+          result.clientRequests_ = clientRequests_;
+        } else {
+          result.clientRequests_ = orderBuilder_.build();
+        }
+      }
       result.clientRequestsCase_ = clientRequestsCase_;
       onBuilt();
       return result;
@@ -498,6 +648,14 @@ private static final long serialVersionUID = 0L;
       switch (other.getClientRequestsCase()) {
         case ACCOUNT: {
           mergeAccount(other.getAccount());
+          break;
+        }
+        case REGACC: {
+          mergeRegAcc(other.getRegAcc());
+          break;
+        }
+        case ORDER: {
+          mergeOrder(other.getOrder());
           break;
         }
         case CLIENTREQUESTS_NOT_SET: {
@@ -582,6 +740,10 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.example.p4f_project.protocols.LoginInfo, com.example.p4f_project.protocols.LoginInfo.Builder, com.example.p4f_project.protocols.LoginInfoOrBuilder> accountBuilder_;
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      * @return Whether the account field is set.
      */
@@ -590,6 +752,10 @@ private static final long serialVersionUID = 0L;
       return clientRequestsCase_ == 2;
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      * @return The account.
      */
@@ -608,6 +774,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     public Builder setAccount(com.example.p4f_project.protocols.LoginInfo value) {
@@ -624,6 +794,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     public Builder setAccount(
@@ -638,6 +812,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     public Builder mergeAccount(com.example.p4f_project.protocols.LoginInfo value) {
@@ -660,6 +838,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     public Builder clearAccount() {
@@ -679,12 +861,20 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     public com.example.p4f_project.protocols.LoginInfo.Builder getAccountBuilder() {
       return getAccountFieldBuilder().getBuilder();
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     @java.lang.Override
@@ -699,6 +889,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     *Use for login and change password
+     * </pre>
+     *
      * <code>.p4f_protocols.LoginInfo account = 2;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
@@ -718,6 +912,288 @@ private static final long serialVersionUID = 0L;
       clientRequestsCase_ = 2;
       onChanged();;
       return accountBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.RegisterInfo, com.example.p4f_project.protocols.RegisterInfo.Builder, com.example.p4f_project.protocols.RegisterInfoOrBuilder> regAccBuilder_;
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     * @return Whether the regAcc field is set.
+     */
+    @java.lang.Override
+    public boolean hasRegAcc() {
+      return clientRequestsCase_ == 3;
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     * @return The regAcc.
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.RegisterInfo getRegAcc() {
+      if (regAccBuilder_ == null) {
+        if (clientRequestsCase_ == 3) {
+          return (com.example.p4f_project.protocols.RegisterInfo) clientRequests_;
+        }
+        return com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+      } else {
+        if (clientRequestsCase_ == 3) {
+          return regAccBuilder_.getMessage();
+        }
+        return com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    public Builder setRegAcc(com.example.p4f_project.protocols.RegisterInfo value) {
+      if (regAccBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        clientRequests_ = value;
+        onChanged();
+      } else {
+        regAccBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    public Builder setRegAcc(
+        com.example.p4f_project.protocols.RegisterInfo.Builder builderForValue) {
+      if (regAccBuilder_ == null) {
+        clientRequests_ = builderForValue.build();
+        onChanged();
+      } else {
+        regAccBuilder_.setMessage(builderForValue.build());
+      }
+      clientRequestsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    public Builder mergeRegAcc(com.example.p4f_project.protocols.RegisterInfo value) {
+      if (regAccBuilder_ == null) {
+        if (clientRequestsCase_ == 3 &&
+            clientRequests_ != com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance()) {
+          clientRequests_ = com.example.p4f_project.protocols.RegisterInfo.newBuilder((com.example.p4f_project.protocols.RegisterInfo) clientRequests_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          clientRequests_ = value;
+        }
+        onChanged();
+      } else {
+        if (clientRequestsCase_ == 3) {
+          regAccBuilder_.mergeFrom(value);
+        }
+        regAccBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    public Builder clearRegAcc() {
+      if (regAccBuilder_ == null) {
+        if (clientRequestsCase_ == 3) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+          onChanged();
+        }
+      } else {
+        if (clientRequestsCase_ == 3) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+        }
+        regAccBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    public com.example.p4f_project.protocols.RegisterInfo.Builder getRegAccBuilder() {
+      return getRegAccFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.RegisterInfoOrBuilder getRegAccOrBuilder() {
+      if ((clientRequestsCase_ == 3) && (regAccBuilder_ != null)) {
+        return regAccBuilder_.getMessageOrBuilder();
+      } else {
+        if (clientRequestsCase_ == 3) {
+          return (com.example.p4f_project.protocols.RegisterInfo) clientRequests_;
+        }
+        return com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.RegisterInfo, com.example.p4f_project.protocols.RegisterInfo.Builder, com.example.p4f_project.protocols.RegisterInfoOrBuilder> 
+        getRegAccFieldBuilder() {
+      if (regAccBuilder_ == null) {
+        if (!(clientRequestsCase_ == 3)) {
+          clientRequests_ = com.example.p4f_project.protocols.RegisterInfo.getDefaultInstance();
+        }
+        regAccBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.example.p4f_project.protocols.RegisterInfo, com.example.p4f_project.protocols.RegisterInfo.Builder, com.example.p4f_project.protocols.RegisterInfoOrBuilder>(
+                (com.example.p4f_project.protocols.RegisterInfo) clientRequests_,
+                getParentForChildren(),
+                isClean());
+        clientRequests_ = null;
+      }
+      clientRequestsCase_ = 3;
+      onChanged();;
+      return regAccBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.Order, com.example.p4f_project.protocols.Order.Builder, com.example.p4f_project.protocols.OrderOrBuilder> orderBuilder_;
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     * @return Whether the order field is set.
+     */
+    @java.lang.Override
+    public boolean hasOrder() {
+      return clientRequestsCase_ == 4;
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     * @return The order.
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.Order getOrder() {
+      if (orderBuilder_ == null) {
+        if (clientRequestsCase_ == 4) {
+          return (com.example.p4f_project.protocols.Order) clientRequests_;
+        }
+        return com.example.p4f_project.protocols.Order.getDefaultInstance();
+      } else {
+        if (clientRequestsCase_ == 4) {
+          return orderBuilder_.getMessage();
+        }
+        return com.example.p4f_project.protocols.Order.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    public Builder setOrder(com.example.p4f_project.protocols.Order value) {
+      if (orderBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        clientRequests_ = value;
+        onChanged();
+      } else {
+        orderBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    public Builder setOrder(
+        com.example.p4f_project.protocols.Order.Builder builderForValue) {
+      if (orderBuilder_ == null) {
+        clientRequests_ = builderForValue.build();
+        onChanged();
+      } else {
+        orderBuilder_.setMessage(builderForValue.build());
+      }
+      clientRequestsCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    public Builder mergeOrder(com.example.p4f_project.protocols.Order value) {
+      if (orderBuilder_ == null) {
+        if (clientRequestsCase_ == 4 &&
+            clientRequests_ != com.example.p4f_project.protocols.Order.getDefaultInstance()) {
+          clientRequests_ = com.example.p4f_project.protocols.Order.newBuilder((com.example.p4f_project.protocols.Order) clientRequests_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          clientRequests_ = value;
+        }
+        onChanged();
+      } else {
+        if (clientRequestsCase_ == 4) {
+          orderBuilder_.mergeFrom(value);
+        }
+        orderBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    public Builder clearOrder() {
+      if (orderBuilder_ == null) {
+        if (clientRequestsCase_ == 4) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+          onChanged();
+        }
+      } else {
+        if (clientRequestsCase_ == 4) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+        }
+        orderBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    public com.example.p4f_project.protocols.Order.Builder getOrderBuilder() {
+      return getOrderFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.OrderOrBuilder getOrderOrBuilder() {
+      if ((clientRequestsCase_ == 4) && (orderBuilder_ != null)) {
+        return orderBuilder_.getMessageOrBuilder();
+      } else {
+        if (clientRequestsCase_ == 4) {
+          return (com.example.p4f_project.protocols.Order) clientRequests_;
+        }
+        return com.example.p4f_project.protocols.Order.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.Order order = 4;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.Order, com.example.p4f_project.protocols.Order.Builder, com.example.p4f_project.protocols.OrderOrBuilder> 
+        getOrderFieldBuilder() {
+      if (orderBuilder_ == null) {
+        if (!(clientRequestsCase_ == 4)) {
+          clientRequests_ = com.example.p4f_project.protocols.Order.getDefaultInstance();
+        }
+        orderBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.example.p4f_project.protocols.Order, com.example.p4f_project.protocols.Order.Builder, com.example.p4f_project.protocols.OrderOrBuilder>(
+                (com.example.p4f_project.protocols.Order) clientRequests_,
+                getParentForChildren(),
+                isClean());
+        clientRequests_ = null;
+      }
+      clientRequestsCase_ = 4;
+      onChanged();;
+      return orderBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

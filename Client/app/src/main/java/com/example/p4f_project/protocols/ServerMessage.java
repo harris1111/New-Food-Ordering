@@ -67,6 +67,25 @@ private static final long serialVersionUID = 0L;
             serverResponsesCase_ = 2;
             break;
           }
+          case 24: {
+            serverResponsesCase_ = 3;
+            serverResponses_ = input.readInt32();
+            break;
+          }
+          case 34: {
+            com.example.p4f_project.protocols.orderResponse.Builder subBuilder = null;
+            if (serverResponsesCase_ == 4) {
+              subBuilder = ((com.example.p4f_project.protocols.orderResponse) serverResponses_).toBuilder();
+            }
+            serverResponses_ =
+                input.readMessage(com.example.p4f_project.protocols.orderResponse.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((com.example.p4f_project.protocols.orderResponse) serverResponses_);
+              serverResponses_ = subBuilder.buildPartial();
+            }
+            serverResponsesCase_ = 4;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -105,6 +124,8 @@ private static final long serialVersionUID = 0L;
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     INFORESPONSE(2),
+    RESPONSECODE(3),
+    ORDERRES(4),
     SERVERRESPONSES_NOT_SET(0);
     private final int value;
     private ServerResponsesCase(int value) {
@@ -123,6 +144,8 @@ private static final long serialVersionUID = 0L;
     public static ServerResponsesCase forNumber(int value) {
       switch (value) {
         case 2: return INFORESPONSE;
+        case 3: return RESPONSECODE;
+        case 4: return ORDERRES;
         case 0: return SERVERRESPONSES_NOT_SET;
         default: return null;
       }
@@ -180,6 +203,66 @@ private static final long serialVersionUID = 0L;
     return com.example.p4f_project.protocols.InfoResponse.getDefaultInstance();
   }
 
+  public static final int RESPONSECODE_FIELD_NUMBER = 3;
+  /**
+   * <pre>
+   *Announce Register status and change password status
+   * </pre>
+   *
+   * <code>int32 responseCode = 3;</code>
+   * @return Whether the responseCode field is set.
+   */
+  @java.lang.Override
+  public boolean hasResponseCode() {
+    return serverResponsesCase_ == 3;
+  }
+  /**
+   * <pre>
+   *Announce Register status and change password status
+   * </pre>
+   *
+   * <code>int32 responseCode = 3;</code>
+   * @return The responseCode.
+   */
+  @java.lang.Override
+  public int getResponseCode() {
+    if (serverResponsesCase_ == 3) {
+      return (java.lang.Integer) serverResponses_;
+    }
+    return 0;
+  }
+
+  public static final int ORDERRES_FIELD_NUMBER = 4;
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   * @return Whether the orderRes field is set.
+   */
+  @java.lang.Override
+  public boolean hasOrderRes() {
+    return serverResponsesCase_ == 4;
+  }
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   * @return The orderRes.
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.orderResponse getOrderRes() {
+    if (serverResponsesCase_ == 4) {
+       return (com.example.p4f_project.protocols.orderResponse) serverResponses_;
+    }
+    return com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+  }
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   */
+  @java.lang.Override
+  public com.example.p4f_project.protocols.orderResponseOrBuilder getOrderResOrBuilder() {
+    if (serverResponsesCase_ == 4) {
+       return (com.example.p4f_project.protocols.orderResponse) serverResponses_;
+    }
+    return com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -200,6 +283,13 @@ private static final long serialVersionUID = 0L;
     if (serverResponsesCase_ == 2) {
       output.writeMessage(2, (com.example.p4f_project.protocols.InfoResponse) serverResponses_);
     }
+    if (serverResponsesCase_ == 3) {
+      output.writeInt32(
+          3, (int)((java.lang.Integer) serverResponses_));
+    }
+    if (serverResponsesCase_ == 4) {
+      output.writeMessage(4, (com.example.p4f_project.protocols.orderResponse) serverResponses_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -216,6 +306,15 @@ private static final long serialVersionUID = 0L;
     if (serverResponsesCase_ == 2) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, (com.example.p4f_project.protocols.InfoResponse) serverResponses_);
+    }
+    if (serverResponsesCase_ == 3) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(
+            3, (int)((java.lang.Integer) serverResponses_));
+    }
+    if (serverResponsesCase_ == 4) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, (com.example.p4f_project.protocols.orderResponse) serverResponses_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -240,6 +339,14 @@ private static final long serialVersionUID = 0L;
         if (!getInfoResponse()
             .equals(other.getInfoResponse())) return false;
         break;
+      case 3:
+        if (getResponseCode()
+            != other.getResponseCode()) return false;
+        break;
+      case 4:
+        if (!getOrderRes()
+            .equals(other.getOrderRes())) return false;
+        break;
       case 0:
       default:
     }
@@ -260,6 +367,14 @@ private static final long serialVersionUID = 0L;
       case 2:
         hash = (37 * hash) + INFORESPONSE_FIELD_NUMBER;
         hash = (53 * hash) + getInfoResponse().hashCode();
+        break;
+      case 3:
+        hash = (37 * hash) + RESPONSECODE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponseCode();
+        break;
+      case 4:
+        hash = (37 * hash) + ORDERRES_FIELD_NUMBER;
+        hash = (53 * hash) + getOrderRes().hashCode();
         break;
       case 0:
       default:
@@ -435,6 +550,16 @@ private static final long serialVersionUID = 0L;
           result.serverResponses_ = infoResponseBuilder_.build();
         }
       }
+      if (serverResponsesCase_ == 3) {
+        result.serverResponses_ = serverResponses_;
+      }
+      if (serverResponsesCase_ == 4) {
+        if (orderResBuilder_ == null) {
+          result.serverResponses_ = serverResponses_;
+        } else {
+          result.serverResponses_ = orderResBuilder_.build();
+        }
+      }
       result.serverResponsesCase_ = serverResponsesCase_;
       onBuilt();
       return result;
@@ -490,6 +615,14 @@ private static final long serialVersionUID = 0L;
       switch (other.getServerResponsesCase()) {
         case INFORESPONSE: {
           mergeInfoResponse(other.getInfoResponse());
+          break;
+        }
+        case RESPONSECODE: {
+          setResponseCode(other.getResponseCode());
+          break;
+        }
+        case ORDERRES: {
+          mergeOrderRes(other.getOrderRes());
           break;
         }
         case SERVERRESPONSES_NOT_SET: {
@@ -710,6 +843,204 @@ private static final long serialVersionUID = 0L;
       serverResponsesCase_ = 2;
       onChanged();;
       return infoResponseBuilder_;
+    }
+
+    /**
+     * <pre>
+     *Announce Register status and change password status
+     * </pre>
+     *
+     * <code>int32 responseCode = 3;</code>
+     * @return Whether the responseCode field is set.
+     */
+    public boolean hasResponseCode() {
+      return serverResponsesCase_ == 3;
+    }
+    /**
+     * <pre>
+     *Announce Register status and change password status
+     * </pre>
+     *
+     * <code>int32 responseCode = 3;</code>
+     * @return The responseCode.
+     */
+    public int getResponseCode() {
+      if (serverResponsesCase_ == 3) {
+        return (java.lang.Integer) serverResponses_;
+      }
+      return 0;
+    }
+    /**
+     * <pre>
+     *Announce Register status and change password status
+     * </pre>
+     *
+     * <code>int32 responseCode = 3;</code>
+     * @param value The responseCode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResponseCode(int value) {
+      serverResponsesCase_ = 3;
+      serverResponses_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *Announce Register status and change password status
+     * </pre>
+     *
+     * <code>int32 responseCode = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearResponseCode() {
+      if (serverResponsesCase_ == 3) {
+        serverResponsesCase_ = 0;
+        serverResponses_ = null;
+        onChanged();
+      }
+      return this;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.orderResponse, com.example.p4f_project.protocols.orderResponse.Builder, com.example.p4f_project.protocols.orderResponseOrBuilder> orderResBuilder_;
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     * @return Whether the orderRes field is set.
+     */
+    @java.lang.Override
+    public boolean hasOrderRes() {
+      return serverResponsesCase_ == 4;
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     * @return The orderRes.
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.orderResponse getOrderRes() {
+      if (orderResBuilder_ == null) {
+        if (serverResponsesCase_ == 4) {
+          return (com.example.p4f_project.protocols.orderResponse) serverResponses_;
+        }
+        return com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+      } else {
+        if (serverResponsesCase_ == 4) {
+          return orderResBuilder_.getMessage();
+        }
+        return com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    public Builder setOrderRes(com.example.p4f_project.protocols.orderResponse value) {
+      if (orderResBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        serverResponses_ = value;
+        onChanged();
+      } else {
+        orderResBuilder_.setMessage(value);
+      }
+      serverResponsesCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    public Builder setOrderRes(
+        com.example.p4f_project.protocols.orderResponse.Builder builderForValue) {
+      if (orderResBuilder_ == null) {
+        serverResponses_ = builderForValue.build();
+        onChanged();
+      } else {
+        orderResBuilder_.setMessage(builderForValue.build());
+      }
+      serverResponsesCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    public Builder mergeOrderRes(com.example.p4f_project.protocols.orderResponse value) {
+      if (orderResBuilder_ == null) {
+        if (serverResponsesCase_ == 4 &&
+            serverResponses_ != com.example.p4f_project.protocols.orderResponse.getDefaultInstance()) {
+          serverResponses_ = com.example.p4f_project.protocols.orderResponse.newBuilder((com.example.p4f_project.protocols.orderResponse) serverResponses_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          serverResponses_ = value;
+        }
+        onChanged();
+      } else {
+        if (serverResponsesCase_ == 4) {
+          orderResBuilder_.mergeFrom(value);
+        }
+        orderResBuilder_.setMessage(value);
+      }
+      serverResponsesCase_ = 4;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    public Builder clearOrderRes() {
+      if (orderResBuilder_ == null) {
+        if (serverResponsesCase_ == 4) {
+          serverResponsesCase_ = 0;
+          serverResponses_ = null;
+          onChanged();
+        }
+      } else {
+        if (serverResponsesCase_ == 4) {
+          serverResponsesCase_ = 0;
+          serverResponses_ = null;
+        }
+        orderResBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    public com.example.p4f_project.protocols.orderResponse.Builder getOrderResBuilder() {
+      return getOrderResFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    @java.lang.Override
+    public com.example.p4f_project.protocols.orderResponseOrBuilder getOrderResOrBuilder() {
+      if ((serverResponsesCase_ == 4) && (orderResBuilder_ != null)) {
+        return orderResBuilder_.getMessageOrBuilder();
+      } else {
+        if (serverResponsesCase_ == 4) {
+          return (com.example.p4f_project.protocols.orderResponse) serverResponses_;
+        }
+        return com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.example.p4f_project.protocols.orderResponse, com.example.p4f_project.protocols.orderResponse.Builder, com.example.p4f_project.protocols.orderResponseOrBuilder> 
+        getOrderResFieldBuilder() {
+      if (orderResBuilder_ == null) {
+        if (!(serverResponsesCase_ == 4)) {
+          serverResponses_ = com.example.p4f_project.protocols.orderResponse.getDefaultInstance();
+        }
+        orderResBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.example.p4f_project.protocols.orderResponse, com.example.p4f_project.protocols.orderResponse.Builder, com.example.p4f_project.protocols.orderResponseOrBuilder>(
+                (com.example.p4f_project.protocols.orderResponse) serverResponses_,
+                getParentForChildren(),
+                isClean());
+        serverResponses_ = null;
+      }
+      serverResponsesCase_ = 4;
+      onChanged();;
+      return orderResBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

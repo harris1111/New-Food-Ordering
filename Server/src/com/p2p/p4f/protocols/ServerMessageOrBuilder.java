@@ -28,5 +28,39 @@ public interface ServerMessageOrBuilder extends
    */
   com.p2p.p4f.protocols.InfoResponseOrBuilder getInfoResponseOrBuilder();
 
+  /**
+   * <pre>
+   *Announce Register status and change password status
+   * </pre>
+   *
+   * <code>int32 responseCode = 3;</code>
+   * @return Whether the responseCode field is set.
+   */
+  boolean hasResponseCode();
+  /**
+   * <pre>
+   *Announce Register status and change password status
+   * </pre>
+   *
+   * <code>int32 responseCode = 3;</code>
+   * @return The responseCode.
+   */
+  int getResponseCode();
+
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   * @return Whether the orderRes field is set.
+   */
+  boolean hasOrderRes();
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   * @return The orderRes.
+   */
+  com.p2p.p4f.protocols.orderResponse getOrderRes();
+  /**
+   * <code>.p4f_protocols.orderResponse orderRes = 4;</code>
+   */
+  com.p2p.p4f.protocols.orderResponseOrBuilder getOrderResOrBuilder();
+
   public com.p2p.p4f.protocols.ServerMessage.ServerResponsesCase getServerResponsesCase();
 }

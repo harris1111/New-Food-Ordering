@@ -103,7 +103,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    *re:
-   *- Login: 0 = Success as customer, 1 = User not exists, 2 = Wrong password, 3 = Success as staff
+   *- Login: 0 = Success as customer, 1 = User does not exist, 2 = Wrong password, 3 = Success as staff
    * </pre>
    *
    * <code>int32 reCode = 1;</code>
@@ -476,7 +476,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      *re:
-     *- Login: 0 = Success as customer, 1 = User not exists, 2 = Wrong password, 3 = Success as staff
+     *- Login: 0 = Success as customer, 1 = User does not exist, 2 = Wrong password, 3 = Success as staff
      * </pre>
      *
      * <code>int32 reCode = 1;</code>
@@ -489,7 +489,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      *re:
-     *- Login: 0 = Success as customer, 1 = User not exists, 2 = Wrong password, 3 = Success as staff
+     *- Login: 0 = Success as customer, 1 = User does not exist, 2 = Wrong password, 3 = Success as staff
      * </pre>
      *
      * <code>int32 reCode = 1;</code>
@@ -505,7 +505,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      *re:
-     *- Login: 0 = Success as customer, 1 = User not exists, 2 = Wrong password, 3 = Success as staff
+     *- Login: 0 = Success as customer, 1 = User does not exist, 2 = Wrong password, 3 = Success as staff
      * </pre>
      *
      * <code>int32 reCode = 1;</code>

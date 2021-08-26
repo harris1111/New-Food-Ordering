@@ -26,7 +26,6 @@ public class SearchActivity extends AppCompatActivity {
         recRes = findViewById(R.id.recycleView_res);
         LinearLayoutManager llm= new LinearLayoutManager(this);
         recRes.setLayoutManager(llm);
-
         resAdapter=new restaurantAdapter(getListRes());
         recRes.setAdapter(resAdapter);
         RecyclerView.ItemDecoration itemDecoration= new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);

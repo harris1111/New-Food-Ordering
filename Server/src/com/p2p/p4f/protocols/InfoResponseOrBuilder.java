@@ -9,7 +9,8 @@ public interface InfoResponseOrBuilder extends
 
   /**
    * <pre>
-   * Result code
+   *re:
+   *- Login: 0 = Success as customer, 1 = User does not exist, 2 = Wrong password, 3 = Success as staff
    * </pre>
    *
    * <code>int32 reCode = 1;</code>

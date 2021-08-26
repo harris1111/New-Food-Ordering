@@ -14,19 +14,61 @@ public interface ClientMessageOrBuilder extends
   int getOpcode();
 
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    * @return Whether the account field is set.
    */
   boolean hasAccount();
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    * @return The account.
    */
   com.p2p.p4f.protocols.LoginInfo getAccount();
   /**
+   * <pre>
+   *Use for login and change password
+   * </pre>
+   *
    * <code>.p4f_protocols.LoginInfo account = 2;</code>
    */
   com.p2p.p4f.protocols.LoginInfoOrBuilder getAccountOrBuilder();
+
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   * @return Whether the regAcc field is set.
+   */
+  boolean hasRegAcc();
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   * @return The regAcc.
+   */
+  com.p2p.p4f.protocols.RegisterInfo getRegAcc();
+  /**
+   * <code>.p4f_protocols.RegisterInfo regAcc = 3;</code>
+   */
+  com.p2p.p4f.protocols.RegisterInfoOrBuilder getRegAccOrBuilder();
+
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   * @return Whether the order field is set.
+   */
+  boolean hasOrder();
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   * @return The order.
+   */
+  com.p2p.p4f.protocols.Order getOrder();
+  /**
+   * <code>.p4f_protocols.Order order = 4;</code>
+   */
+  com.p2p.p4f.protocols.OrderOrBuilder getOrderOrBuilder();
 
   public com.p2p.p4f.protocols.ClientMessage.ClientRequestsCase getClientRequestsCase();
 }
