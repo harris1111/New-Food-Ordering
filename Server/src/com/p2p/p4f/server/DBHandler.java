@@ -54,7 +54,7 @@ public class DBHandler {
         ResultSet rs = st.executeQuery();
         try{
             // if username is invalid
-            if (!rs.next())
+            if (!rs.first())
                 Result.setReCode(1);
                 // if password is incorrect
             else if (!user.getPassword().equals(rs.getString("U_pass")))
@@ -136,14 +136,15 @@ public class DBHandler {
             stQuery.setString(2,   email );
             stQuery.setString(1, " Phone");
             stQuery.setString(2,   phone );
-            if (rs.next()) return 1;
+
+            if (rs.first()) return 1;
             else if (! email.equals("NULL")) {
                 rs = stQuery.executeQuery();
-                if (rs.next()) return 2;
+                if (rs.first()) return 2;
             }
             else if (! phone.equals("NULL")) {
                 rs = stQuery.executeQuery();
-                if (rs.next()) return 3;
+                if (rs.first()) return 3;
             }
             else {
                 st.executeUpdate(sqlState + val);
@@ -204,13 +205,24 @@ public class DBHandler {
         String sqlUpdate = "Update tblUser\n" +
                 "set U_pass = " + "\'" + newPass + "\'" +
                 "\nwhere Username = " + "\'" +  username + "\'";
+        Connection conn = this.conn;
+        PreparedStatement sql = conn.prepareStatement(sqlUpdate);
+        try{
+            System.out.println(sqlUpdate);
+            System.out.println(username);
+            sql.executeUpdate();
+            conn.commit();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
         return 1;
     }
 
     public boolean ChangeInformation (UserAccount user, String oldPass, UserAccount newInfo) throws SQLException {
         // if the inputted oldPass is incorrect
         String pass = getPass(user.getUsername());
-        if (!pass.equals(oldPass) ) return false;
+        if ( pass == null || !pass.equals(oldPass) ) return false;
 
         String sqlUpdate = "Update tblUser\n" +
                 "set Email = ?,\n" +
