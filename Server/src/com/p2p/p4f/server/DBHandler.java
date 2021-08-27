@@ -191,34 +191,20 @@ public class DBHandler {
         else return null;
     }
     // Change password
-    public boolean ChangePassword (UserAccount user, String oldPass, String newPass) throws SQLException {
-
+    public int ChangePassword (changePassInfo user) throws SQLException {
         String pass = getPass(user.getUsername());
+        String oldPass = user.getOldPass();
+        String newPass = user.getNewPass();
         // if get pass false, it means that user has some faults
-        if (pass == null) return false;
-
-        if ((!pass.equals(oldPass))|| pass.equals(newPass)) return false;
+        if (pass == null) return -1;
+        if ((!pass.equals(oldPass))|| pass.equals(newPass)) return -1;
         // if the inputted oldPass is incorrect or the new pass and old pass is the same
-        String email =  user.getEmail();
-        String phone =  user.getPhone();
         String Usertype = "1";
         String username =  user.getUsername();
-        String addr =  user.getAddress();
         String sqlUpdate = "Update tblUser\n" +
                 "set U_pass = " + "\'" + newPass + "\'" +
                 "\nwhere Username = " + "\'" +  username + "\'";
-        Connection conn = this.conn;
-        PreparedStatement sql = conn.prepareStatement(sqlUpdate);
-        try{
-            System.out.println(sqlUpdate);
-            System.out.println(username);
-            sql.executeUpdate();
-            conn.commit();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-        return true;
+        return 1;
     }
 
     public boolean ChangeInformation (UserAccount user, String oldPass, UserAccount newInfo) throws SQLException {
