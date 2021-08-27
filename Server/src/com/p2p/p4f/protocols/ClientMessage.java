@@ -99,6 +99,20 @@ private static final long serialVersionUID = 0L;
             clientRequestsCase_ = 4;
             break;
           }
+          case 42: {
+            com.p2p.p4f.protocols.changePassInfo.Builder subBuilder = null;
+            if (clientRequestsCase_ == 5) {
+              subBuilder = ((com.p2p.p4f.protocols.changePassInfo) clientRequests_).toBuilder();
+            }
+            clientRequests_ =
+                input.readMessage(com.p2p.p4f.protocols.changePassInfo.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((com.p2p.p4f.protocols.changePassInfo) clientRequests_);
+              clientRequests_ = subBuilder.buildPartial();
+            }
+            clientRequestsCase_ = 5;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -139,6 +153,7 @@ private static final long serialVersionUID = 0L;
     ACCOUNT(2),
     REGACC(3),
     ORDER(4),
+    CHANGERES(5),
     CLIENTREQUESTS_NOT_SET(0);
     private final int value;
     private ClientRequestsCase(int value) {
@@ -159,6 +174,7 @@ private static final long serialVersionUID = 0L;
         case 2: return ACCOUNT;
         case 3: return REGACC;
         case 4: return ORDER;
+        case 5: return CHANGERES;
         case 0: return CLIENTREQUESTS_NOT_SET;
         default: return null;
       }
@@ -290,6 +306,37 @@ private static final long serialVersionUID = 0L;
     return com.p2p.p4f.protocols.Order.getDefaultInstance();
   }
 
+  public static final int CHANGERES_FIELD_NUMBER = 5;
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   * @return Whether the changeRes field is set.
+   */
+  @java.lang.Override
+  public boolean hasChangeRes() {
+    return clientRequestsCase_ == 5;
+  }
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   * @return The changeRes.
+   */
+  @java.lang.Override
+  public com.p2p.p4f.protocols.changePassInfo getChangeRes() {
+    if (clientRequestsCase_ == 5) {
+       return (com.p2p.p4f.protocols.changePassInfo) clientRequests_;
+    }
+    return com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+  }
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   */
+  @java.lang.Override
+  public com.p2p.p4f.protocols.changePassInfoOrBuilder getChangeResOrBuilder() {
+    if (clientRequestsCase_ == 5) {
+       return (com.p2p.p4f.protocols.changePassInfo) clientRequests_;
+    }
+    return com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -316,6 +363,9 @@ private static final long serialVersionUID = 0L;
     if (clientRequestsCase_ == 4) {
       output.writeMessage(4, (com.p2p.p4f.protocols.Order) clientRequests_);
     }
+    if (clientRequestsCase_ == 5) {
+      output.writeMessage(5, (com.p2p.p4f.protocols.changePassInfo) clientRequests_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -340,6 +390,10 @@ private static final long serialVersionUID = 0L;
     if (clientRequestsCase_ == 4) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, (com.p2p.p4f.protocols.Order) clientRequests_);
+    }
+    if (clientRequestsCase_ == 5) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, (com.p2p.p4f.protocols.changePassInfo) clientRequests_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -372,6 +426,10 @@ private static final long serialVersionUID = 0L;
         if (!getOrder()
             .equals(other.getOrder())) return false;
         break;
+      case 5:
+        if (!getChangeRes()
+            .equals(other.getChangeRes())) return false;
+        break;
       case 0:
       default:
     }
@@ -400,6 +458,10 @@ private static final long serialVersionUID = 0L;
       case 4:
         hash = (37 * hash) + ORDER_FIELD_NUMBER;
         hash = (53 * hash) + getOrder().hashCode();
+        break;
+      case 5:
+        hash = (37 * hash) + CHANGERES_FIELD_NUMBER;
+        hash = (53 * hash) + getChangeRes().hashCode();
         break;
       case 0:
       default:
@@ -593,6 +655,13 @@ private static final long serialVersionUID = 0L;
           result.clientRequests_ = orderBuilder_.build();
         }
       }
+      if (clientRequestsCase_ == 5) {
+        if (changeResBuilder_ == null) {
+          result.clientRequests_ = clientRequests_;
+        } else {
+          result.clientRequests_ = changeResBuilder_.build();
+        }
+      }
       result.clientRequestsCase_ = clientRequestsCase_;
       onBuilt();
       return result;
@@ -656,6 +725,10 @@ private static final long serialVersionUID = 0L;
         }
         case ORDER: {
           mergeOrder(other.getOrder());
+          break;
+        }
+        case CHANGERES: {
+          mergeChangeRes(other.getChangeRes());
           break;
         }
         case CLIENTREQUESTS_NOT_SET: {
@@ -1194,6 +1267,147 @@ private static final long serialVersionUID = 0L;
       clientRequestsCase_ = 4;
       onChanged();;
       return orderBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.p2p.p4f.protocols.changePassInfo, com.p2p.p4f.protocols.changePassInfo.Builder, com.p2p.p4f.protocols.changePassInfoOrBuilder> changeResBuilder_;
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     * @return Whether the changeRes field is set.
+     */
+    @java.lang.Override
+    public boolean hasChangeRes() {
+      return clientRequestsCase_ == 5;
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     * @return The changeRes.
+     */
+    @java.lang.Override
+    public com.p2p.p4f.protocols.changePassInfo getChangeRes() {
+      if (changeResBuilder_ == null) {
+        if (clientRequestsCase_ == 5) {
+          return (com.p2p.p4f.protocols.changePassInfo) clientRequests_;
+        }
+        return com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+      } else {
+        if (clientRequestsCase_ == 5) {
+          return changeResBuilder_.getMessage();
+        }
+        return com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    public Builder setChangeRes(com.p2p.p4f.protocols.changePassInfo value) {
+      if (changeResBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        clientRequests_ = value;
+        onChanged();
+      } else {
+        changeResBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    public Builder setChangeRes(
+        com.p2p.p4f.protocols.changePassInfo.Builder builderForValue) {
+      if (changeResBuilder_ == null) {
+        clientRequests_ = builderForValue.build();
+        onChanged();
+      } else {
+        changeResBuilder_.setMessage(builderForValue.build());
+      }
+      clientRequestsCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    public Builder mergeChangeRes(com.p2p.p4f.protocols.changePassInfo value) {
+      if (changeResBuilder_ == null) {
+        if (clientRequestsCase_ == 5 &&
+            clientRequests_ != com.p2p.p4f.protocols.changePassInfo.getDefaultInstance()) {
+          clientRequests_ = com.p2p.p4f.protocols.changePassInfo.newBuilder((com.p2p.p4f.protocols.changePassInfo) clientRequests_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          clientRequests_ = value;
+        }
+        onChanged();
+      } else {
+        if (clientRequestsCase_ == 5) {
+          changeResBuilder_.mergeFrom(value);
+        }
+        changeResBuilder_.setMessage(value);
+      }
+      clientRequestsCase_ = 5;
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    public Builder clearChangeRes() {
+      if (changeResBuilder_ == null) {
+        if (clientRequestsCase_ == 5) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+          onChanged();
+        }
+      } else {
+        if (clientRequestsCase_ == 5) {
+          clientRequestsCase_ = 0;
+          clientRequests_ = null;
+        }
+        changeResBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    public com.p2p.p4f.protocols.changePassInfo.Builder getChangeResBuilder() {
+      return getChangeResFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    @java.lang.Override
+    public com.p2p.p4f.protocols.changePassInfoOrBuilder getChangeResOrBuilder() {
+      if ((clientRequestsCase_ == 5) && (changeResBuilder_ != null)) {
+        return changeResBuilder_.getMessageOrBuilder();
+      } else {
+        if (clientRequestsCase_ == 5) {
+          return (com.p2p.p4f.protocols.changePassInfo) clientRequests_;
+        }
+        return com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.p2p.p4f.protocols.changePassInfo, com.p2p.p4f.protocols.changePassInfo.Builder, com.p2p.p4f.protocols.changePassInfoOrBuilder> 
+        getChangeResFieldBuilder() {
+      if (changeResBuilder_ == null) {
+        if (!(clientRequestsCase_ == 5)) {
+          clientRequests_ = com.p2p.p4f.protocols.changePassInfo.getDefaultInstance();
+        }
+        changeResBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.p2p.p4f.protocols.changePassInfo, com.p2p.p4f.protocols.changePassInfo.Builder, com.p2p.p4f.protocols.changePassInfoOrBuilder>(
+                (com.p2p.p4f.protocols.changePassInfo) clientRequests_,
+                getParentForChildren(),
+                isClean());
+        clientRequests_ = null;
+      }
+      clientRequestsCase_ = 5;
+      onChanged();;
+      return changeResBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -23,7 +23,7 @@ import static com.example.p4f_project.LoginActivity.worker;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
     ImageView profile_backtomain;
-    TextView profile_name;
+    TextView profile_name, profile_address, profile_phone, profile_email;
     Button logout,changePass;
     SharedPreferences myPreferences;
     private Context mContext;
@@ -39,6 +39,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
         prefGetEdit = prefGet.edit();
         profile_name.setText(prefGet.getString("Username", null));
+        profile_address.setText(prefGet.getString("UserAddress", null));
+        profile_phone.setText(prefGet.getString("UserPhone", null));
+        profile_email.setText(prefGet.getString("UserEmail", null));
         //use Handler to receive Message
         Profile.profileHandler = new Handler(Looper.getMainLooper()){
             @Override
@@ -55,6 +58,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         profile_name=(TextView) findViewById(R.id.profile_name);
         logout=(Button) findViewById(R.id.logout_button);
         changePass=(Button) findViewById(R.id.btn_changePass);
+        profile_address = findViewById(R.id.profile_address);
+        profile_email = findViewById(R.id.profile_email);
+        profile_phone = findViewById(R.id.profile_phone);
     }
     @Override
     public void onClick(View v) {

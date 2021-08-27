@@ -18,7 +18,7 @@ private static final long serialVersionUID = 0L;
   private RegisterInfo() {
     username_ = "";
     password_ = "";
-    fullname_ = "";
+    email_ = "";
     phone_ = "";
     address_ = "";
   }
@@ -68,7 +68,7 @@ private static final long serialVersionUID = 0L;
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            fullname_ = s;
+            email_ = s;
             break;
           }
           case 34: {
@@ -191,38 +191,38 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int FULLNAME_FIELD_NUMBER = 3;
-  private volatile java.lang.Object fullname_;
+  public static final int EMAIL_FIELD_NUMBER = 3;
+  private volatile java.lang.Object email_;
   /**
-   * <code>string fullname = 3;</code>
-   * @return The fullname.
+   * <code>string email = 3;</code>
+   * @return The email.
    */
   @java.lang.Override
-  public java.lang.String getFullname() {
-    java.lang.Object ref = fullname_;
+  public java.lang.String getEmail() {
+    java.lang.Object ref = email_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      fullname_ = s;
+      email_ = s;
       return s;
     }
   }
   /**
-   * <code>string fullname = 3;</code>
-   * @return The bytes for fullname.
+   * <code>string email = 3;</code>
+   * @return The bytes for email.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getFullnameBytes() {
-    java.lang.Object ref = fullname_;
+      getEmailBytes() {
+    java.lang.Object ref = email_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      fullname_ = b;
+      email_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -325,8 +325,8 @@ private static final long serialVersionUID = 0L;
     if (!getPasswordBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
     }
-    if (!getFullnameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fullname_);
+    if (!getEmailBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
     }
     if (!getPhoneBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, phone_);
@@ -349,8 +349,8 @@ private static final long serialVersionUID = 0L;
     if (!getPasswordBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
     }
-    if (!getFullnameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, fullname_);
+    if (!getEmailBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
     }
     if (!getPhoneBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, phone_);
@@ -377,8 +377,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getUsername())) return false;
     if (!getPassword()
         .equals(other.getPassword())) return false;
-    if (!getFullname()
-        .equals(other.getFullname())) return false;
+    if (!getEmail()
+        .equals(other.getEmail())) return false;
     if (!getPhone()
         .equals(other.getPhone())) return false;
     if (!getAddress()
@@ -398,8 +398,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getUsername().hashCode();
     hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
     hash = (53 * hash) + getPassword().hashCode();
-    hash = (37 * hash) + FULLNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getFullname().hashCode();
+    hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+    hash = (53 * hash) + getEmail().hashCode();
     hash = (37 * hash) + PHONE_FIELD_NUMBER;
     hash = (53 * hash) + getPhone().hashCode();
     hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
@@ -541,7 +541,7 @@ private static final long serialVersionUID = 0L;
 
       password_ = "";
 
-      fullname_ = "";
+      email_ = "";
 
       phone_ = "";
 
@@ -575,7 +575,7 @@ private static final long serialVersionUID = 0L;
       com.example.p4f_project.protocols.RegisterInfo result = new com.example.p4f_project.protocols.RegisterInfo(this);
       result.username_ = username_;
       result.password_ = password_;
-      result.fullname_ = fullname_;
+      result.email_ = email_;
       result.phone_ = phone_;
       result.address_ = address_;
       onBuilt();
@@ -634,8 +634,8 @@ private static final long serialVersionUID = 0L;
         password_ = other.password_;
         onChanged();
       }
-      if (!other.getFullname().isEmpty()) {
-        fullname_ = other.fullname_;
+      if (!other.getEmail().isEmpty()) {
+        email_ = other.email_;
         onChanged();
       }
       if (!other.getPhone().isEmpty()) {
@@ -827,78 +827,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object fullname_ = "";
+    private java.lang.Object email_ = "";
     /**
-     * <code>string fullname = 3;</code>
-     * @return The fullname.
+     * <code>string email = 3;</code>
+     * @return The email.
      */
-    public java.lang.String getFullname() {
-      java.lang.Object ref = fullname_;
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        fullname_ = s;
+        email_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string fullname = 3;</code>
-     * @return The bytes for fullname.
+     * <code>string email = 3;</code>
+     * @return The bytes for email.
      */
     public com.google.protobuf.ByteString
-        getFullnameBytes() {
-      java.lang.Object ref = fullname_;
+        getEmailBytes() {
+      java.lang.Object ref = email_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        fullname_ = b;
+        email_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string fullname = 3;</code>
-     * @param value The fullname to set.
+     * <code>string email = 3;</code>
+     * @param value The email to set.
      * @return This builder for chaining.
      */
-    public Builder setFullname(
+    public Builder setEmail(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      fullname_ = value;
+      email_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string fullname = 3;</code>
+     * <code>string email = 3;</code>
      * @return This builder for chaining.
      */
-    public Builder clearFullname() {
+    public Builder clearEmail() {
       
-      fullname_ = getDefaultInstance().getFullname();
+      email_ = getDefaultInstance().getEmail();
       onChanged();
       return this;
     }
     /**
-     * <code>string fullname = 3;</code>
-     * @param value The bytes for fullname to set.
+     * <code>string email = 3;</code>
+     * @param value The bytes for email to set.
      * @return This builder for chaining.
      */
-    public Builder setFullnameBytes(
+    public Builder setEmailBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      fullname_ = value;
+      email_ = value;
       onChanged();
       return this;
     }

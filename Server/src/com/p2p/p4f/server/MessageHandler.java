@@ -45,6 +45,11 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 			response.setOpcode(op);
 			response.setResponseCode(result);
 		}
+		if (op == 3) {
+			int result = dbHandler.ChangePassword(clientMsg.getChangeRes());
+			response.setOpcode(op);
+			response.setResponseCode(result);
+		}
 		dbHandler.releaseConn();
 		ctx.writeAndFlush(response.build());
 	}

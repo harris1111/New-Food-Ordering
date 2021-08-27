@@ -5,11 +5,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import com.example.p4f_project.ChangePassword;
 import com.example.p4f_project.LoginFragment;
+import com.example.p4f_project.Profile;
 import com.example.p4f_project.RegisterFragment;
 import com.example.p4f_project.protocols.ClientMessage;
 import com.example.p4f_project.protocols.LoginInfo;
 import com.example.p4f_project.protocols.RegisterInfo;
+import com.example.p4f_project.protocols.changePassInfo;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -80,6 +83,10 @@ public class ContainerClient implements Runnable {
                             Message response = null;
                             if (msg.what == 1)
                                 response = Message.obtain(LoginFragment.loginFragmentHandler);
+                            if (msg.what == 2)
+                                response = Message.obtain(RegisterFragment.registerFragmentHandler);
+                            if (msg.what == 3)
+                                response = Message.obtain(Profile.profileHandler);
                             response.what = -1; // Opcode for connection error
                             response.obj = "Unable to connect to server";
                             response.sendToTarget();
@@ -128,10 +135,27 @@ public class ContainerClient implements Runnable {
                     }
                     if (msg.what == 2 ) {
                         Log.d("Vao msg.what == 2", " Thanh cong");
-                        boolean result = validatePassword((RegisterInfo) msg.obj);
-                        Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
-                        if (!(result)) {
-                            response.obj = "Register fail";
+                        int result = validateLoginInfo(((RegisterInfo)msg.obj).getUsername(), ((RegisterInfo)msg.obj).getPassword());
+                        if (result > 0) {
+                            Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
+                            response.what = 2;
+                            response.arg1 = -1;
+                            switch (result) {
+                                case 1:
+                                    response.obj = "Username contains special character(s)";
+                                    break;
+                                case 2:
+                                    response.obj = "Username must be at least 5 characters!";
+                                    break;
+                                case 3:
+                                    response.obj = "Username invalid!";
+                                    break;
+                                case 4:
+                                    response.obj = "Password invalid!";
+                                    break;
+                                case 5:
+                                    response.obj = "Password must be at least 8 characters";
+                            }
                             response.sendToTarget();
                             return;
                         }
@@ -139,6 +163,13 @@ public class ContainerClient implements Runnable {
                         clientMessage.setOpcode(2);
                         clientMessage.setRegAcc((RegisterInfo) msg.obj);
                         Log.d("Set clientMessage", " Thanh cong");
+                    }
+                    if (msg.what == 3) {
+                        Log.d("Vao msg.what == 3", " Thanh cong");
+                        Message reponse = Message.obtain(ChangePassword.changePasswordhandler);
+                        clientMessage.setOpcode(3);
+                        clientMessage.setChangeRes((changePassInfo) msg.obj);
+                        Log.d("Set ClientMessage ", "Thanh Cong");
                     }
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(clientMessage.build());
@@ -218,29 +249,26 @@ public class ContainerClient implements Runnable {
         }
         return 0;
     }
-    public boolean validatePassword(RegisterInfo registerInfo){
-        // Case blank field(s)
-        String userName = registerInfo.getUsername();
-        String passWord = registerInfo.getPassword();
-        String Phone = registerInfo.getPhone();
-        String Address = registerInfo.getAddress();
-        String fName = registerInfo.getUsername();
-        if(userName.equals("")||passWord.equals("")||Phone.equals("")|| Address.equals("")|| fName.equals("")){
-            return false;
+    private int validateLoginInfo(String username, String password) {
+        // Case username has special characters
+        if(checkString(username)){
+            return 1;
         }
-        // Case password length too long
-        if(passWord.length()>20){
-            return false;
+        // Username is shorter than 5 characters
+        if(username.length()<5 && username.length()!=0){
+            return 2;
         }
-        if(checkString(userName)){
-            return false;
+        // case username or password is blank
+        if(username.length()==0){
+            return 3;
         }
-        if(userName.length()<5){
-            return false;
+        if(password.length()==0){
+            return 4;
         }
-        if(passWord.length()<8){
-            return false;
+        // case password length <8 characters
+        if(password.length()<8){
+            return 5;
         }
-        return true;
+        return 0;
     }
 }

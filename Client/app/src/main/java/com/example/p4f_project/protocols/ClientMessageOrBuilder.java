@@ -70,5 +70,20 @@ public interface ClientMessageOrBuilder extends
    */
   com.example.p4f_project.protocols.OrderOrBuilder getOrderOrBuilder();
 
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   * @return Whether the changeRes field is set.
+   */
+  boolean hasChangeRes();
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   * @return The changeRes.
+   */
+  com.example.p4f_project.protocols.changePassInfo getChangeRes();
+  /**
+   * <code>.p4f_protocols.changePassInfo changeRes = 5;</code>
+   */
+  com.example.p4f_project.protocols.changePassInfoOrBuilder getChangeResOrBuilder();
+
   public com.example.p4f_project.protocols.ClientMessage.ClientRequestsCase getClientRequestsCase();
 }

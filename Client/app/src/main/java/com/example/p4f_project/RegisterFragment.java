@@ -27,7 +27,7 @@ public class RegisterFragment extends Fragment {
     EditText reg_password;
     EditText phone;
     EditText address;
-    EditText fullName;
+    EditText email;
     Button regButton;
     public static Handler registerFragmentHandler;
     float v = 0;
@@ -38,7 +38,7 @@ public class RegisterFragment extends Fragment {
 
         reg_username = root.findViewById(R.id.reg_username);
         reg_password = root.findViewById(R.id.reg_password);
-        fullName = root.findViewById(R.id.fullname);
+        email = root.findViewById(R.id.email);
         phone = root.findViewById(R.id.phone);
         address = root.findViewById(R.id.address);
         regButton = root.findViewById(R.id.regButton);
@@ -46,7 +46,7 @@ public class RegisterFragment extends Fragment {
 
         reg_username.setTranslationX(0);
         reg_password.setTranslationX(0);
-        fullName.setTranslationX(0);
+        email.setTranslationX(0);
         phone.setTranslationX(0);
         address.setTranslationX(0);
         regButton.setTranslationX(0);
@@ -54,7 +54,7 @@ public class RegisterFragment extends Fragment {
 
         reg_username.setAlpha(v);
         reg_password.setAlpha(v);
-        fullName.setAlpha(v);
+        email.setAlpha(v);
         phone.setAlpha(v);
         address.setAlpha(v);
         regButton.setAlpha(v);
@@ -62,7 +62,7 @@ public class RegisterFragment extends Fragment {
 
         reg_username.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(300).start();
         reg_password.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(500).start();
-        fullName.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(700).start();
+        email.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(700).start();
         phone.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(900).start();
         address.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1100).start();
         regButton.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
@@ -71,15 +71,17 @@ public class RegisterFragment extends Fragment {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == 1 ) {
+                if (msg.what == 2 ) {
                     Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
                     announce.show();
-                    //resetRegisterActivity();
+                    if (msg.arg1 == 0) {
+                        clearData();
+                        toLoginActivity();
+                    }
                 }
                 else if (msg.what == -1) {
                     Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
                     announce.show();
-                    //resetRegisterActivity();
                 }
             }
         };
@@ -89,17 +91,15 @@ public class RegisterFragment extends Fragment {
                 RegisterInfo registerInfo = RegisterInfo.newBuilder()
                         .setUsername(reg_username.getText().toString())
                         .setPassword(reg_password.getText().toString())
-                        .setFullname(fullName.getText().toString())
+                        .setEmail(email.getText().toString())
                         .setPhone(phone.getText().toString())
                         .setAddress(address.getText().toString()).build();
-                Log.d("Set Register Infor ", "Thanh cong");
                 //Create Message to send to Client
                 Message msg = Message.obtain(ContainerClient.handler);
                 msg.what = 2;
                 msg.obj = registerInfo;
                 //send to client
                 msg.sendToTarget();
-                Log.d("sendtoTarget() ", "Thanh cong");
             }
         });
         return root;
@@ -118,5 +118,18 @@ public class RegisterFragment extends Fragment {
         getActivity().finish();
         p4f_project.getContext().startActivity(intent);
 
+    }
+   public void clearData(){
+       reg_username. getText(). clear();
+       reg_password. getText(). clear();
+       phone.getText().clear();
+        address.getText().clear();
+        email.getText().clear();
+   }
+    public void toLoginActivity() {
+        //Start new activity
+        Intent myIntent = new Intent(RegisterFragment.this.getActivity(), LoginActivity.class);
+        startActivity(myIntent);
+        getActivity().finish();
     }
 }

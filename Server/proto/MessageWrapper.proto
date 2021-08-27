@@ -21,9 +21,14 @@ message UserAccount {
 message RegisterInfo {
   string username = 1;
   string password = 2;
-  string fullname = 3;
+  string email = 3;
   string phone = 4;
   string address = 5;
+}
+message changePassInfo {
+  string username = 1;
+  string oldPass = 2;
+  string newPass = 3;
 }
 
 message Food {
@@ -63,6 +68,7 @@ message ClientMessage {
     LoginInfo account = 2;
     RegisterInfo regAcc = 3;
     Order order = 4;
+    changePassInfo changeRes = 5;
   }
 }
 
@@ -73,5 +79,6 @@ message ServerMessage {
     //Announce Register status and change password status
     int32 responseCode = 3;
     orderResponse orderRes = 4;
+    changePassInfo changeRes = 5;
   }
 }

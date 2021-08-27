@@ -80,39 +80,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497" android:fontFamily="@font/aclonica"/>
-
     <ImageView
             android:layout_width="33dp"
             android:layout_height="29dp"
-            android:src="@drawable/ic_action_profile_name"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            android:layout_marginTop="24dp" app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/profile_name_view" android:layout_marginLeft="64dp" android:layout_marginStart="64dp"/>
+            android:src="@drawable/ic_nav_home"
+            android:id="@+id/addressPr"
+            app:layout_constraintTop_toBottomOf="@+id/view2" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="64dp"/>
+    <TextView
+            android:id="@+id/profile_address"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_textview"
+            android:hint="Address"
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="104dp" android:fontFamily="@font/alice"
+            app:layout_constraintTop_toBottomOf="@+id/view2" android:layout_marginTop="28dp"/>
     <ImageView
             android:layout_width="33dp"
             android:layout_height="29dp"
             android:src="@drawable/ic_action_profile_email"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name_view"
-            android:layout_marginTop="28dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.169"
-            android:id="@+id/profile_email_view"/>
-
-    <TextView
-            android:id="@+id/profile_fullname"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:background="@drawable/custom_textview"
-            android:hint="Full name"
-            android:textSize="20dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/alice"
-            android:layout_marginEnd="104dp"
-            android:layout_marginRight="104dp"/>
+            android:id="@+id/profile_email_view"
+            app:layout_constraintTop_toBottomOf="@+id/addressPr" android:layout_marginTop="28dp"/>
     <TextView
             android:id="@+id/profile_email"
             android:layout_width="200dp"
@@ -122,21 +116,21 @@
             android:textSize="20dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="104dp" android:layout_marginRight="104dp" android:fontFamily="@font/alice"
-            app:layout_constraintTop_toBottomOf="@+id/profile_fullname"
-            android:layout_marginTop="24dp"/>
-    <TextView android:layout_width="200dp"
-              android:layout_height="30dp"
-              android:id="@+id/profile_phone"
-              android:background="@drawable/custom_textview"
-              android:hint="Phone"
-              android:textSize="20dp"
-              android:gravity="center"
-              app:layout_constraintEnd_toEndOf="parent"
-              android:layout_marginEnd="104dp" android:layout_marginRight="104dp"
-              app:layout_constraintTop_toBottomOf="@+id/profile_email"
-              android:layout_marginTop="28dp"
-              android:fontFamily="@font/alice"/>
+            android:layout_marginEnd="104dp" android:fontFamily="@font/alice"
+            app:layout_constraintTop_toBottomOf="@+id/profile_address" android:layout_marginTop="28dp"/>
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:id="@+id/profile_phone"
+            android:background="@drawable/custom_textview"
+            android:hint="Phone"
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="104dp"
+            app:layout_constraintTop_toBottomOf="@+id/profile_email"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/alice"/>
     <ImageView
             android:layout_width="33dp"
             android:layout_height="29dp"

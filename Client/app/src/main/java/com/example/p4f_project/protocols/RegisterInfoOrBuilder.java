@@ -32,16 +32,16 @@ public interface RegisterInfoOrBuilder extends
       getPasswordBytes();
 
   /**
-   * <code>string fullname = 3;</code>
-   * @return The fullname.
+   * <code>string email = 3;</code>
+   * @return The email.
    */
-  java.lang.String getFullname();
+  java.lang.String getEmail();
   /**
-   * <code>string fullname = 3;</code>
-   * @return The bytes for fullname.
+   * <code>string email = 3;</code>
+   * @return The bytes for email.
    */
   com.google.protobuf.ByteString
-      getFullnameBytes();
+      getEmailBytes();
 
   /**
    * <code>string phone = 4;</code>

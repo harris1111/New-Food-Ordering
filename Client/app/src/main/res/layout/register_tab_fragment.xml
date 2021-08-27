@@ -29,6 +29,7 @@
     <EditText
             android:id="@+id/reg_password"
             android:layout_width="0dp"
+            android:inputType="textPassword"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bg"
             app:layout_constraintWidth_percent=".8"
@@ -46,14 +47,14 @@
     />
 
     <EditText
-            android:id="@+id/fullname"
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bg"
             app:layout_constraintWidth_percent=".8"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintHorizontal_bias=".5"
-            android:hint="Full name"
+            android:hint="Email"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -80,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fullname"
+            app:layout_constraintTop_toBottomOf="@id/email"
     />
 
     <EditText
