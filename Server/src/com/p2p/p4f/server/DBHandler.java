@@ -124,32 +124,34 @@ public class DBHandler {
                 phone + "," +
                 "N\'" +  addr +
                 "\', " +  image + ");" ;
-        String QState = "select * from tblUser where ? = ?";
-        //PreparedStatement st = conn.prepareStatement(sqlState+val);
+        String UserSt = "select * from tblUser where Username = ?";
+        String EmailSt = "select * from tblUser where Email = ?";
+        String PhoneSt = "select * from tblUser where Phone = ?";
         Statement st = conn.createStatement();
-        PreparedStatement stQuery = conn.prepareStatement(QState);
+        PreparedStatement stUser = conn.prepareStatement(UserSt);
+        PreparedStatement stEmail = conn.prepareStatement(EmailSt);
+        PreparedStatement stPhone = conn.prepareStatement(PhoneSt);
         try {
-            stQuery.setString(1, " Username");
-            stQuery.setString(2,   username );
-            ResultSet rs = stQuery.executeQuery();
-            stQuery.setString(1, " Email");
-            stQuery.setString(2,   email );
-            stQuery.setString(1, " Phone");
-            stQuery.setString(2,   phone );
+            // Check Username
+            stUser.setString(1, username);
+            stEmail.setString(1,email);
+            stPhone.setString(1,phone);
+            ResultSet rs = stUser.executeQuery();
+            if (rs.next()) return 1;
+            // Check mail
+            if (! email.equals("NULL")) {
+                rs = stEmail.executeQuery();
+                if (rs.next()) return 2;
+            }
+            // Check phone
+            if (! phone.equals("NULL")) {
+                rs = stPhone.executeQuery();
+                if (rs.next()) return 3;
+            }
 
-            if (rs.first()) return 1;
-            else if (! email.equals("NULL")) {
-                rs = stQuery.executeQuery();
-                if (rs.first()) return 2;
-            }
-            else if (! phone.equals("NULL")) {
-                rs = stQuery.executeQuery();
-                if (rs.first()) return 3;
-            }
-            else {
-                st.executeUpdate(sqlState + val);
-                return 0;
-            }
+            // Insert to DB
+            st.executeUpdate(sqlState + val);
+            return 0;
         }catch (SQLException e) {
             e.printStackTrace();
         }
