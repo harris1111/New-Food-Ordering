@@ -1,5 +1,7 @@
 USE [master]
 GO
+/*drop database PrayForFood
+go*/
 CREATE DATABASE [PrayForFood]
 GO
 USE [PrayForFood]
@@ -49,14 +51,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tblOrder](
 	[Order_ID] [char](4) NOT NULL,
-	[Menu_ID] [char](4) NOT NULL,
 	[Customer] [varchar](50) NULL,
 	[Total] [int] NULL,
 	[Order_status] [varchar](10) NULL,
+	[Order_day] [date] NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[Order_ID] ASC,
-	[Menu_ID] ASC
+	[Order_ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -71,7 +72,7 @@ CREATE TABLE [dbo].[tblOrder_details](
 	[Food_ID] [char](4) NOT NULL,
 	[Amount] [float] NULL,
 	[Price] [int] NULL,
-	[Oder_day] [date] NULL,
+	
 PRIMARY KEY CLUSTERED 
 (
 	[Order_ID] ASC,
@@ -133,6 +134,10 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+ALTER TABLE tblUser
+ADD CONSTRAINT df_image
+DEFAULT 'avt.png' FOR U_image;
+GO
 INSERT [dbo].[tblBranch] ([Branch_ID], [Branch_Name], [Branch_Address], [Branch_image], [Branch_Location_Longitude], [Branch_Location_Latitude]) VALUES (N'0001', N'Nhà hàng Qua Môn', N'111 Lê Trọng Tấn, phường Tây Thạnh, quận Tân Phú, TPHCM', NULL, NULL, NULL)
 GO
 INSERT [dbo].[tblBranch] ([Branch_ID], [Branch_Name], [Branch_Address], [Branch_image], [Branch_Location_Longitude], [Branch_Location_Latitude]) VALUES (N'0002', N'Nhà hàng Qua Môn 2', N'303 Cộng Hoà, phường 13, quận Tân Bình, TPHCM', NULL, NULL, NULL)
@@ -141,30 +146,29 @@ INSERT [dbo].[tblMenu] ([Menu_ID], [Menu_Type], [Food_ID], [Food_Name], [Price],
 GO
 INSERT [dbo].[tblMenu] ([Menu_ID], [Menu_Type], [Food_ID], [Food_Name], [Price], [Amount], [Food_Image]) VALUES (N'0002', N'Drink', N'0001', N'Milo', 15000, 1, NULL)
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'admin', N'0000', N'0', NULL, NULL, N'111 Nguyễn Thị Tú, phường Bình Hưng Hoà B, quận Bình Tân, TPHCM', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'admin', N'00000000', N'0', NULL, NULL, N'111 Nguyễn Thị Tú, phường Bình Hưng Hoà B, quận Bình Tân, TPHCM', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'khachhang1', N'1111', N'1', NULL, NULL, N'12 Nguyễn Hồng Đào, phường 14, quận Tân Bình, TPHCM', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'khachhang1', N'111111111', N'1', NULL, NULL, N'12 Nguyễn Hồng Đào, phường 14, quận Tân Bình, TPHCM', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'ngocchinh', N'12321', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'ngocchinh', N'12344321', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user1', N'pass', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user1', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user2', N'pass', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user2', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user3', N'pass', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user3', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user4', N'pass', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user4', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
-INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user5', N'pass', N'1', NULL, NULL, N'ABCCCCC', NULL)
+INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user5', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
 ALTER TABLE [dbo].[tblOrder]  WITH CHECK ADD FOREIGN KEY([Customer])
 REFERENCES [dbo].[tblUser] ([Username])
 GO
-ALTER TABLE [dbo].[tblOrder_details]  WITH CHECK ADD FOREIGN KEY([Order_ID], [Menu_ID])
-REFERENCES [dbo].[tblOrder] ([Order_ID], [Menu_ID])
+ALTER TABLE [dbo].[tblOrder_details]  WITH CHECK ADD  CONSTRAINT [FK_tblOrder_details_tblOrder] FOREIGN KEY([Order_ID])
+REFERENCES [dbo].[tblOrder] ([Order_ID])
 GO
-ALTER TABLE [dbo].[tblOrder_details]  WITH CHECK ADD FOREIGN KEY([Menu_ID], [Food_ID])
-REFERENCES [dbo].[tblMenu] ([Menu_ID], [Food_ID])
+ALTER TABLE [dbo].[tblOrder_details] CHECK CONSTRAINT [FK_tblOrder_details_tblOrder]
 GO
 ALTER TABLE [dbo].[tblPayment]  WITH CHECK ADD FOREIGN KEY([Pay_by])
 REFERENCES [dbo].[tblUser] ([Username])
