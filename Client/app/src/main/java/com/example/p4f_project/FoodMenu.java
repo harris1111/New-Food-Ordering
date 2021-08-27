@@ -26,8 +26,8 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
     ImageView add1,add2,add3,add4,backBtt;
     Button cartButton;
     ArrayList<Boolean> tempArr=new ArrayList<Boolean>(Collections.nCopies(4,false));
-    ArrayList<Product> foodList=new ArrayList<Product>();
-    BufferedReader reader = null;
+    ArrayList<Product> foodList;
+    ArrayList<Product> foodMenu=new ArrayList<Product>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_menu);
@@ -38,6 +38,18 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
         add4.setOnClickListener(this);
         backBtt.setOnClickListener(this);
         cartButton.setOnClickListener(this);
+        Intent cartReturn = getIntent();
+        foodList = cartReturn.getParcelableArrayListExtra("cart_list");
+        if (foodList == null) {
+            foodList = new ArrayList<Product>();
+        }
+        else {
+            for (Product item : foodList) {
+                int i = Integer.parseInt(item.getID().substring(4, item.getID().length()));
+                tempArr.set(i-1, true);
+            }
+        }
+        BufferedReader reader = null;
         AssetManager assetManager = p4f_project.getContext().getResources().getAssets();
         InputStream is = null;
         try {
@@ -47,6 +59,20 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
         }
         if(is!=null){
             reader=new BufferedReader(new InputStreamReader(is));
+            try {
+                String line = reader.readLine();
+                while (line != null) {
+                    String id=line;
+                    String name=reader.readLine();
+                    String Des=reader.readLine();
+                    int price=Integer.parseInt(reader.readLine());
+                    foodMenu.add(new Product(id,name,Des,price));
+                    line = reader.readLine();
+                }
+                is.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public void findID(){
@@ -63,12 +89,13 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
         switch(v.getId()){
             case R.id.addToCart1:
                 if(tempArr.get(0) ==false){
-                    readFood(reader,0);
+                    //readFood(reader,0);
+                    foodList.add(foodMenu.get(0));
                     tempArr.set(0,true);
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="item1") {
+                        if(foodList.get(j).getID().equals("item1")) {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -77,12 +104,13 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.addToCart2:
                 if(tempArr.get(1) ==false){
-                    readFood(reader,1);
+                    //readFood(reader,1);
+                    foodList.add(foodMenu.get(1));
                     tempArr.set(1,true);
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="item2") {
+                        if(foodList.get(j).getID().equals("item2")) {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -91,12 +119,13 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.addToCart3:
                 if(tempArr.get(2) ==false){
-                    readFood(reader,2);
+                    //readFood(reader,2);
+                    foodList.add(foodMenu.get(2));
                     tempArr.set(2,true);
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="item3") {
+                        if(foodList.get(j).getID().equals("item3")) {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -105,12 +134,13 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.addToCart4:
                 if(tempArr.get(3) ==false){
-                    readFood(reader,3);
+                    //readFood(reader,3);
+                    foodList.add(foodMenu.get(3));
                     tempArr.set(3,true);
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="item4") {
+                        if(foodList.get(j).getID().equals("item4")) {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -120,40 +150,40 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
             case R.id.back2main:
                 Intent backI=new Intent(FoodMenu.this,MainPage.class);
                 startActivity(backI);
+
                 finish();
                 break;
             case R.id.CartButton:
                 Intent cartIntent= new Intent(FoodMenu.this,cart.class);
                 cartIntent.putParcelableArrayListExtra("food_list", foodList);
                 startActivity(cartIntent);
-
 //                while (cart.cartScreenHandler == null) {
 //                    continue;
 //                }
                 break;
         }
     }
-
-    private void readFood(BufferedReader reader,int ind){
-        String temp;
-        int i=0;
-        try{
-            while((temp=reader.readLine())!=null){
-                if(i<ind){
-                    for(int j=0;j<3;j++){
-                        reader.readLine();
-                    }
-                    continue;
-                }
-                String id=temp;
-                String name=reader.readLine();
-                String Des=reader.readLine();
-                int price=Integer.parseInt(reader.readLine());
-                foodList.add(new Product(temp,name,Des,price));
-                break;
-            }
-        }
-        catch (Exception e){e.printStackTrace();}
-    }
+//
+//    private void readFood(BufferedReader reader,int ind){
+//        String temp;
+//        int i=0;
+//        try{
+//            while((temp=reader.readLine())!=null){
+//                if(i<ind){
+//                    for(int j=0;j<3;j++){
+//                        reader.readLine();
+//                    }
+//                    continue;
+//                }
+//                String id=temp;
+//                String name=reader.readLine();
+//                String Des=reader.readLine();
+//                int price=Integer.parseInt(reader.readLine());
+//                foodList.add(new Product(temp,name,Des,price));
+//                break;
+//            }
+//        }
+//        catch (Exception e){e.printStackTrace();}
+//    }
 }
 
