@@ -1,30 +1,7 @@
 package com.p2p.p4f.server;
-
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import java.io.*;
-import java.nio.channels.FileChannel;
-import java.sql.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main {
-    public void testJDBC() {
-        try {
-            String connString = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=QuanLyDeAn;integratedSecurity=true";
-            Connection conn = DriverManager.getConnection(connString);
-            PreparedStatement stmt = conn.prepareStatement("SELECT HONV + ' ' + TENLOT + ' ' + TENNV FROM NHANVIEN");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-            }
-        }
-        catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
     
     public static void main(String[] args) {
         try {

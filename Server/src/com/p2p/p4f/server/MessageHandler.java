@@ -2,9 +2,11 @@ package com.p2p.p4f.server;
 
 import com.p2p.p4f.protocols.ClientMessage;
 import com.p2p.p4f.protocols.InfoResponse;
+import com.p2p.p4f.protocols.RegisterInfo;
 import com.p2p.p4f.protocols.ServerMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.apache.commons.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,6 +38,12 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 			InfoResponse info = dbHandler.Login(clientMsg.getAccount());
 			response.setOpcode(op);
 			response.setInfoResponse(info);
+		}
+		if (op == 2) {
+			// 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
+			int result = dbHandler.Register(clientMsg.getRegAcc());
+			response.setOpcode(op);
+			response.setResponseCode(result);
 		}
 		dbHandler.releaseConn();
 		ctx.writeAndFlush(response.build());

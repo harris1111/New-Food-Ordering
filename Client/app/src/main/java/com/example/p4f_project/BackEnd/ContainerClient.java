@@ -6,8 +6,10 @@ import android.os.Message;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.example.p4f_project.LoginFragment;
+import com.example.p4f_project.RegisterFragment;
 import com.example.p4f_project.protocols.ClientMessage;
 import com.example.p4f_project.protocols.LoginInfo;
+import com.example.p4f_project.protocols.RegisterInfo;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -124,6 +126,20 @@ public class ContainerClient implements Runnable {
                         clientMessage.setOpcode(1);
                         clientMessage.setAccount((LoginInfo) msg.obj);
                     }
+                    if (msg.what == 2 ) {
+                        Log.d("Vao msg.what == 2", " Thanh cong");
+                        boolean result = validatePassword((RegisterInfo) msg.obj);
+                        Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
+                        if (!(result)) {
+                            response.obj = "Register fail";
+                            response.sendToTarget();
+                            return;
+                        }
+                        Log.d("Vao set clientMessage", " Thanh cong");
+                        clientMessage.setOpcode(2);
+                        clientMessage.setRegAcc((RegisterInfo) msg.obj);
+                        Log.d("Set clientMessage", " Thanh cong");
+                    }
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(clientMessage.build());
                     try {
@@ -201,5 +217,30 @@ public class ContainerClient implements Runnable {
             return 5;
         }
         return 0;
+    }
+    public boolean validatePassword(RegisterInfo registerInfo){
+        // Case blank field(s)
+        String userName = registerInfo.getUsername();
+        String passWord = registerInfo.getPassword();
+        String Phone = registerInfo.getPhone();
+        String Address = registerInfo.getAddress();
+        String fName = registerInfo.getUsername();
+        if(userName.equals("")||passWord.equals("")||Phone.equals("")|| Address.equals("")|| fName.equals("")){
+            return false;
+        }
+        // Case password length too long
+        if(passWord.length()>20){
+            return false;
+        }
+        if(checkString(userName)){
+            return false;
+        }
+        if(userName.length()<5){
+            return false;
+        }
+        if(passWord.length()<8){
+            return false;
+        }
+        return true;
     }
 }

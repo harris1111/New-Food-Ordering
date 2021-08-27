@@ -2,6 +2,7 @@ package com.p2p.p4f.server;
 
 import com.p2p.p4f.protocols.InfoResponse;
 import com.p2p.p4f.protocols.LoginInfo;
+import com.p2p.p4f.protocols.RegisterInfo;
 import com.p2p.p4f.protocols.UserAccount;
 
 import java.sql.*;
@@ -103,15 +104,16 @@ public class DBHandler {
     }
 
     // 0 = no fault, 1 = user fault, 2 = email fault, 3 = phone fault
-    public int Register(UserAccount u, String pass) throws SQLException {
+    public int Register(RegisterInfo u) throws SQLException {
         String sqlState = "insert into tblUser(Username, U_pass, Usertype, " +
                 "Email, Phone, U_address, U_image) \nvalues";
-        String email = u.getEmail();
+        String email = u.getFullname();
         String phone = u.getPhone();
         String Usertype = "1";
         String username = u.getUsername();
         String addr = u.getAddress();
         String image = "NULL";
+        String pass = u.getPassword();
         if (! email.equals("NULL"))  email = "\'" +  email + "\'";
         if (! phone.equals("NULL"))  phone = "\'" +  phone + "\'";
         String val = "(\'" +  username + "\'," +

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Message;
 import com.example.p4f_project.LoginFragment;
+import com.example.p4f_project.RegisterFragment;
 import com.example.p4f_project.p4f_project;
 import com.example.p4f_project.protocols.InfoResponse;
 import com.example.p4f_project.protocols.LoginInfo;
@@ -55,6 +56,27 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
             else if (infoResponse.getReCode() == 2) {
                 response.arg1 = -1;
                 response.obj = "Wrong password";
+            }
+            response.sendToTarget();
+        }
+        if (serverMessage.getOpcode() == 2) {
+            Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
+            response.what = 1;
+            if (serverMessage.getResponseCode() == 0) {
+                response.arg1 = 0;
+                response.obj = "Register success";
+            }
+            else if (serverMessage.getResponseCode() == 1) {
+                response.arg1 = -1;
+                response.obj = "User unavailable";
+            }
+            else if (serverMessage.getResponseCode() == 2) {
+                response.arg1 = -1;
+                response.obj = "Email fault";
+            }
+            else if (serverMessage.getResponseCode() == 3) {
+                response.arg1 = -1;
+                response.obj = "Phone fault";
             }
             response.sendToTarget();
         }

@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.p4f_project.BackEnd.ContainerClient;
+import com.example.p4f_project.protocols.LoginInfo;
+import org.w3c.dom.Text;
+
+import static com.example.p4f_project.p4f_project.getContext;
 
 public class ChangePassword extends AppCompatActivity implements View.OnClickListener {
     Button confirmChangePass;
@@ -40,11 +43,31 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         newPass=(EditText) findViewById(R.id.et_newPass);
         newPassConfirm=(EditText) findViewById(R.id.et_newPassConfirm);
     }
-
+    private boolean checkNewPass() {
+        String newPassString = newPass.getText().toString();
+        String newPassConfirmString = newPassConfirm.getText().toString();
+        if (newPassString == newPassConfirmString) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_confirmChangePass:
+                if (!checkNewPass()) {
+                    Toast announce = Toast.makeText(getContext(), "Password confirmation failed", Toast.LENGTH_SHORT);
+                    announce.show();
+                    break;
+                }
+                LoginInfo loginInfo = LoginInfo.newBuilder()
+                        .setUsername(profile_name.getText().toString())
+                        .setPassword(oldPass.getText().toString()).build();
+                Message msg = Message.obtain(ContainerClient.handler);
+                msg.what = 2;
+
             case R.id.backtoprofile:
                 Intent confirmIntent=new Intent(ChangePassword.this,Profile.class);
                 startActivity(confirmIntent);
