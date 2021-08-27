@@ -1,113 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context=".MainPage">
-    <androidx.drawerlayout.widget.DrawerLayout
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:id="@+id/mainpage_layout">
-        <LinearLayout
+            android:layout_height="match_parent">
+        <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/cbg"
+                android:id="@+id/order_toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0">
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/back"
+                    android:id="@+id/back2main"
+                    android:layout_marginTop="8dp"
+                    android:layout_alignParentLeft="true"
+                    tools:ignore="VectorDrawableCompat"/>
+        </RelativeLayout>
+        <TextView
+                android:text="Food Menu"
+                android:textSize="40dp"
+                android:textStyle="italic"
+                android:textColor="#434343"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:background="@drawable/mintbg"
-                    android:id="@+id/toolbar"/>
-            <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white">
+                android:gravity="center"
+                android:id="@+id/textView9"
+                android:fontFamily="@font/aladin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.497"/>
 
-                    <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="200dp" app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            android:padding="10dp" android:id="@+id/linearLayout"
-                            app:layout_constraintTop_toTopOf="parent">
-                        <androidx.cardview.widget.CardView
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_margin="10dp"
-                                app:cardCornerRadius="20dp"
-                                app:cardElevation="2dp">
-                            <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    >
-                                <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        app:srcCompat="@drawable/image"
-                                        android:id="@+id/imageView1"
-                                        android:layout_marginTop="0dp"
-                                        android:layout_alignParentTop="true"
-                                        android:layout_alignParentEnd="true"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_centerHorizontal="true" android:layout_marginLeft="-1dp"
-                                        android:layout_marginStart="-1dp" android:layout_marginRight="1dp"
-                                        android:layout_marginEnd="1dp"/>
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-                    <TextView
-                            android:text="Item name"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/menuItem1"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintHorizontal_bias="0.0"/>
-                    <TextView
-                            android:text="Item description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/menuItemDes1"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintTop_toBottomOf="@+id/menuItem1"
-                            android:fontFamily="@font/alice"
-                            android:layout_marginTop="12dp"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </ScrollView>
-        </LinearLayout>
-
-        <com.google.android.material.navigation.NavigationView
-                android:layout_width="match_parent"
+        <ImageView android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:src="@drawable/mocha"
+                   app:layout_constraintTop_toBottomOf="@+id/order_toolbar"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="0.0"
+                   android:id="@+id/item1" android:layout_marginTop="4dp"/>
+        <TextView
+                android:text="Mocha"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
+                android:id="@+id/item_name1"
+                app:layout_constraintTop_toBottomOf="@+id/order_toolbar"
+                app:layout_constraintStart_toEndOf="@+id/item1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.043"
+                android:fontFamily="@font/aladin" android:layout_marginTop="8dp"/>
+        <TextView
+                android:maxEms="15"
+                android:text="Mocha with caramel flavor and chocolate cream on top."
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:fontFamily="@font/alice"
+                android:layout_width="229dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:fitsSystemWindows="true"
-                android:id="@+id/navigationView"
-                app:headerLayout="@layout/header"
-                app:menu="@menu/main_menu">
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/bottomNavigation"
-            app:menu="@menu/bottom_menu_nav"
-            android:background="#DAF8DD"
-    />
-</RelativeLayout>
+                android:id="@+id/textView1"
+                app:layout_constraintTop_toBottomOf="@+id/item_name1"
+                app:layout_constraintStart_toEndOf="@+id/item1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.218"
+                android:layout_marginTop="8dp"/>
+
+        <TextView
+                android:text="Price: 35.000 vnđ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceItem1"
+                app:layout_constraintStart_toEndOf="@+id/item1" android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp" app:layout_constraintTop_toBottomOf="@+id/textView1"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="48dp"
+                app:layout_constraintHorizontal_bias="0.016"/>
+        <ImageView android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:src="@drawable/dalgona"
+                   android:id="@+id/item2"
+                   app:layout_constraintTop_toBottomOf="@+id/item1"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintHorizontal_bias="0.0"
+                   android:layout_marginTop="56dp"/>
+        <TextView
+                android:id="@+id/textView2"
+                android:maxEms="15"
+                android:text="Korean style,frothy iced coffee drink made with instant coffee, sugar, water, and milk."
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:fontFamily="@font/alice"
+                android:layout_width="229dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_name2"
+                app:layout_constraintStart_toEndOf="@+id/item1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.218" android:layout_marginTop="8dp"/>
+        <TextView
+                android:text="Price: 55.000 vnđ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceItem2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item2"
+                android:layout_marginTop="8dp"
+                app:layout_constraintHorizontal_bias="0.037"/>
+        <View android:layout_width="100dp"
+              android:layout_height="1dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item_name2"
+              app:layout_constraintStart_toEndOf="@+id/item2"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="0dp"/>
+
+        <TextView
+                android:text="Dalgona"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
+                android:id="@+id/item_name2"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/aladin"
+                app:layout_constraintStart_toEndOf="@+id/item2"
+                app:layout_constraintHorizontal_bias="0.043"
+                app:layout_constraintTop_toBottomOf="@+id/view8"
+                android:layout_marginTop="28dp"/>
+        <View android:layout_width="100dp"
+              android:layout_height="1dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item_name1"
+              app:layout_constraintStart_toEndOf="@+id/item1"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="0.0dp" android:id="@+id/view3"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="0.5dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item1"
+              android:layout_marginTop="16dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintBottom_toTopOf="@+id/item2" app:layout_constraintVertical_bias="0.275"
+              android:id="@+id/view8"/>
+        <View android:layout_width="match_parent" android:layout_height="0.5dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item2"
+              android:layout_marginTop="16dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintBottom_toTopOf="@+id/item3"
+              app:layout_constraintVertical_bias="0.375"
+              android:id="@+id/view9"/>
+        <ImageView android:layout_width="150dp" android:layout_height="150dp"
+                   android:background="@drawable/americano"
+                   app:layout_constraintTop_toBottomOf="@+id/item2"
+                   android:layout_marginTop="56dp"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="0.0"
+                   android:id="@+id/item3"/>
+        <TextView
+                android:text="Price: 35.000 vnđ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceItem3"
+                app:layout_constraintStart_toEndOf="@+id/item3"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.031" android:layout_marginTop="4dp"/>
+        <TextView
+                android:id="@+id/item_name3"
+                android:text="Americano"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/aladin"
+                app:layout_constraintStart_toEndOf="@+id/item3"
+                app:layout_constraintTop_toBottomOf="@+id/view9"
+                android:layout_marginTop="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.043"/>
+        <View android:layout_width="100dp"
+              android:layout_height="1dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item_name3"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@+id/item3"
+              app:layout_constraintHorizontal_bias="0.0" android:id="@+id/view4"/>
+
+        <TextView
+                android:id="@+id/textView3"
+                android:maxEms="15"
+                android:text="Espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee."
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:fontFamily="@font/alice"
+                android:layout_width="229dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_name3"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/item3"
+                app:layout_constraintHorizontal_bias="0.218"/>
+        <View android:layout_width="match_parent" android:layout_height="0.5dp"
+              android:background="@color/white_blue"
+              app:layout_constraintTop_toBottomOf="@+id/item3"
+              android:layout_marginTop="16dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintVertical_bias="0.375"
+              android:id="@+id/view10" app:layout_constraintBottom_toTopOf="@+id/item4"/>
+        <ImageView android:id="@+id/item4"
+                   android:layout_width="150dp" android:layout_height="150dp"
+                   android:background="@drawable/chocolate"
+                   app:layout_constraintTop_toBottomOf="@+id/item3"
+                   android:layout_marginTop="56dp"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="0.0"
+        />
+        <TextView
+                android:id="@+id/item_name4"
+                android:text="Chocolate latte"
+                android:layout_width="118dp"
+                android:layout_height="47dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/aladin"
+                app:layout_constraintTop_toBottomOf="@+id/view10" app:layout_constraintStart_toEndOf="@+id/item4"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="24dp"
+                app:layout_constraintHorizontal_bias="0.043"
+        />
+        <TextView
+                android:id="@+id/textView4"
+                android:maxEms="15"
+                android:text="Chocolate latte with almond mild and hot hershey chocolate and whipped cream on top."
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:fontFamily="@font/alice"
+                android:layout_width="229dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@+id/item4" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.218" app:layout_constraintTop_toBottomOf="@+id/item_name4"/>
+        <TextView
+                android:text="Price: 48.000 vnđ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceItem4"
+                android:layout_marginTop="4dp" app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/item4" android:layout_marginStart="4dp"/>
+        <ImageView android:layout_width="60dp" android:layout_height="wrap_content"
+                   android:src="@drawable/add2cart"
+                   android:padding="5dp"
+                   android:layout_alignParentEnd="true"
+                   android:background="@color/light_white"
+                   android:layout_centerVertical="true"
+                   android:id="@+id/addToCart1"
+                   app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView1"
+                   android:layout_marginTop="60dp" android:layout_marginEnd="4dp"/>
+        <ImageView android:layout_width="60dp" android:layout_height="wrap_content"
+                   android:src="@drawable/add2cart"
+                   android:padding="5dp"
+                   android:layout_alignParentEnd="true"
+                   android:background="@color/light_white"
+                   android:layout_centerVertical="true"
+                   android:id="@+id/addToCart2"
+                   app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView2"
+                   android:layout_marginTop="24dp"/>
+        <ImageView android:layout_width="60dp" android:layout_height="wrap_content"
+                   android:src="@drawable/add2cart"
+                   android:padding="5dp"
+                   android:layout_alignParentEnd="true"
+                   android:background="@color/light_white"
+                   android:layout_centerVertical="true"
+                   android:id="@+id/addToCart3"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/textView3"
+                   android:layout_marginTop="20dp" android:layout_marginEnd="4dp"/>
+        <ImageView android:layout_width="60dp" android:layout_height="wrap_content"
+                   android:src="@drawable/add2cart"
+                   android:padding="5dp"
+                   android:layout_alignParentEnd="true"
+                   android:background="@color/light_white"
+                   android:layout_centerVertical="true"
+                   android:id="@+id/addToCart4"
+                   android:layout_marginTop="20dp" android:layout_marginEnd="4dp"
+                   app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+
+        <Button android:layout_width="99dp" android:layout_height="58dp"
+                android:background="#ffdde1"
+                android:text="Cart"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alice"
+                android:id="@+id/CartButton"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
