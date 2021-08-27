@@ -27,6 +27,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
     Button cartButton;
     ArrayList<Boolean> tempArr=new ArrayList<Boolean>(Collections.nCopies(4,false));
     ArrayList<Product> foodList=new ArrayList<Product>();
+    BufferedReader reader = null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_menu);
@@ -37,7 +38,16 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
         add4.setOnClickListener(this);
         backBtt.setOnClickListener(this);
         cartButton.setOnClickListener(this);
-
+        AssetManager assetManager = p4f_project.getContext().getResources().getAssets();
+        InputStream is = null;
+        try {
+            is = assetManager.open("Food.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(is!=null){
+            reader=new BufferedReader(new InputStreamReader(is));
+        }
     }
     public void findID(){
         add1=(ImageView) findViewById(R.id.addToCart1);
@@ -50,18 +60,6 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        BufferedReader reader = null;
-        AssetManager assetManager = p4f_project.getContext().getResources().getAssets();
-        InputStream is = null;
-        try {
-            is = assetManager.open("Food.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(is!=null){
-            reader=new BufferedReader(new InputStreamReader(is));
-
-        }
         switch(v.getId()){
             case R.id.addToCart1:
                 if(tempArr.get(0) ==false){
@@ -70,7 +68,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="Item1") {
+                        if(foodList.get(j).getID()=="item1") {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -84,7 +82,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="Item2") {
+                        if(foodList.get(j).getID()=="item2") {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -98,7 +96,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="Item3") {
+                        if(foodList.get(j).getID()=="item3") {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -112,7 +110,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 }
                 else{
                     for(int j =0;j<foodList.size();j++){
-                        if(foodList.get(j).getID()=="Item4") {
+                        if(foodList.get(j).getID()=="item4") {
                             foodList.get(j).increaseAmount(1);
                             break;
                         }
@@ -128,6 +126,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 Intent cartIntent= new Intent(FoodMenu.this,cart.class);
                 cartIntent.putParcelableArrayListExtra("food_list", foodList);
                 startActivity(cartIntent);
+
 //                while (cart.cartScreenHandler == null) {
 //                    continue;
 //                }

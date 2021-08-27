@@ -60,11 +60,12 @@ public class CustomListAdapter extends BaseAdapter{
         Product product= this.listData.get(position);
         holder.foodName.setText(product.getName());
         holder.foodDes.setText(product.getDes());
-        holder.foodAmount.setText(product.getAmount());
-        holder.foodPrice.setText(product.getPrice());
+        holder.foodPrice.setText(String.valueOf(product.getPrice() * product.getAmount()));
+        holder.foodAmount.setText(String.valueOf(product.getAmount()));
         holder.foodImg.setImageResource(getImageID(product.getID()));
         return convertView;
     }
+
 
     private int getImageID(String imgName){
         Resources res = context.getResources();
