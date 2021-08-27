@@ -24,34 +24,34 @@ public class cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_layout);
         back=(ImageView) findViewById(R.id.back2main);
-        cartScreenHandler= new Handler(Looper.myLooper()){
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == 15) {
-                    System.out.println("Receive message");
-                    if (foodList == null) {
-                        foodList = (ArrayList<Product>) msg.obj;
-                    }
-                    else {
-                        ArrayList<Product> newList = (ArrayList<Product>) msg.obj;
-                        for (Product item : newList) {
-                            boolean exist = false;
-                            for (int i = 0; i < foodList.size(); ++i) {
-                                if (foodList.get(i).getID().equals(item.getID())) {
-                                    exist = true;
-                                    foodList.get(i).increaseAmount(item.getAmount());
-                                    break;
-                                }
-                            }
-                            if (!exist) {
-                                foodList.add(item);
-                            }
-                        }
-                    }
-                }
-            }
-        };
+//        cartScreenHandler= new Handler(Looper.myLooper()){
+//            @Override
+//            public void handleMessage(@NonNull Message msg) {
+//                super.handleMessage(msg);
+//                if (msg.what == 15) {
+//                    System.out.println("Receive message");
+//                    if (foodList == null) {
+//                        foodList = (ArrayList<Product>) msg.obj;
+//                    }
+//                    else {
+//                        ArrayList<Product> newList = (ArrayList<Product>) msg.obj;
+//                        for (Product item : newList) {
+//                            boolean exist = false;
+//                            for (int i = 0; i < foodList.size(); ++i) {
+//                                if (foodList.get(i).getID().equals(item.getID())) {
+//                                    exist = true;
+//                                    foodList.get(i).increaseAmount(item.getAmount());
+//                                    break;
+//                                }
+//                            }
+//                            if (!exist) {
+//                                foodList.add(item);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        };
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +60,27 @@ public class cart extends AppCompatActivity {
                 finish();
             }
         });
-
+        Intent intent = getIntent();
+        ArrayList<Product> newList = intent.getParcelableArrayListExtra("food_list");
+        if (foodList == null) {
+            foodList = newList;
+            newList = null;
+        }
+        else {
+            for (Product item : newList) {
+                boolean exist = false;
+                for (int i = 0; i < foodList.size(); ++i) {
+                    if (foodList.get(i).getID().equals(item.getID())) {
+                        exist = true;
+                        foodList.get(i).increaseAmount(item.getAmount());
+                        break;
+                    }
+                }
+                if (!exist) {
+                    foodList.add(item);
+                }
+            }
+        }
         if(foodList!=null){
             final ListView listView = (ListView) findViewById(R.id.listView);
             listView.setAdapter(new CustomListAdapter(this,foodList));

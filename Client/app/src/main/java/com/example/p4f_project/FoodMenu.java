@@ -126,15 +126,11 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.CartButton:
                 Intent cartIntent= new Intent(FoodMenu.this,cart.class);
+                cartIntent.putParcelableArrayListExtra("food_list", foodList);
                 startActivity(cartIntent);
 //                while (cart.cartScreenHandler == null) {
 //                    continue;
 //                }
-                Message msg=Message.obtain(cart.cartScreenHandler);
-                msg.what = 15;
-                msg.obj = foodList;
-                foodList = null;
-                msg.sendToTarget();
                 break;
         }
     }
