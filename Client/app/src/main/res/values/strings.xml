@@ -7,4 +7,6 @@
         <item>284 Hai Bà Trưng, Hà Nội</item>
     </string-array>
     <string name="name">tabian.com.sharedpreferences.name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

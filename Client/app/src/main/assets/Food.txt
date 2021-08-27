@@ -1,0 +1,16 @@
+item1
+Mocha
+Mocha with caramel flavor and chocolate cream on top.
+35000
+item2
+Dalgona
+Korean style,frothy iced coffee drink made with instant coffee, sugar, water, and milk.
+55000
+item3
+Americano
+Espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.
+35000
+item4
+Chocolate latte
+Chocolate latte with almond mild and hot hershey chocolate and whipped cream on top.
+48000
