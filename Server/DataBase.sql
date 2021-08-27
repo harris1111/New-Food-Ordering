@@ -1,3 +1,7 @@
+use master
+go
+create database PrayForFood
+go
 USE [PrayForFood]
 GO
 /****** Object:  Table [dbo].[tblBranch]    Script Date: 8/27/2021 5:15:02 PM ******/
@@ -44,7 +48,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tblOrder](
-	[Order_ID] [char](4) NOT NULL,
+	[Order_ID] [char](100) NOT NULL,
 	[Customer] [varchar](50) NULL,
 	[Total] [int] NULL,
 	[Order_status] [varchar](10) NULL,
@@ -62,7 +66,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tblOrder_details](
-	[Order_ID] [char](4) NOT NULL,
+	[Order_ID] [char](100) NOT NULL,
 	[Menu_ID] [char](4) NULL,
 	[Food_ID] [char](4) NOT NULL,
 	[Amount] [float] NULL,

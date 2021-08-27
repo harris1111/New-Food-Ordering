@@ -256,5 +256,47 @@ public class DBHandler {
         }
     }
 
-//    public boolean insertOrder ()
+    private int TotalBill (List<Food> list){
+        int sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum+= list.get(i).getPrice() * list.get(i).getAmount();
+        }
+        return sum;
+    }
+    public orderResponse insertOrder (Order o) throws SQLException {
+        String username = o.getUsername();
+        String resID = o.getResID();
+        String day = o.getBuyDate();
+        List<Food> list = o.getFoodListList();
+        int sum = TotalBill(list);
+        String orderID = username + day + resID;
+        orderResponse.Builder Result = orderResponse.newBuilder();
+        Result.setOrderID(orderID);
+
+        PreparedStatement OrderSt = conn.prepareStatement(
+                "Insert into tblOrder(Order_ID, Customer, Total, Oder_day, Restaurant_ID) values(?,?,?,?,?)");
+        PreparedStatement ODSt = conn.prepareStatement(
+                "Insert into tblOrder_details(Order_ID, Food_ID, Amount, Price) values(?,?,?,?)");
+        try{
+            OrderSt.setString(1,orderID);
+            OrderSt.setString(2,username);
+            OrderSt.setString(3,Integer.toString(sum));
+            OrderSt.setString(4,day);
+            OrderSt.setString(5,resID);
+            OrderSt.executeUpdate();
+
+            for (int i = 0; i < list.size(); i++) {
+                ODSt.setString(1,orderID);
+                ODSt.setString(2,list.get(1).getFoodID());
+                ODSt.setString(3,Integer.toString(list.get(1).getAmount()));
+                ODSt.setString(4,Integer.toString(list.get(1).getPrice()));
+                ODSt.executeUpdate();
+            }
+            Result.setOrderResult(0);
+        }catch(SQLException e){
+            e.printStackTrace();
+            Result.setOrderResult(1);
+        }
+        return Result.build();
+    }
 }
