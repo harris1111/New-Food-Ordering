@@ -1,12 +1,6 @@
-USE [master]
-GO
-/*drop database PrayForFood
-go*/
-CREATE DATABASE [PrayForFood]
-GO
 USE [PrayForFood]
 GO
-/****** Object:  Table [dbo].[tblBranch]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblBranch]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +18,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblMenu]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblMenu]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -44,7 +38,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblOrder]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblOrder]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,13 +49,14 @@ CREATE TABLE [dbo].[tblOrder](
 	[Total] [int] NULL,
 	[Order_status] [varchar](10) NULL,
 	[Order_day] [date] NULL,
+	[Restaurant_ID] [char](4) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Order_ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblOrder_details]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblOrder_details]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -72,7 +67,6 @@ CREATE TABLE [dbo].[tblOrder_details](
 	[Food_ID] [char](4) NOT NULL,
 	[Amount] [float] NULL,
 	[Price] [int] NULL,
-	
 PRIMARY KEY CLUSTERED 
 (
 	[Order_ID] ASC,
@@ -80,7 +74,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblPayment]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblPayment]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,7 +91,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblReview]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblReview]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +109,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblUser]    Script Date: 8/18/2021 7:03:48 PM ******/
+/****** Object:  Table [dbo].[tblUser]    Script Date: 8/27/2021 5:15:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,10 +127,6 @@ PRIMARY KEY CLUSTERED
 	[Username] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-ALTER TABLE tblUser
-ADD CONSTRAINT df_image
-DEFAULT 'avt.png' FOR U_image;
 GO
 INSERT [dbo].[tblBranch] ([Branch_ID], [Branch_Name], [Branch_Address], [Branch_image], [Branch_Location_Longitude], [Branch_Location_Latitude]) VALUES (N'0001', N'Nhà hàng Qua Môn', N'111 Lê Trọng Tấn, phường Tây Thạnh, quận Tân Phú, TPHCM', NULL, NULL, NULL)
 GO
@@ -162,8 +152,15 @@ INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_a
 GO
 INSERT [dbo].[tblUser] ([Username], [U_pass], [Usertype], [Email], [Phone], [U_address], [U_image]) VALUES (N'user5', N'password', N'1', NULL, NULL, N'ABCCCCC', N'avt.png')
 GO
+ALTER TABLE [dbo].[tblUser] ADD  CONSTRAINT [df_image]  DEFAULT ('avt.png') FOR [U_image]
+GO
 ALTER TABLE [dbo].[tblOrder]  WITH CHECK ADD FOREIGN KEY([Customer])
 REFERENCES [dbo].[tblUser] ([Username])
+GO
+ALTER TABLE [dbo].[tblOrder]  WITH CHECK ADD  CONSTRAINT [FK_tblOrder_tblBranch] FOREIGN KEY([Restaurant_ID])
+REFERENCES [dbo].[tblBranch] ([Branch_ID])
+GO
+ALTER TABLE [dbo].[tblOrder] CHECK CONSTRAINT [FK_tblOrder_tblBranch]
 GO
 ALTER TABLE [dbo].[tblOrder_details]  WITH CHECK ADD  CONSTRAINT [FK_tblOrder_details_tblOrder] FOREIGN KEY([Order_ID])
 REFERENCES [dbo].[tblOrder] ([Order_ID])

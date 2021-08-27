@@ -1,6 +1,10 @@
 package com.p2p.p4f.server;
 
 import com.p2p.p4f.protocols.*;
+import com.p2p.p4f.protocols.InfoResponse;
+import com.p2p.p4f.protocols.LoginInfo;
+import com.p2p.p4f.protocols.RegisterInfo;
+import com.p2p.p4f.protocols.UserAccount;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -126,23 +130,25 @@ public class DBHandler {
         PreparedStatement stQuery = conn.prepareStatement(QState);
         try {
             stQuery.setString(1, " Username");
-            stQuery.setString(2, "\'" +  username + "\'");
+            stQuery.setString(2,   username );
             ResultSet rs = stQuery.executeQuery();
-            if (rs.next()) return 1;
             stQuery.setString(1, " Email");
-            stQuery.setString(2, "\'" +  email + "\'");
-            if (! email.equals("NULL")) {
+            stQuery.setString(2,   email );
+            stQuery.setString(1, " Phone");
+            stQuery.setString(2,   phone );
+            if (rs.next()) return 1;
+            else if (! email.equals("NULL")) {
                 rs = stQuery.executeQuery();
                 if (rs.next()) return 2;
             }
-            stQuery.setString(1, " Phone");
-            stQuery.setString(2, "\'" +  phone + "\'");
-            if (! phone.equals("NULL")) {
+            else if (! phone.equals("NULL")) {
                 rs = stQuery.executeQuery();
                 if (rs.next()) return 3;
             }
-            st.executeUpdate(sqlState + val);
-            return 0;
+            else {
+                st.executeUpdate(sqlState + val);
+                return 0;
+            }
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,26 +156,24 @@ public class DBHandler {
     }
 
 
-
-
     // Restaurant: Branch_ID, Branch_Name, Branch_Address, Branch_image, Branch_Location_Longtitude, Branch_Location_Latitude
     // example: rs.getArray("BranchID") is get column BranchID.
     public ArrayList<Restaurant> get_ListRestaurant() throws SQLException {
-            String sqlSelect = "SELECT * from tblBranch";
-            ArrayList<Restaurant> list = new ArrayList<>();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sqlSelect);
-            try{
-                    while(rs.next()){
-                        Restaurant r = new Restaurant(rs.getString("Branch_ID"),
-                                rs.getString("Branch_Name")
-                                ,rs.getString("Branch_Address")
-                                ,rs.getString("Branch_image")
+        String sqlSelect = "SELECT * from tblBranch";
+        ArrayList<Restaurant> list = new ArrayList<>();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sqlSelect);
+        try{
+            while(rs.next()){
+                Restaurant r = new Restaurant(rs.getString("Branch_ID"),
+                        rs.getString("Branch_Name")
+                        ,rs.getString("Branch_Address")
+                        ,rs.getString("Branch_image")
                         ,rs.getString("Branch_Location_Longitude")
-                                ,rs.getString("Branch_Location_Latitude"));
-                        list.add(r);
-                    }
-                return list;
+                        ,rs.getString("Branch_Location_Latitude"));
+                list.add(r);
+            }
+            return list;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,18 +191,19 @@ public class DBHandler {
         else return null;
     }
     // Change password
-    public int ChangePassword (changePassInfo user) throws SQLException {
+    public boolean ChangePassword (UserAccount user, String oldPass, String newPass) throws SQLException {
 
         String pass = getPass(user.getUsername());
-        String oldPass = user.getOldPass();
-        String newPass = user.getNewPass();
         // if get pass false, it means that user has some faults
-        if (pass == null) return -1;
+        if (pass == null) return false;
 
-        if ((!pass.equals(oldPass))|| pass.equals(newPass)) return -1;
+        if ((!pass.equals(oldPass))|| pass.equals(newPass)) return false;
         // if the inputted oldPass is incorrect or the new pass and old pass is the same
+        String email =  user.getEmail();
+        String phone =  user.getPhone();
         String Usertype = "1";
         String username =  user.getUsername();
+        String addr =  user.getAddress();
         String sqlUpdate = "Update tblUser\n" +
                 "set U_pass = " + "\'" + newPass + "\'" +
                 "\nwhere Username = " + "\'" +  username + "\'";
@@ -213,9 +218,9 @@ public class DBHandler {
         catch(SQLException e){
             e.printStackTrace();
         }
-        return 1;
+        return true;
     }
-    
+
     public boolean ChangeInformation (UserAccount user, String oldPass, UserAccount newInfo) throws SQLException {
         // if the inputted oldPass is incorrect
         String pass = getPass(user.getUsername());
@@ -227,7 +232,7 @@ public class DBHandler {
                 "U_address = ?,\n" +
                 "U_image = ?\n" +
                 "where Username = ?";
-         PreparedStatement sql = conn.prepareStatement(sqlUpdate);
+        PreparedStatement sql = conn.prepareStatement(sqlUpdate);
         try{
 
             sql.setString(1, newInfo.getEmail());
@@ -251,6 +256,5 @@ public class DBHandler {
         }
     }
 
+//    public boolean insertOrder ()
 }
-
-
