@@ -81,6 +81,10 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
                 response.arg1 = -1;
                 response.obj = "Phone fault";
             }
+            else if (serverMessage.getResponseCode() == 5) {
+                response.arg1 = -1;
+                response.obj = "Unexpected error";
+            }
             response.sendToTarget();
         }
         if (serverMessage.getOpcode() == 3) {
