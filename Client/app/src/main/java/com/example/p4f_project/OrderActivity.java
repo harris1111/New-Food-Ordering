@@ -1,6 +1,7 @@
 package com.example.p4f_project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +15,14 @@ import java.util.ArrayList;
 public class OrderActivity extends AppCompatActivity {
     ArrayList<Product> foodList;
     ImageView backbtt;
+    SharedPreferences prefGet;
+    SharedPreferences.Editor prefGetEdit;
     Button confirmPurchase;
+    String userName,userAddress,userPhone;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
-        retrieveCartList();
+
         findID();
         backbtt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +38,21 @@ public class OrderActivity extends AppCompatActivity {
                 // nhay qua man hinh ket qua thanh cong / that bai
             }
         });
+        // Get SharedPrereferences
+        prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
+        prefGetEdit = prefGet.edit();
+        getUserInform();
+        retrieveCartList();
     }
     private void findID(){
          backbtt=(ImageView) findViewById(R.id.back2cart);
          confirmPurchase= (Button) findViewById(R.id.Confirm);
     }
-
+    private void getUserInform(){
+         userName=prefGet.getString("Username", null);
+         userAddress=prefGet.getString("UserAddress", null);
+         userPhone=prefGet.getString("UserPhone", null);
+    }
     private void retrieveCartList() {
         Intent intent = getIntent();
         ArrayList<Product> newList = intent.getParcelableArrayListExtra("cart_list");
@@ -61,7 +74,7 @@ public class OrderActivity extends AppCompatActivity {
                 }
             }
             TextView detailBox=(TextView) findViewById(R.id.Orderdetails);
-            detailBox.setText("Total: "+String.valueOf(total)+" VND");
+            detailBox.setText("Total: "+String.valueOf(total)+" VND\nName: "+userName+"\nAddress: "+userAddress+"\nPhone: "+userPhone);
         }
     }
 }
