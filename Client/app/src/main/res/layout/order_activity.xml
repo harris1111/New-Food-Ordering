@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cbg"
+            android:id="@+id/cartbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0">
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/back"
+                android:id="@+id/back2main"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentLeft="true"
+                tools:ignore="VectorDrawableCompat"/>
+    </RelativeLayout>
+    <TextView
+            android:text="Order"
+            android:textSize="40dp"
+            android:textStyle="italic"
+            android:textColor="#434343"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/textView9"
+            android:fontFamily="@font/aladin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.497"/>
+    <ListView
+            android:id="@+id/listView"
+            android:layout_width="414dp"
+            android:layout_height="547dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cartbar" android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.457"/>
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/black"
+          android:layout_marginTop="24dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintTop_toBottomOf="@id/listView"
+          android:id="@+id/line"/>
+    <TextView android:layout_width="match_parent" android:layout_height="170dp"
+              android:id="@+id/textView6" app:layout_constraintStart_toStartOf="parent"
+              android:text="Details here"
+              app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/line"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

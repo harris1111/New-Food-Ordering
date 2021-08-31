@@ -312,15 +312,17 @@
                    android:layout_marginTop="20dp" android:layout_marginEnd="4dp"
                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView4"/>
 
-        <Button android:layout_width="99dp" android:layout_height="58dp"
+        <Button android:layout_width="match_parent" android:layout_height="58dp"
                 android:background="#ffdde1"
                 android:text="Cart"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"
+                android:gravity="center"
                 android:fontFamily="@font/alice"
                 android:id="@+id/CartButton"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/addToCart4"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
