@@ -8,7 +8,6 @@
 
     <ImageView android:layout_width="150dp"
                android:layout_height="150dp"
-
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintHorizontal_bias="0.0"
@@ -21,7 +20,7 @@
             android:textColor="@color/black"
             android:textStyle="bold|italic"
             android:id="@+id/item_name"
-
+            android:paddingLeft="10dp"
             app:layout_constraintStart_toEndOf="@+id/itemImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.043"
@@ -30,6 +29,7 @@
     <TextView
             android:maxEms="15"
             android:text="des"
+            android:paddingLeft="10dp"
             android:textSize="18dp"
             android:textColor="@color/black"
             android:textStyle="italic"
@@ -45,6 +45,7 @@
 
     <TextView
             android:text="Total: "
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/total"
@@ -55,6 +56,7 @@
             android:layout_marginTop="4dp"/>
     <TextView
             android:text="Amount: "
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/amount"
