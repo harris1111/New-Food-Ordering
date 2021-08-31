@@ -57,6 +57,11 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                     startActivity(homeIntent);
                     finish();
                 }
+                if(id==R.id.n_search){
+                    Intent searchIntent= new Intent(MainPage.this, SearchActivity.class);
+                    startActivity(searchIntent);
+                    finish();
+                }
                 return true;
             }
         });
@@ -76,7 +81,7 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                     startActivity(cartIntent);
                 }
                 if(id==R.id.action_orders){
-                    Intent orderIntent=new Intent(MainPage.this, order.class);
+                    Intent orderIntent=new Intent(MainPage.this, OrderActivity.class);
                     startActivity(orderIntent);
                 }
                 return true;

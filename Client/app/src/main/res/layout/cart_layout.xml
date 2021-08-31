@@ -51,19 +51,22 @@
         <TextView android:layout_width="210dp" android:layout_height="50dp"
                   android:text="Total price:"
                   android:textSize="20dp"
+                  android:textColor="@color/black"
+                  android:gravity="center"
                   android:background="@drawable/textviewshape"
-                  app:layout_constraintStart_toStartOf="parent" android:id="@+id/textView5"
+                  app:layout_constraintStart_toStartOf="parent" android:id="@+id/totalPrice"
                   app:layout_constraintBottom_toBottomOf="parent" android:layout_alignParentStart="true"
                   android:layout_marginStart="-3dp"/>
         <Button
                 android:layout_width="205dp" android:layout_height="50dp"
+                android:id="@+id/orderButton"
                 android:text="Order"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:onClick="onClick"
                 android:background="@drawable/buttonshape"
                 android:fontFamily="@font/alice" app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/totalPrice"
                 app:layout_constraintHorizontal_bias="0.826" android:layout_alignParentEnd="true"
                 android:layout_marginEnd="-1dp"/>
     </RelativeLayout>

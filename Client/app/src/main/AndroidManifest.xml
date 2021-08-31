@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".FoodMenu">
         </activity>
-        <activity android:name=".order">
+        <activity android:name=".OrderActivity">
         </activity>
         <activity android:name=".history">
         </activity>

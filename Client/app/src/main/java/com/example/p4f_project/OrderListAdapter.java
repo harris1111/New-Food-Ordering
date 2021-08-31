@@ -12,12 +12,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-public class CustomListAdapter extends BaseAdapter{
+public class OrderListAdapter extends BaseAdapter{
     private List<Product> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public CustomListAdapter(Context aContext,  List<Product> listData) {
+    public OrderListAdapter(Context aContext,  List<Product> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -45,13 +45,12 @@ public class CustomListAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView==null){
-            convertView = layoutInflater.inflate(R.layout.cart_list_view, null);
+            convertView = layoutInflater.inflate(R.layout.activity_order_list_view, null);
             holder = new ViewHolder();
-            holder.foodImg = (ImageView) convertView.findViewById(R.id.itemImg);
-            holder.foodName = (TextView) convertView.findViewById(R.id.item_name);
-            holder.foodDes = (TextView) convertView.findViewById(R.id.itemDes);
-            holder.foodPrice = (TextView) convertView.findViewById(R.id.total);
-            holder.foodAmount = (TextView) convertView.findViewById(R.id.amount);
+            holder.foodImg = (ImageView) convertView.findViewById(R.id.orderdItemImg);
+            holder.foodName = (TextView) convertView.findViewById(R.id.ordered_item_name);
+            holder.foodPrice = (TextView) convertView.findViewById(R.id.Orderedtotal);
+            holder.foodAmount = (TextView) convertView.findViewById(R.id.Orderedamount);
             convertView.setTag(holder);
         }
         else {
@@ -59,7 +58,6 @@ public class CustomListAdapter extends BaseAdapter{
         }
         Product product= this.listData.get(position);
         holder.foodName.setText(product.getName());
-        holder.foodDes.setText(product.getDes());
         holder.foodPrice.setText("Price: "+String.valueOf(product.getPrice() * product.getAmount())+" VND");
         holder.foodAmount.setText("Amount: "+String.valueOf(product.getAmount()));
         holder.foodImg.setImageResource(getImageID(product.getID()));
@@ -75,7 +73,6 @@ public class CustomListAdapter extends BaseAdapter{
     private class ViewHolder {
         ImageView foodImg;
         TextView foodName;
-        TextView foodDes;
         TextView foodPrice;
         TextView foodAmount;
     }

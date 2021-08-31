@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.*;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,13 +16,16 @@ import java.util.List;
 
 public class cart extends AppCompatActivity {
     ImageView back;
+    Button orderButton;
     public static Handler cartScreenHandler = null;
     ArrayList<Product> foodList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_layout);
-        back=(ImageView) findViewById(R.id.back2main);
+        findID();
+
+        // back to food menu click
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,52 +34,41 @@ public class cart extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-        // Restore old cart
-//        if (savedInstanceState != null) {
-//            foodList = savedInstanceState.getParcelableArrayList("cart_list");
-//            Log.d("CHECK: ", "RESTORING FOOD CART ON CREATE");
-//            if (foodList != null)
-//                Log.d("CHECK: ", "FOOD CART IS NOT NULL");
-//            else Log.d("CHECK: ", "FOOD CART IS NULL");
-//        }
+        // foward to Order screen
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent orderIntent=new Intent(cart.this,OrderActivity.class);
+                orderIntent.putParcelableArrayListExtra("cart_list", foodList);
+                startActivity(orderIntent);
+            }
+        });
         Intent intent = getIntent();
         ArrayList<Product> newList = intent.getParcelableArrayListExtra("food_list");
         if (foodList == null) {
             foodList = newList;
             newList = null;
         }
-//        else {
-//            for (Product item : newList) {
-//                boolean exist = false;
-//                for (int i = 0; i < foodList.size(); ++i) {
-//                    if (foodList.get(i).getID().equals(item.getID())) {
-//                        exist = true;
-//                        foodList.get(i).increaseAmount(item.getAmount());
-//                        break;
-//                    }
-//                }
-//                if (!exist) {
-//                    foodList.add(item);
-//                }
-//            }
-//        }
+
         if(foodList!=null){
+            TextView totalbox;
             final ListView listView = (ListView) findViewById(R.id.listView);
             listView.setAdapter(new CustomListAdapter(this,foodList));
+            // Iterate list view to calculate total price
+            long total = 0;
+            for (int i = 0; i < listView.getCount(); ++i) {
+                View v = listView.getAdapter().getView(i, null, null);
+                if (v != null) {
+                    totalbox = (TextView) v.findViewById(R.id.total);
+                    total += Integer.parseInt(totalbox.getText().toString().substring(7, totalbox.getText().length()-4));
+                }
+            }
+            TextView totalpriceBox=(TextView) findViewById(R.id.totalPrice);
+            totalpriceBox.setText("Total: "+String.valueOf(total)+" VND");
         }
     }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelableArrayList("cart_list", foodList);
-        Log.d("CHECK: ", "SAVING FOOD CART");
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        foodList = savedInstanceState.getParcelableArrayList("cart_list");
-        Log.d("CHECK: ", "RESTORING FOOD CART ON RESTORE");
+    private void findID(){
+        back=(ImageView) findViewById(R.id.back2main);
+        orderButton=(Button) findViewById(R.id.orderButton);
     }
 }

@@ -80,7 +80,6 @@ public class Product implements Parcelable {
         Des = des;
         Price = price;
     }
-
     @Override
     public int describeContents() {
         return 0;
