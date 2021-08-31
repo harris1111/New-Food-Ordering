@@ -37,17 +37,19 @@
     <ListView
             android:id="@+id/listView"
             android:layout_width="412dp"
-            android:layout_height="566dp"
+            android:layout_height="600dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cartbar" />
+            app:layout_constraintTop_toBottomOf="@+id/cartbar"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout3"/>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="50dp"
                     android:gravity="bottom"
                     android:background="@drawable/mintbg" app:layout_constraintBottom_toBottomOf="parent"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/relativeLayout3">
         <TextView android:layout_width="210dp" android:layout_height="50dp"
                   android:text="Total price:"
                   android:textSize="20dp"
