@@ -54,7 +54,7 @@ public class DBHandler {
         ResultSet rs = st.executeQuery();
         try{
             // if username is invalid
-            if (!rs.first())
+            if (!rs.next())
                 Result.setReCode(1);
                 // if password is incorrect
             else if (!user.getPassword().equals(rs.getString("U_pass")))

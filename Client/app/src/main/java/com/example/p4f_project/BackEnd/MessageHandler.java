@@ -8,14 +8,13 @@ import com.example.p4f_project.LoginFragment;
 import com.example.p4f_project.RegisterFragment;
 import com.example.p4f_project.p4f_project;
 import com.example.p4f_project.protocols.InfoResponse;
-import com.example.p4f_project.protocols.LoginInfo;
 import com.example.p4f_project.protocols.ServerMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.sql.SQLOutput;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 
 public class MessageHandler extends ChannelInboundHandlerAdapter {
     @Override
