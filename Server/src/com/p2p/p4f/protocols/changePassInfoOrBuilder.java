@@ -44,14 +44,14 @@ public interface changePassInfoOrBuilder extends
       getNewPassBytes();
 
   /**
-   * <code>string newPassConfrim = 4;</code>
-   * @return The newPassConfrim.
+   * <code>string newPassConfirm = 4;</code>
+   * @return The newPassConfirm.
    */
-  java.lang.String getNewPassConfrim();
+  java.lang.String getNewPassConfirm();
   /**
-   * <code>string newPassConfrim = 4;</code>
-   * @return The bytes for newPassConfrim.
+   * <code>string newPassConfirm = 4;</code>
+   * @return The bytes for newPassConfirm.
    */
   com.google.protobuf.ByteString
-      getNewPassConfrimBytes();
+      getNewPassConfirmBytes();
 }

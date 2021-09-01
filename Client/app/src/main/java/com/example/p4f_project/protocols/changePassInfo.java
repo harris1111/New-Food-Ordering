@@ -19,7 +19,7 @@ private static final long serialVersionUID = 0L;
     username_ = "";
     oldPass_ = "";
     newPass_ = "";
-    newPassConfrim_ = "";
+    newPassConfirm_ = "";
   }
 
   @java.lang.Override
@@ -73,7 +73,7 @@ private static final long serialVersionUID = 0L;
           case 34: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            newPassConfrim_ = s;
+            newPassConfirm_ = s;
             break;
           }
           default: {
@@ -222,38 +222,38 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int NEWPASSCONFRIM_FIELD_NUMBER = 4;
-  private volatile java.lang.Object newPassConfrim_;
+  public static final int NEWPASSCONFIRM_FIELD_NUMBER = 4;
+  private volatile java.lang.Object newPassConfirm_;
   /**
-   * <code>string newPassConfrim = 4;</code>
-   * @return The newPassConfrim.
+   * <code>string newPassConfirm = 4;</code>
+   * @return The newPassConfirm.
    */
   @java.lang.Override
-  public java.lang.String getNewPassConfrim() {
-    java.lang.Object ref = newPassConfrim_;
+  public java.lang.String getNewPassConfirm() {
+    java.lang.Object ref = newPassConfirm_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      newPassConfrim_ = s;
+      newPassConfirm_ = s;
       return s;
     }
   }
   /**
-   * <code>string newPassConfrim = 4;</code>
-   * @return The bytes for newPassConfrim.
+   * <code>string newPassConfirm = 4;</code>
+   * @return The bytes for newPassConfirm.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getNewPassConfrimBytes() {
-    java.lang.Object ref = newPassConfrim_;
+      getNewPassConfirmBytes() {
+    java.lang.Object ref = newPassConfirm_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      newPassConfrim_ = b;
+      newPassConfirm_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -283,8 +283,8 @@ private static final long serialVersionUID = 0L;
     if (!getNewPassBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, newPass_);
     }
-    if (!getNewPassConfrimBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, newPassConfrim_);
+    if (!getNewPassConfirmBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, newPassConfirm_);
     }
     unknownFields.writeTo(output);
   }
@@ -304,8 +304,8 @@ private static final long serialVersionUID = 0L;
     if (!getNewPassBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, newPass_);
     }
-    if (!getNewPassConfrimBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, newPassConfrim_);
+    if (!getNewPassConfirmBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, newPassConfirm_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -328,8 +328,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getOldPass())) return false;
     if (!getNewPass()
         .equals(other.getNewPass())) return false;
-    if (!getNewPassConfrim()
-        .equals(other.getNewPassConfrim())) return false;
+    if (!getNewPassConfirm()
+        .equals(other.getNewPassConfirm())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -347,8 +347,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getOldPass().hashCode();
     hash = (37 * hash) + NEWPASS_FIELD_NUMBER;
     hash = (53 * hash) + getNewPass().hashCode();
-    hash = (37 * hash) + NEWPASSCONFRIM_FIELD_NUMBER;
-    hash = (53 * hash) + getNewPassConfrim().hashCode();
+    hash = (37 * hash) + NEWPASSCONFIRM_FIELD_NUMBER;
+    hash = (53 * hash) + getNewPassConfirm().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -488,7 +488,7 @@ private static final long serialVersionUID = 0L;
 
       newPass_ = "";
 
-      newPassConfrim_ = "";
+      newPassConfirm_ = "";
 
       return this;
     }
@@ -519,7 +519,7 @@ private static final long serialVersionUID = 0L;
       result.username_ = username_;
       result.oldPass_ = oldPass_;
       result.newPass_ = newPass_;
-      result.newPassConfrim_ = newPassConfrim_;
+      result.newPassConfirm_ = newPassConfirm_;
       onBuilt();
       return result;
     }
@@ -580,8 +580,8 @@ private static final long serialVersionUID = 0L;
         newPass_ = other.newPass_;
         onChanged();
       }
-      if (!other.getNewPassConfrim().isEmpty()) {
-        newPassConfrim_ = other.newPassConfrim_;
+      if (!other.getNewPassConfirm().isEmpty()) {
+        newPassConfirm_ = other.newPassConfirm_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -841,78 +841,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object newPassConfrim_ = "";
+    private java.lang.Object newPassConfirm_ = "";
     /**
-     * <code>string newPassConfrim = 4;</code>
-     * @return The newPassConfrim.
+     * <code>string newPassConfirm = 4;</code>
+     * @return The newPassConfirm.
      */
-    public java.lang.String getNewPassConfrim() {
-      java.lang.Object ref = newPassConfrim_;
+    public java.lang.String getNewPassConfirm() {
+      java.lang.Object ref = newPassConfirm_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        newPassConfrim_ = s;
+        newPassConfirm_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string newPassConfrim = 4;</code>
-     * @return The bytes for newPassConfrim.
+     * <code>string newPassConfirm = 4;</code>
+     * @return The bytes for newPassConfirm.
      */
     public com.google.protobuf.ByteString
-        getNewPassConfrimBytes() {
-      java.lang.Object ref = newPassConfrim_;
+        getNewPassConfirmBytes() {
+      java.lang.Object ref = newPassConfirm_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        newPassConfrim_ = b;
+        newPassConfirm_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string newPassConfrim = 4;</code>
-     * @param value The newPassConfrim to set.
+     * <code>string newPassConfirm = 4;</code>
+     * @param value The newPassConfirm to set.
      * @return This builder for chaining.
      */
-    public Builder setNewPassConfrim(
+    public Builder setNewPassConfirm(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      newPassConfrim_ = value;
+      newPassConfirm_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string newPassConfrim = 4;</code>
+     * <code>string newPassConfirm = 4;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNewPassConfrim() {
+    public Builder clearNewPassConfirm() {
       
-      newPassConfrim_ = getDefaultInstance().getNewPassConfrim();
+      newPassConfirm_ = getDefaultInstance().getNewPassConfirm();
       onChanged();
       return this;
     }
     /**
-     * <code>string newPassConfrim = 4;</code>
-     * @param value The bytes for newPassConfrim to set.
+     * <code>string newPassConfirm = 4;</code>
+     * @param value The bytes for newPassConfirm to set.
      * @return This builder for chaining.
      */
-    public Builder setNewPassConfrimBytes(
+    public Builder setNewPassConfirmBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      newPassConfrim_ = value;
+      newPassConfirm_ = value;
       onChanged();
       return this;
     }

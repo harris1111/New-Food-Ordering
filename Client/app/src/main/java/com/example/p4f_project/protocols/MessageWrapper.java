@@ -82,7 +82,7 @@ public final class MessageWrapper {
       "\005email\030\003 \001(\t\022\r\n\005phone\030\004 \001(\t\022\017\n\007address\030\005" +
       " \001(\t\"\\\n\016changePassInfo\022\020\n\010username\030\001 \001(\t" +
       "\022\017\n\007oldPass\030\002 \001(\t\022\017\n\007newPass\030\003 \001(\t\022\026\n\016ne" +
-      "wPassConfrim\030\004 \001(\t\"s\n\004Food\022\016\n\006foodID\030\001 \001" +
+      "wPassConfirm\030\004 \001(\t\"s\n\004Food\022\016\n\006foodID\030\001 \001" +
       "(\t\022\020\n\003des\030\002 \001(\tH\000\210\001\001\022\025\n\010foodName\030\003 \001(\tH\001" +
       "\210\001\001\022\r\n\005price\030\004 \001(\005\022\016\n\006amount\030\005 \001(\005B\006\n\004_d" +
       "esB\013\n\t_foodName\"F\n\rorderResponse\022\024\n\007orde" +
@@ -133,7 +133,7 @@ public final class MessageWrapper {
     internal_static_p4f_protocols_changePassInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_p4f_protocols_changePassInfo_descriptor,
-        new java.lang.String[] { "Username", "OldPass", "NewPass", "NewPassConfrim", });
+        new java.lang.String[] { "Username", "OldPass", "NewPass", "NewPassConfirm", });
     internal_static_p4f_protocols_Food_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_p4f_protocols_Food_fieldAccessorTable = new
