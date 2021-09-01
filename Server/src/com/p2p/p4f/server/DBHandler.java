@@ -274,11 +274,15 @@ public class DBHandler {
         String orderID = username + day + resID;
         orderResponse.Builder Result = orderResponse.newBuilder();
         Result.setOrderID(orderID);
-
-        PreparedStatement OrderSt = conn.prepareStatement(
+        String sample = "Insert into tblOrder_details(Order_ID, Food_ID, Amount, Price) values(?,?,?,?)\n";
+        String Val = ",(?,?,?,?)";
+        for (int i = 1; i < list.size(); i++){
+            sample+=(Val);
+        }
+            PreparedStatement OrderSt = conn.prepareStatement(
                 "Insert into tblOrder(Order_ID, Customer, Total, Order_day, Restaurant_ID) values(?,?,?,?,?)");
         PreparedStatement ODSt = conn.prepareStatement(
-                "Insert into tblOrder_details(Order_ID, Food_ID, Amount, Price) values(?,?,?,?)");
+                sample);
         try{
             OrderSt.setString(1,orderID);
             OrderSt.setString(2,username);
@@ -286,14 +290,16 @@ public class DBHandler {
             OrderSt.setString(4,day);
             OrderSt.setString(5,resID);
             OrderSt.executeUpdate();
-
+            int ite = 0;
             for (int i = 0; i < list.size(); i++) {
-                ODSt.setString(1,orderID);
-                ODSt.setString(2,list.get(1).getFoodID());
-                ODSt.setString(3,Integer.toString(list.get(1).getAmount()));
-                ODSt.setString(4,Integer.toString(list.get(1).getPrice()));
-                ODSt.executeUpdate();
+                System.out.println(orderID + " " + list.get(i).getFoodID() + " " + Integer.toString(list.get(i).getAmount())
+                + " " + Integer.toString(list.get(i).getPrice()) + "\n");
+                ODSt.setString(++ite,orderID);
+                ODSt.setString(++ite,list.get(i).getFoodID());
+                ODSt.setString(++ite,Integer.toString(list.get(i).getAmount()));
+                ODSt.setString(++ite,Integer.toString(list.get(i).getPrice()));
             }
+            ODSt.executeUpdate();
             Result.setOrderResult(0);
         }catch(SQLException e){
             e.printStackTrace();
