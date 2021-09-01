@@ -333,7 +333,7 @@ public class ContainerClient implements Runnable {
         }
 
         // check if newPassword different from newPasswordConfirm
-        if (!changePassword.getNewPass().equals(changePassword.getNewPassConfrim())) {
+        if (!changePassword.getNewPass().equals(changePassword.getNewPassConfirm())) {
             return 3;
         }
 

@@ -29,6 +29,7 @@ message changePassInfo {
   string username = 1;
   string oldPass = 2;
   string newPass = 3;
+  string newPassConfirm = 4;
 }
 
 message Food {
