@@ -17,6 +17,8 @@
             android:theme="@style/Theme.P4F_Project">
         <activity android:name=".MainPage">
         </activity>
+        <activity android:name=".SuccessScreen">
+        </activity>
         <activity android:name=".cart">
         </activity>
         <activity android:name=".SearchActivity">

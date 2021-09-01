@@ -41,7 +41,6 @@ public class OrderActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                 //nhay qua man hinh ket qua thanh cong / that bai
                 prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
                 Order.Builder order = Order.newBuilder();
                 order.setUsername(prefGet.getString("Username", null))
@@ -59,15 +58,23 @@ public class OrderActivity extends AppCompatActivity {
                 msg.sendToTarget();
             }
         });
+
+
         // Setup the handler for receiving order result
         orderActivityHandler = new Handler(Looper.myLooper()) {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 if (msg.what == 4) {
-                    // Switch to Order Result screen
-                    Toast toast = Toast.makeText(p4f_project.getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
-                    toast.show();
+                    if (msg.arg1 == 1) {
+                        Intent confirmIntent = new Intent(OrderActivity.this, SuccessScreen.class);
+                        confirmIntent.putExtra("successString",(String) msg.obj);
+                        startActivity(confirmIntent);
+                        finish();
+                    } else {
+                        Toast toast = Toast.makeText(p4f_project.getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             }
         };
