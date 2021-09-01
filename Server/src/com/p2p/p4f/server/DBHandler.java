@@ -263,6 +263,8 @@ public class DBHandler {
         }
         return sum;
     }
+    
+    // Result: 0 = Success, 1 = Failed
     public orderResponse insertOrder (Order o) throws SQLException {
         String username = o.getUsername();
         String resID = o.getResID();
@@ -274,7 +276,7 @@ public class DBHandler {
         Result.setOrderID(orderID);
 
         PreparedStatement OrderSt = conn.prepareStatement(
-                "Insert into tblOrder(Order_ID, Customer, Total, Oder_day, Restaurant_ID) values(?,?,?,?,?)");
+                "Insert into tblOrder(Order_ID, Customer, Total, Order_day, Restaurant_ID) values(?,?,?,?,?)");
         PreparedStatement ODSt = conn.prepareStatement(
                 "Insert into tblOrder_details(Order_ID, Food_ID, Amount, Price) values(?,?,?,?)");
         try{
