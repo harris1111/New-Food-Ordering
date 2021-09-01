@@ -3,12 +3,10 @@ package com.example.p4f_project.BackEnd;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Message;
-import com.example.p4f_project.ChangePassword;
-import com.example.p4f_project.LoginFragment;
-import com.example.p4f_project.RegisterFragment;
-import com.example.p4f_project.p4f_project;
+import com.example.p4f_project.*;
 import com.example.p4f_project.protocols.InfoResponse;
 import com.example.p4f_project.protocols.ServerMessage;
+import com.example.p4f_project.protocols.orderResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -60,7 +58,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
             }
             response.sendToTarget();
         }
-        if (serverMessage.getOpcode() == 2) {
+        else if (serverMessage.getOpcode() == 2) {
             Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
             response.what = 2;
             System.out.println("responseCode: " + serverMessage.getResponseCode());
@@ -86,7 +84,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
             }
             response.sendToTarget();
         }
-        if (serverMessage.getOpcode() == 3) {
+        else if (serverMessage.getOpcode() == 3) {
             Message response = Message.obtain(ChangePassword.changePasswordhandler);
             response.what = 3;
             if (serverMessage.getResponseCode() == 1) {
@@ -96,6 +94,20 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
             else if (serverMessage.getResponseCode() == -1) {
                 response.arg1 = -1;
                 response.obj = "Change Password Fail";
+            }
+            response.sendToTarget();
+        }
+        else if (serverMessage.getOpcode() == 4) {
+            Message response = Message.obtain(OrderActivity.orderActivityHandler);
+            response.what = 4;
+            orderResponse orderRes = serverMessage.getOrderRes();
+            if (orderRes.getOrderResult() == 0) {
+                response.arg1 = 1;
+                response.obj = "Your order has been received. The ID is: " + orderRes.getOrderID();
+            }
+            else {
+                response.arg1 = -1;
+                response.obj = "Order failed. Please try again later.";
             }
             response.sendToTarget();
         }

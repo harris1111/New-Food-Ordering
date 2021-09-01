@@ -81,6 +81,8 @@ public class ContainerClient implements Runnable {
                                 response = Message.obtain(RegisterFragment.registerFragmentHandler);
                             if (msg.what == 3)
                                 response = Message.obtain(Profile.profileHandler);
+                            if (msg.what == 4)
+                                response = Message.obtain(OrderActivity.orderActivityHandler);
                             response.what = -1; // Opcode for connection error
                             response.obj = "Unable to connect to server";
                             response.sendToTarget();
@@ -190,8 +192,6 @@ public class ContainerClient implements Runnable {
                         Order clientOrder = (Order) msg.obj;
                         clientMessage.setOpcode(4);
                         clientMessage.setOrder((Order) msg.obj);
-                        Log.d("Info order" , clientOrder.getUsername() + " " + clientOrder.getBuyDate()
-                                +  " " + clientOrder.getResID() + " " + clientOrder.getFoodListCount());
                     }
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(clientMessage.build());
