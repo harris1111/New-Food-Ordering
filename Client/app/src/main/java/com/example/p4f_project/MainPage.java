@@ -107,21 +107,25 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 res1Intent.putExtra("resID", "0001");
                 startActivity(res1Intent);
                 finish();
+                break;
             case R.id.res2:
                 Intent res2Intent= new Intent(MainPage.this,FoodMenu.class);
                 res2Intent.putExtra("resID","0002");
                 startActivity(res2Intent);
                 finish();
+                break;
             case R.id.res3:
                 Intent res3Intent= new Intent(MainPage.this,FoodMenu.class);
                 res3Intent.putExtra("resID","0003");
                 startActivity(res3Intent);
                 finish();
+                break;
             case R.id.res4:
                 Intent res4Intent= new Intent(MainPage.this,FoodMenu.class);
                 res4Intent.putExtra("resID","0004");
                 startActivity(res4Intent);
                 finish();
+                break;
         }
     }
 
