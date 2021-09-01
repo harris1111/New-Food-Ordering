@@ -73,7 +73,8 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 changePassInfo changeInfo = changePassInfo.newBuilder()
                         .setUsername(profile_name.getText().toString())
                         .setOldPass(oldPass.getText().toString())
-                        .setNewPass(newPass.getText().toString()).build();
+                        .setNewPass(newPass.getText().toString())
+                        .setNewPass(newPassConfirm.getText().toString()).build();
                 Message msg = Message.obtain(ContainerClient.handler);
                 msg.what = 3;
                 msg.obj = changeInfo;

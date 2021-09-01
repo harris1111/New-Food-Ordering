@@ -88,19 +88,39 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        imageView1=(ImageView) findViewById(R.id.imageView1);
-        imageView2=(ImageView) findViewById(R.id.imageView2);
-        imageView3=(ImageView) findViewById(R.id.imageView3);
-        imageView4=(ImageView) findViewById(R.id.imageView4);
+        imageView1=(ImageView) findViewById(R.id.res1);
+        imageView2=(ImageView) findViewById(R.id.res2);
+        imageView3=(ImageView) findViewById(R.id.res3);
+        imageView4=(ImageView) findViewById(R.id.res4);
         imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
+        imageView4.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.imageView1:
-                Intent newIntent= new Intent(MainPage.this,FoodMenu.class);
-                startActivity(newIntent);
+            case R.id.res1:
+                Intent res1Intent= new Intent(MainPage.this,FoodMenu.class);
+                res1Intent.putExtra("resID", "0001");
+                startActivity(res1Intent);
+                finish();
+            case R.id.res2:
+                Intent res2Intent= new Intent(MainPage.this,FoodMenu.class);
+                res2Intent.putExtra("resID","0002");
+                startActivity(res2Intent);
+                finish();
+            case R.id.res3:
+                Intent res3Intent= new Intent(MainPage.this,FoodMenu.class);
+                res3Intent.putExtra("resID","0003");
+                startActivity(res3Intent);
+                finish();
+            case R.id.res4:
+                Intent res4Intent= new Intent(MainPage.this,FoodMenu.class);
+                res4Intent.putExtra("resID","0004");
+                startActivity(res4Intent);
                 finish();
         }
     }

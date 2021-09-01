@@ -16,6 +16,7 @@ import java.util.List;
 
 public class cart extends AppCompatActivity {
     ImageView back;
+    String rID;
     Button orderButton;
     public static Handler cartScreenHandler = null;
     ArrayList<Product> foodList;
@@ -30,6 +31,7 @@ public class cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent=new Intent(cart.this,FoodMenu.class);
+                myIntent.putExtra("resID",rID);
                 myIntent.putParcelableArrayListExtra("cart_list", foodList);
                 startActivity(myIntent);
             }
@@ -39,12 +41,14 @@ public class cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent orderIntent=new Intent(cart.this,OrderActivity.class);
+                orderIntent.putExtra("resID",rID);
                 orderIntent.putParcelableArrayListExtra("cart_list", foodList);
                 startActivity(orderIntent);
             }
         });
         Intent intent = getIntent();
         ArrayList<Product> newList = intent.getParcelableArrayListExtra("food_list");
+        rID = intent.getStringExtra("resID");
         if (foodList == null) {
             foodList = newList;
             newList = null;

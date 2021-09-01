@@ -42,4 +42,16 @@ public interface changePassInfoOrBuilder extends
    */
   com.google.protobuf.ByteString
       getNewPassBytes();
+
+  /**
+   * <code>string newPassConfrim = 4;</code>
+   * @return The newPassConfrim.
+   */
+  java.lang.String getNewPassConfrim();
+  /**
+   * <code>string newPassConfrim = 4;</code>
+   * @return The bytes for newPassConfrim.
+   */
+  com.google.protobuf.ByteString
+      getNewPassConfrimBytes();
 }

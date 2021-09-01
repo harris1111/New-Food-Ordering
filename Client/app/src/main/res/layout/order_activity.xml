@@ -37,21 +37,22 @@
     <ListView
             android:id="@+id/orderListView"
             android:layout_width="412dp"
-            android:layout_height="566dp"
+            android:layout_height="500dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderbar"/>
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="70dp"
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="100dp"
                     app:layout_constraintBottom_toTopOf="@id/rltlButton">
-    <TextView android:layout_width="match_parent" android:layout_height="70dp"
-              android:id="@+id/Orderdetails" app:layout_constraintStart_toStartOf="parent"
-              android:text="Details here"
-              android:textColor="@color/black"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
-              tools:layout_editor_absoluteY="132dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="70dp"
+                  android:id="@+id/Orderdetails" app:layout_constraintStart_toStartOf="parent"
+                  android:text="Details here"
+                  android:textColor="@color/black"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.0"
+                  tools:layout_editor_absoluteY="132dp" android:layout_alignParentStart="true"
+                  android:layout_marginStart="0dp"/>
     </RelativeLayout>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="50dp"
                     android:gravity="bottom"

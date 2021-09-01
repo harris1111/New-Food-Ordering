@@ -129,7 +129,7 @@ public class ContainerClient implements Runnable {
                     }
                     if (msg.what == 2 ) {
                         Log.d("Vao msg.what == 2", " Thanh cong");
-                        int result = validateLoginInfo(((RegisterInfo)msg.obj).getUsername(), ((RegisterInfo)msg.obj).getPassword());
+                        int result = validateRegister((RegisterInfo) msg.obj);
                         if (result > 0) {
                             Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
                             response.what = 2;
@@ -139,13 +139,13 @@ public class ContainerClient implements Runnable {
                                     response.obj = "Username contains special character(s)";
                                     break;
                                 case 2:
-                                    response.obj = "Username must be at least 5 characters!";
+                                    response.obj = "There are some fields missing";
                                     break;
                                 case 3:
-                                    response.obj = "Username invalid!";
+                                    response.obj = "Phone number contains character";
                                     break;
                                 case 4:
-                                    response.obj = "Password invalid!";
+                                    response.obj = "Username must be at least 5 characters";
                                     break;
                                 case 5:
                                     response.obj = "Password must be at least 8 characters";
@@ -153,25 +153,45 @@ public class ContainerClient implements Runnable {
                             response.sendToTarget();
                             return;
                         }
-                        Log.d("Vao set clientMessage", " Thanh cong");
                         clientMessage.setOpcode(2);
                         clientMessage.setRegAcc((RegisterInfo) msg.obj);
-                        Log.d("Set clientMessage", " Thanh cong");
                     }
                     if (msg.what == 3) {
-                        Log.d("Vao msg.what == 3", " Thanh cong");
                         Message reponse = Message.obtain(ChangePassword.changePasswordhandler);
+                        int result = checkChangePassword((changePassInfo) msg.obj);
+                        if (result > 0) {
+                            Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
+                            response.what = 3;
+                            response.arg1 = -1;
+                            switch (result) {
+                                case 1:
+                                    response.obj = "New password must be different from old password ";
+                                    break;
+                                case 2:
+                                    response.obj = "Password must be at least 8 characters";
+                                    break;
+                                case 3:
+                                    response.obj = "New password and confirm password must be the same";
+                                    break;
+                                case 4:
+                                    response.obj = "New password contains username";
+                                    break;
+//                                case 5:
+//                                    response.obj = "Password must be at least 8 characters";
+                            }
+                            response.sendToTarget();
+                            return;
+                        }
                         clientMessage.setOpcode(3);
                         clientMessage.setChangeRes((changePassInfo) msg.obj);
-                        Log.d("Set ClientMessage ", "Thanh Cong");
                         reponse.sendToTarget();
                     }
                     if (msg.what == 4) {
-                        Log.d("Vao msg.what == 3" , "Thanh cong");
-                        Message reponse = Message.obtain(OrderActivity.orderActivityHandler);
+                        Order clientOrder = (Order) msg.obj;
                         clientMessage.setOpcode(4);
                         clientMessage.setOrder((Order) msg.obj);
-                        reponse.sendToTarget();
+                        Log.d("Info order" , clientOrder.getUsername() + " " + clientOrder.getBuyDate()
+                                +  " " + clientOrder.getResID() + " " + clientOrder.getFoodListCount());
                     }
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(clientMessage.build());
@@ -296,11 +316,11 @@ public class ContainerClient implements Runnable {
     }
 
 
-    private int checkChangePassword(changePassInfo changePassword,LoginInfo loginInfo){
+    private int checkChangePassword(changePassInfo changePassword) {
         boolean flag=true; // used to check change pass successfully
 
-        // check if old password is same with login password (old password)
-        if(changePassword.getOldPass()!=loginInfo.getPassword()){
+        // check if new password is same with old password (old password)
+        if(changePassword.getOldPass().equals(changePassword.getNewPass())){
             flag=false;
             return 1;
         }
@@ -311,27 +331,25 @@ public class ContainerClient implements Runnable {
             return 2;
         }
 
-        // check if nwe password != old password
-        if((changePassword.getNewPass()==changePassword.getOldPass())||(changePassword.getNewPass()==loginInfo.getPassword())){
-            flag=false;
+        // check if newPassword different from newPasswordConfirm
+        if (!changePassword.getNewPass().equals(changePassword.getNewPassConfrim())) {
             return 3;
         }
 
         // check if new password contains username or same with username
-        if(changePassword.getNewPass().contains(loginInfo.getUsername())|| changePassword.getNewPass()==loginInfo.getUsername()){
+        if(changePassword.getNewPass().contains(changePassword.getUsername())) {
             flag=false;
             return 4;
         }
 
         // check if all cases above passed and if new password != old password then change password successfully
-        if((changePassword.getOldPass()!=changePassword.getNewPass())&& flag){
+        if(!(changePassword.getOldPass().equals(changePassword.getNewPass()))&& flag){
             return 5;
         }
+        //Unexpected error
         return 0;
 
     }
-
-
     private int validateLoginInfo(String username, String password) {
         // Case username has special characters
         if(checkString(username)){

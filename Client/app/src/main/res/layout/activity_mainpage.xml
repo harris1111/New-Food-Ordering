@@ -61,7 +61,7 @@
                                         android:layout_width="130dp"
                                         android:layout_height="130dp"
                                         app:srcCompat="@drawable/tcf1"
-                                        android:id="@+id/imageView1"
+                                        android:id="@+id/res1"
                                         android:layout_marginTop="8dp"
                                         android:layout_alignParentTop="true"
                                         android:layout_alignParentEnd="true"
@@ -80,7 +80,7 @@
                                         android:textSize="16dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" android:id="@+id/res_name1"
-                                        android:layout_below="@id/imageView1" android:layout_marginTop="1dp"
+                                        android:layout_below="@id/res1" android:layout_marginTop="1dp"
                                         android:layout_centerHorizontal="true"/>
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
@@ -99,7 +99,7 @@
                                 <ImageView
                                         android:layout_width="130dp"
                                         android:layout_height="130dp" app:srcCompat="@drawable/tcf2"
-                                        android:id="@+id/imageView2" android:layout_marginTop="8dp"
+                                        android:id="@+id/res2" android:layout_marginTop="8dp"
                                         android:layout_alignParentTop="true"
                                         android:layout_alignParentEnd="true"
                                         android:layout_alignParentRight="true"
@@ -117,7 +117,7 @@
                                         android:textSize="16dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" android:id="@+id/res_name2"
-                                        android:layout_below="@id/imageView2" android:layout_marginTop="1dp"
+                                        android:layout_below="@id/res2" android:layout_marginTop="1dp"
                                         android:layout_centerHorizontal="true"/>
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
@@ -147,7 +147,7 @@
                                 <ImageView
                                         android:layout_width="130dp"
                                         android:layout_height="130dp" app:srcCompat="@drawable/tcf3"
-                                        android:id="@+id/imageView3" android:layout_marginTop="8dp"
+                                        android:id="@+id/res3" android:layout_marginTop="8dp"
                                         android:layout_alignParentTop="true"
                                         android:layout_alignParentEnd="true"
                                         android:layout_alignParentRight="true"
@@ -165,7 +165,7 @@
                                         android:textSize="16dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" android:id="@+id/res_name3"
-                                        android:layout_below="@id/imageView3" android:layout_marginTop="1dp"
+                                        android:layout_below="@id/res3" android:layout_marginTop="1dp"
                                         android:layout_centerHorizontal="true"/>
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
@@ -184,7 +184,7 @@
                                 <ImageView
                                         android:layout_width="130dp"
                                         android:layout_height="130dp" app:srcCompat="@drawable/tcf4"
-                                        android:id="@+id/imageView4" android:layout_marginTop="8dp"
+                                        android:id="@+id/res4" android:layout_marginTop="8dp"
                                         android:layout_alignParentTop="true"
                                         android:layout_alignParentEnd="true"
                                         android:layout_alignParentRight="true"
@@ -202,7 +202,7 @@
                                         android:textSize="16dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" android:id="@+id/res_name4"
-                                        android:layout_below="@id/imageView4" android:layout_marginTop="1dp"
+                                        android:layout_below="@id/res4" android:layout_marginTop="1dp"
                                         android:layout_centerHorizontal="true"/>
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>

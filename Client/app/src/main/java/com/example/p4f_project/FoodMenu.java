@@ -25,6 +25,7 @@ import java.util.List;
 public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
     ImageView add1,add2,add3,add4,backBtt;
     Button cartButton;
+    String rID;
     ArrayList<Boolean> tempArr=new ArrayList<Boolean>(Collections.nCopies(4,false));
     ArrayList<Product> foodList;
     ArrayList<Product> foodMenu=new ArrayList<Product>();
@@ -38,8 +39,9 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
         add4.setOnClickListener(this);
         backBtt.setOnClickListener(this);
         cartButton.setOnClickListener(this);
-        Intent cartReturn = getIntent();
-        foodList = cartReturn.getParcelableArrayListExtra("cart_list");
+        Intent intent = getIntent();
+        foodList = intent.getParcelableArrayListExtra("cart_list");
+        rID = intent.getStringExtra("resID");
         if (foodList == null) {
             foodList = new ArrayList<Product>();
         }
@@ -74,6 +76,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 e.printStackTrace();
             }
         }
+
     }
     public void findID(){
         add1=(ImageView) findViewById(R.id.addToCart1);
@@ -155,6 +158,7 @@ public class FoodMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.CartButton:
                 Intent cartIntent= new Intent(FoodMenu.this,cart.class);
+                cartIntent.putExtra("resID", rID);
                 cartIntent.putParcelableArrayListExtra("food_list", foodList);
                 startActivity(cartIntent);
 //                while (cart.cartScreenHandler == null) {

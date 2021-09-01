@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.p4f_project.BackEnd.ContainerClient;
+import com.example.p4f_project.protocols.Food;
 import com.example.p4f_project.protocols.Order;
 
+import java.lang.Process;
 import java.util.ArrayList;
 
 public class OrderActivity extends AppCompatActivity {
     ArrayList<Product> foodList;
     ImageView backbtt;
+    String rID;
     SharedPreferences prefGet;
     SharedPreferences.Editor prefGetEdit;
     Button confirmPurchase;
@@ -22,12 +26,12 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
-
         findID();
         backbtt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent backIntent= new Intent(OrderActivity.this,cart.class);
+                backIntent.putExtra("resID",rID);
                 backIntent.putParcelableArrayListExtra("food_list", foodList);
                 startActivity(backIntent);
             }
@@ -36,16 +40,22 @@ public class OrderActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                // nhay qua man hinh ket qua thanh cong / that bai
+                 //nhay qua man hinh ket qua thanh cong / that bai
                 prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
-                Order order = Order.newBuilder()
-                        .setUsername(prefGet.getString("Username", null))
-                        .setBuyDate((java.time.LocalDate.now().toString()))
-                        .setResID(String.valueOf(1))
-                        .setFoodList(1,)
-
-)
-
+                Order.Builder order = Order.newBuilder();
+                order.setUsername(prefGet.getString("Username", null))
+                    .setBuyDate((java.time.LocalDate.now().toString()))
+                    .setResID(rID);
+                for (Product item : foodList) {
+                    Food foodItem = Food.newBuilder().setFoodID(item.getID())
+                            .setAmount(item.getAmount())
+                            .setPrice(item.getPrice()).build();
+                    order.addFoodList(foodItem);
+                }
+                Message msg = Message.obtain(ContainerClient.handler);
+                msg.what = 4;
+                msg.obj = order.build();
+                msg.sendToTarget();
             }
         });
         // Get SharedPrereferences
@@ -66,6 +76,7 @@ public class OrderActivity extends AppCompatActivity {
     private void retrieveCartList() {
         Intent intent = getIntent();
         ArrayList<Product> newList = intent.getParcelableArrayListExtra("cart_list");
+        rID = intent.getStringExtra("resID");
         if (foodList == null) {
             foodList = newList;
             newList = null;
