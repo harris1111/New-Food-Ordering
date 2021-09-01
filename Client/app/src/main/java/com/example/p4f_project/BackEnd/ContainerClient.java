@@ -5,14 +5,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import androidx.annotation.NonNull;
-import com.example.p4f_project.ChangePassword;
-import com.example.p4f_project.LoginFragment;
-import com.example.p4f_project.Profile;
-import com.example.p4f_project.RegisterFragment;
-import com.example.p4f_project.protocols.ClientMessage;
-import com.example.p4f_project.protocols.LoginInfo;
-import com.example.p4f_project.protocols.RegisterInfo;
-import com.example.p4f_project.protocols.changePassInfo;
+import com.example.p4f_project.*;
+import com.example.p4f_project.protocols.*;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -170,6 +164,14 @@ public class ContainerClient implements Runnable {
                         clientMessage.setOpcode(3);
                         clientMessage.setChangeRes((changePassInfo) msg.obj);
                         Log.d("Set ClientMessage ", "Thanh Cong");
+                        reponse.sendToTarget();
+                    }
+                    if (msg.what == 4) {
+                        Log.d("Vao msg.what == 3" , "Thanh cong");
+                        Message reponse = Message.obtain(OrderActivity.orderActivityHandler);
+                        clientMessage.setOpcode(4);
+                        clientMessage.setOrder((Order) msg.obj);
+                        reponse.sendToTarget();
                     }
                     ChannelFuture lastWrite;
                     lastWrite = channel.writeAndFlush(clientMessage.build());

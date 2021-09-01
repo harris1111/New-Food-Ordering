@@ -2,13 +2,12 @@ package com.example.p4f_project;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
+import android.os.*;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.p4f_project.protocols.Order;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,7 @@ public class OrderActivity extends AppCompatActivity {
     SharedPreferences.Editor prefGetEdit;
     Button confirmPurchase;
     String userName,userAddress,userPhone;
+    public static Handler orderActivityHandler;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
@@ -33,9 +33,19 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
         confirmPurchase.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 // nhay qua man hinh ket qua thanh cong / that bai
+                prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
+                Order order = Order.newBuilder()
+                        .setUsername(prefGet.getString("Username", null))
+                        .setBuyDate((java.time.LocalDate.now().toString()))
+                        .setResID(String.valueOf(1))
+                        .setFoodList(1,)
+
+)
+
             }
         });
         // Get SharedPrereferences
