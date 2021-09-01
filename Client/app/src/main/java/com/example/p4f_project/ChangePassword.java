@@ -66,6 +66,10 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_confirmChangePass:
+                while(newPass.getText().toString()!=newPassConfirm.getText().toString()){
+                    Toast announce = Toast.makeText(getContext(), "New password does not match !", Toast.LENGTH_SHORT);
+                    announce.show();
+                }
                 changePassInfo changeInfo = changePassInfo.newBuilder()
                         .setUsername(profile_name.getText().toString())
                         .setOldPass(oldPass.getText().toString())
