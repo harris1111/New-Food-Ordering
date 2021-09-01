@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.*;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.p4f_project.BackEnd.ContainerClient;
@@ -58,6 +59,18 @@ public class OrderActivity extends AppCompatActivity {
                 msg.sendToTarget();
             }
         });
+        // Setup the handler for receiving order result
+        orderActivityHandler = new Handler(Looper.myLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 4) {
+                    // Switch to Order Result screen
+                    Toast toast = Toast.makeText(p4f_project.getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        };
         // Get SharedPrereferences
         prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
         prefGetEdit = prefGet.edit();
