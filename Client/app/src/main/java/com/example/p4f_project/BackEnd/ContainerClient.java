@@ -227,6 +227,20 @@ public class ContainerClient implements Runnable {
         return isSpecial;
     }
 
+    private boolean checkEmpty(String input){
+        if(input.length()==0){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePhoneNumber(String phone){
+        if(phone.matches("[0-9]+") &&phone.length()==10){
+            return true;
+        }
+        return false;
+    }
+
     private int validateLoginInfo(LoginInfo loginInfo) {
         // Case username has special characters
         if(checkString(loginInfo.getUsername())){
@@ -249,6 +263,73 @@ public class ContainerClient implements Runnable {
         }
         return 0;
     }
+
+    private int validateRegister(RegisterInfo registerInfo){
+        // check if Username contains special characters
+        if(checkString(registerInfo.getUsername())){
+            return 1;
+        }
+
+        // check if any field is missed
+        if(checkEmpty(registerInfo.getUsername())==false || checkEmpty(registerInfo.getPassword())==false ||
+                checkEmpty(registerInfo.getEmail())==false|| checkEmpty(registerInfo.getAddress())==false || checkEmpty(registerInfo.getPhone())==false){
+            return 2;
+        }
+
+        // check if a phone number is validate
+        if(validatePhoneNumber(registerInfo.getPhone())==false){
+            return 3;
+        }
+
+        // check if Username length is valid (>=5)
+        if((registerInfo.getUsername()).length()<5){
+            return 4;
+        }
+
+        // check if password length is valid (>=8)
+        if((registerInfo.getPassword()).length()<8){
+            return 5;
+        }
+        return 0;
+    }
+
+
+    private int checkChangePassword(changePassInfo changePassword,LoginInfo loginInfo){
+        boolean flag=true; // used to check change pass successfully
+
+        // check if old password is same with login password (old password)
+        if(changePassword.getOldPass()!=loginInfo.getPassword()){
+            flag=false;
+            return 1;
+        }
+
+        // check if new password length is valid (>=8)
+        if(changePassword.getNewPass().length()<8){
+            flag=false;
+            return 2;
+        }
+
+        // check if nwe password != old password
+        if((changePassword.getNewPass()==changePassword.getOldPass())||(changePassword.getNewPass()==loginInfo.getPassword())){
+            flag=false;
+            return 3;
+        }
+
+        // check if new password contains username or same with username
+        if(changePassword.getNewPass().contains(loginInfo.getUsername())|| changePassword.getNewPass()==loginInfo.getUsername()){
+            flag=false;
+            return 4;
+        }
+
+        // check if all cases above passed and if new password != old password then change password successfully
+        if((changePassword.getOldPass()!=changePassword.getNewPass())&& flag){
+            return 5;
+        }
+        return 0;
+
+    }
+
+
     private int validateLoginInfo(String username, String password) {
         // Case username has special characters
         if(checkString(username)){
