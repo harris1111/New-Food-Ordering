@@ -190,6 +190,7 @@ public class ContainerClient implements Runnable {
                     }
                     if (msg.what == 4) {
                         Order clientOrder = (Order) msg.obj;
+                        Log.d("Info order" , clientOrder.getUsername() + " " + clientOrder.getBuyDate() +  " " + clientOrder.getResID() + " " + clientOrder.getFoodListCount());
                         clientMessage.setOpcode(4);
                         clientMessage.setOrder((Order) msg.obj);
                     }

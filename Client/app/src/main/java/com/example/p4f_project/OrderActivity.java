@@ -45,7 +45,7 @@ public class OrderActivity extends AppCompatActivity {
                 prefGet = getApplicationContext().getSharedPreferences("user_info", MODE_PRIVATE);
                 Order.Builder order = Order.newBuilder();
                 order.setUsername(prefGet.getString("Username", null))
-                    .setBuyDate((java.time.LocalDate.now().toString()))
+                    .setBuyDate((java.time.LocalDateTime.now().toString()))
                     .setResID(rID);
                 for (Product item : foodList) {
                     Food foodItem = Food.newBuilder().setFoodID(item.getID())
