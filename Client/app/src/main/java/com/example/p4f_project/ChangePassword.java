@@ -41,13 +41,18 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == 1) {
-                    Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
-                    announce.show();
-                }
-                else if (msg.what == -1) {
-                    Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
-                    announce.show();
+                if (msg.what == 3 ) {
+                    if (msg.arg1 == 1) {
+                        Toast announce = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                        announce.show();
+                        Intent confirmIntent=new Intent(ChangePassword.this,Profile.class);
+                        startActivity(confirmIntent);
+                        finish();
+                    }
+                    else if (msg.arg1 == -1 ) {
+                        Toast announce1 = Toast.makeText(getContext(), (String) msg.obj, Toast.LENGTH_SHORT);
+                        announce1.show();
+                    }
                 }
             }
         };
@@ -66,15 +71,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_confirmChangePass:
-                while(newPass.getText().toString()!=newPassConfirm.getText().toString()){
-                    Toast announce = Toast.makeText(getContext(), "New password does not match !", Toast.LENGTH_SHORT);
-                    announce.show();
-                }
                 changePassInfo changeInfo = changePassInfo.newBuilder()
                         .setUsername(profile_name.getText().toString())
                         .setOldPass(oldPass.getText().toString())
                         .setNewPass(newPass.getText().toString())
-                        .setNewPass(newPassConfirm.getText().toString()).build();
+                        .setNewPassConfirm(newPassConfirm.getText().toString()).build();
                 Message msg = Message.obtain(ContainerClient.handler);
                 msg.what = 3;
                 msg.obj = changeInfo;

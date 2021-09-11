@@ -88,7 +88,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
             Message response = Message.obtain(ChangePassword.changePasswordhandler);
             response.what = 3;
             if (serverMessage.getResponseCode() == 1) {
-                response.arg1 = 0;
+                response.arg1 = 1;
                 response.obj = "Change Password success";
             }
             else if (serverMessage.getResponseCode() == -1) {

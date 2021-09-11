@@ -159,10 +159,9 @@ public class ContainerClient implements Runnable {
                         clientMessage.setRegAcc((RegisterInfo) msg.obj);
                     }
                     if (msg.what == 3) {
-                        Message reponse = Message.obtain(ChangePassword.changePasswordhandler);
+                        Message response = Message.obtain(ChangePassword.changePasswordhandler);
                         int result = checkChangePassword((changePassInfo) msg.obj);
                         if (result > 0) {
-                            Message response = Message.obtain(RegisterFragment.registerFragmentHandler);
                             response.what = 3;
                             response.arg1 = -1;
                             switch (result) {
@@ -178,15 +177,12 @@ public class ContainerClient implements Runnable {
                                 case 4:
                                     response.obj = "New password contains username";
                                     break;
-//                                case 5:
-//                                    response.obj = "Password must be at least 8 characters";
                             }
                             response.sendToTarget();
                             return;
                         }
                         clientMessage.setOpcode(3);
                         clientMessage.setChangeRes((changePassInfo) msg.obj);
-                        reponse.sendToTarget();
                     }
                     if (msg.what == 4) {
                         Order clientOrder = (Order) msg.obj;
@@ -345,10 +341,10 @@ public class ContainerClient implements Runnable {
 
         // check if all cases above passed and if new password != old password then change password successfully
         if(!(changePassword.getOldPass().equals(changePassword.getNewPass()))&& flag){
-            return 5;
+            return 0;
         }
         //Unexpected error
-        return 0;
+        return -1;
 
     }
     private int validateLoginInfo(String username, String password) {
